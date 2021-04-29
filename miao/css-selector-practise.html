@@ -5,20 +5,34 @@
   <meta charset="utf-8">
   <title>Document</title>
   <style>
-    body>p:focus {
-      color: blue;
-    }
-
-    body>p:hover {
+    body>p:first-child {
       color: red;
     }
 
-    body>p:active {
+    p[tabindex="-1"]:focus {
+      color: blue;
+    }
+
+    p[tabindex="-1"]:hover {
+      color: red;
+    }
+
+    p[tabindex="-1"]:active {
       color: green;
     }
-  </style>
 
-  <style>
+    .a.c>span:first-child {
+      color: red;
+    }
+
+    .a.c>span :first-child {
+      color: green;
+    }
+
+    .a.c>span :last-child {
+      color: blue;
+    }
+
     a[href^="https"]:visited {
       color: orange;
     }
@@ -104,24 +118,16 @@
 
 
   <style>
-    div.b li:nth-child(n) {
+    div.b li:nth-child(-n+25) {
       color: red;
-    }
-
-    div.b li:nth-child(n+26) {
-      color: black;
-    }
-
-    div.b li:nth-child(n+35) {
-      color: blue;
-    }
-
-    div.b li:nth-child(n+51) {
-      color: black;
     }
 
     div.b li:nth-child(n+65) {
       color: green;
+    }
+
+    div.b li:nth-child(n+35):nth-child(-n+50) {
+      color: blue;
     }
   </style>
   <div class="b">
@@ -239,12 +245,14 @@
       color: blue;
     }
 
-    div.prime li:first-child,
+    div.prime li:first-child {
+      color: red;
+    }
+
     div.prime li:nth-child(2n + 4),
-    div.prime li:nth-child(3n + 6),
-    div.prime li:nth-child(4n + 8),
-    div.prime li:nth-child(5n + 10),
-    div.prime li:nth-child(7n + 14) {
+    div.prime li:nth-child(3n + 9),
+    div.prime li:nth-child(5n + 15),
+    div.prime li:nth-child(7n + 49) {
       color: green;
     }
   </style>
