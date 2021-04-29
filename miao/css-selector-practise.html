@@ -19,23 +19,23 @@
   </style>
 
   <style>
-    div>a[href^="https"]:visited {
+    a[href^="https"]:visited {
       color: orange;
     }
 
-    div>a[href^="https"]:link {
+    a[href^="https"]:link {
       color: pink;
     }
 
-    div>a[href*="a@"] {
+    a[href*="a@"] {
       color: blue;
     }
 
-    div>a[href^="tel"] {
+    a[href^="tel"] {
       color: yellow;
     }
 
-    div>a[href$="pdf"i] {
+    a[href$="pdf"i] {
       font-size: 30px;
     }
   </style>
@@ -76,11 +76,11 @@
   </div>
 
   <style>
-    body>div.a>ul>li:nth-child(n+4) {
+    div.a li:nth-child(n+4) {
       color: red;
     }
 
-    body>div.a>ul>li:nth-child(n+8) {
+    div.a li:nth-child(n+8) {
       color: black;
     }
   </style>
@@ -104,23 +104,23 @@
 
 
   <style>
-    body>div.b>ul>li:nth-child(n) {
+    div.b li:nth-child(n) {
       color: red;
     }
 
-    body>div.b>ul>li:nth-child(n+26) {
+    div.b li:nth-child(n+26) {
       color: black;
     }
 
-    body>div.b>ul>li:nth-child(n+35) {
+    div.b li:nth-child(n+35) {
       color: blue;
     }
 
-    body>div.b>ul>li:nth-child(n+51) {
+    div.b li:nth-child(n+51) {
       color: black;
     }
 
-    body>div.b>ul>li:nth-child(n+65) {
+    div.b li:nth-child(n+65) {
       color: green;
     }
   </style>
@@ -235,16 +235,16 @@
   <hr>
 
   <style>
-    body>div.prime>ul>li {
+    div.prime li {
       color: blue;
     }
 
-    body>div.prime>ul>li:first-child,
-    body>div.prime>ul>li:nth-child(2n + 4),
-    body>div.prime>ul>li:nth-child(3n + 6),
-    body>div.prime>ul>li:nth-child(4n + 8),
-    body>div.prime>ul>li:nth-child(5n + 10),
-    body>div.prime>ul>li:nth-child(7n + 14) {
+    div.prime li:first-child,
+    div.prime li:nth-child(2n + 4),
+    div.prime li:nth-child(3n + 6),
+    div.prime li:nth-child(4n + 8),
+    div.prime li:nth-child(5n + 10),
+    div.prime li:nth-child(7n + 14) {
       color: green;
     }
   </style>
