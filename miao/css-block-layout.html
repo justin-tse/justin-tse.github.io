@@ -8,15 +8,17 @@
   <title>Document</title>
   <style>
     header {
-      color: white;
-      background-color: black;
+      color: blue;
+      background-color: darkorange;
       margin-left: -8px;
       margin-right: -8px;
       margin-top: -8px;
+      font-size: 30px;
+      font-family: "comic sans ms";
     }
 
     p.p1 {
-      background-color: black;
+      background-color: darkorange;
       margin: auto;
       width: 600px;
     }
@@ -25,6 +27,47 @@
       margin: auto;
       width: 600px;
       text-align: justify;
+      font-family: "comic sans ms";
+    }
+
+    div#d1 {
+      border: 1px solid #0000;
+      background-color: #0000;
+      margin: 10px auto 200px;
+      width: 600px;
+    }
+
+    div:hover {
+      background-color: red;
+      font-family: "simsun";
+    }
+
+    div {
+      font-family: "comic sans ms";
+      border: 3px solid magenta;
+      width: 180px;
+      height: 40px;
+      background-color: greenyellow;
+      text-align: center;
+      margin: 10px 0;
+      line-height: 35px;
+    }
+
+    div :nth-child(3n + 2) {
+      margin-left: 200px;
+    }
+
+    div :nth-child(3n + 3) {
+      margin-left: 400px;
+    }
+
+
+    div:nth-child(3n + 2) {
+      margin-top: -56px;
+    }
+
+    div:nth-child(3n + 3) {
+      margin-top: -56px;
     }
 
     p.p3 {
@@ -32,11 +75,13 @@
       width: 600px;
       border: 1px dotted #0000;
       border-bottom-color: black;
+      font-family: "comic sans ms";
     }
 
     p.p4 {
       border: #0000;
       margin-bottom: 12px;
+      font-family: "comic sans ms";
     }
 
     p.p5 {
@@ -44,18 +89,15 @@
       text-align: center;
       margin: 0 -8px;
       border: 8px lightskyblue;
-    }
-
-    div {
-      text-align: center;
-      width: auto;
+      font-family: "comic sans ms";
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <p class="p1">hello world 请调整浏览器窗口大小查看效果</p>
+  <header> font-family: "comic sans ms";
+
+    <p class="p1">Hello world 请调整浏览器窗口大小查看效果</p>
   </header>
   <p class="p2">页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px
     页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px
