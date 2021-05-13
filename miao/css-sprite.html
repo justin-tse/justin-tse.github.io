@@ -6,72 +6,75 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <!-- 进一步优化封装就是把css代码写成一个css文件，需要的时候只需要图片和css文件就可以直接调用 -->
+  <!-- <link rel="stylesheet" href="icons.css"> -->
   <style>
-    .google-go {
+    [class^="icon-"] {
       display: inline-block;
       background-image: url(./picture/nav_logo240_hr.webp);
       background-repeat: no-repeat;
+    }
+
+    .icon-google-go {
       height: 50px;
       width: 64px;
       background-position: -58px -160px;
     }
 
-    .google-o-y {
-      display: inline-block;
-      background-image: url(./picture/nav_logo240_hr.webp);
-      background-repeat: no-repeat;
+    .icon-google-o-y {
       height: 50px;
       width: 25px;
       background-position: -123px -160px;
     }
 
-    .google-gle {
-      display: inline-block;
-      background-image: url(./picture/nav_logo240_hr.webp);
-      background-repeat: no-repeat;
+    .icon-google-gle {
       height: 50px;
       width: 60px;
       background-position: -150px -160px;
     }
 
-    .phone {
-      display: block;
-      background-image: url(./picture/nav_logo240_hr.webp);
-      background-repeat: no-repeat;
+    .icon-phone {
       height: 34px;
-      width: 58px;
+      width: 28px;
       background-position: -0px -178px;
-      margin: 30px 100px;
     }
 
-    .star {
-      display: block;
-      background-image: url(./picture/nav_logo240_hr.webp);
-      background-repeat: no-repeat;
-      margin-left: auto;
-      margin-right: auto;
+    .icon-star {
       height: 30px;
-      width: 170px;
+      width: 23px;
       background-position: -200px -548px;
+    }
+
+    strong {
+      vertical-align: 12px;
     }
   </style>
 </head>
 
 <body>
   <div>
-    <span class="google-go"></span>
-    <span class="google-o-y"></span>
-    <span class="google-o-y"></span>
-    <span class="google-o-y"></span>
-    <span class="google-o-y"></span>
-    <span class="google-o-y"></span>
-    <span class="google-o-y"></span>
-    <span class="google-o-y"></span>
-    <span class="google-o-y"></span>
-    <span class="google-o-y"></span>
-    <span class="google-gle"></span>
-    <span class="phone"></span>
-    <span class="star"></span>
+    <div>
+      <span class="icon-google-go"></span>
+      <span class="icon-google-o-y"></span>
+      <span class="icon-google-o-y"></span>
+      <span class="icon-google-o-y"></span>
+      <span class="icon-google-o-y"></span>
+      <span class="icon-google-o-y"></span>
+      <span class="icon-google-o-y"></span>
+      <span class="icon-google-o-y"></span>
+      <span class="icon-google-o-y"></span>
+      <span class="icon-google-o-y"></span>
+      <span class="icon-google-gle"></span>
+    </div>
+    <div>
+      <strong>class="icon-phone":&nbsp;&nbsp;&nbsp;</strong>
+      <span class="icon-phone"></span>
+    </div>
+
+    <div>
+      <strong>class="icon-star":&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+      <span class="icon-star"></span>
+    </div>
   </div>
 </body>
 
