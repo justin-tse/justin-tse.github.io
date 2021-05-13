@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+    }
+
+    tr {
+      background-color: #3F7FBF;
+    }
+
+    th {
+      display: inline-block;
+      padding: 0;
+      text-align: justify;
+      overflow: hidden;
+    }
+
+    th.code:hover {
+      display: inline-block;
+      background-color: aliceblue;
+    }
+
+    section.code {
+      position: absolute;
+      display: none;
+    }
+
+    th.code:hover section.code {
+      display: block;
+      margin-left: 8px;
+      width: 200px;
+      background-color: gainsboro;
+      border-radius: 8px;
+      transition: 3s;
+    }
+
+    section.code:hover {
+      display: block;
+      margin-left: 8px;
+      width: 200px;
+      background-color: gainsboro;
+      border-radius: 8px;
+    }
+
+    section.preferences {
+      display: none;
+    }
+
+    div.preferences:hover section.preferences {
+      display: block;
+      overflow: hidden;
+      width: 160px;
+      background-color: gainsboro;
+      border-radius: 8px;
+      position: absolute;
+      left: 201px;
+      top: 37px;
+    }
+
+    h2 {
+      margin-top: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th class="code">&nbsp;&nbsp;Code&nbsp;&nbsp;
+          <section class="code">
+            <div>About Visual Studio Code</div>
+            <div>Restart to Update</div>
+            <div class="preferences">
+              Preferences&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>
+              <section class="preferences">
+                <div>Settings</div>
+                <div>Online Services</div>
+                <div>Entensions</div>
+                <div>Keyboard Shortcuts</div>
+                <div>Keymaps</div>
+                <div>User Snippets</div>
+              </section>
+            </div>
+            <div>Services</div>
+            <div>Hide Visual Studio Code</div>
+            <div>Hide Others</div>
+            <div>Show All</div>
+            <div>Quit Visual Studio Code</div>
+          </section>
+        </th>
+        <th>&nbsp;&nbsp;File&nbsp;&nbsp;</th>
+        <th>&nbsp;&nbsp;Edit&nbsp;&nbsp;</th>
+        <th>&nbsp;&nbsp;Selection&nbsp;&nbsp;</th>
+        <th>&nbsp;&nbsp;View&nbsp;&nbsp;</th>
+        <th>&nbsp;&nbsp;Go&nbsp;&nbsp;</th>
+        <th>&nbsp;&nbsp;Run&nbsp;&nbsp;</th>
+        <th>&nbsp;&nbsp;Terminal&nbsp;&nbsp;</th>
+        <th>&nbsp;&nbsp;Window&nbsp;&nbsp;</th>
+        <th>&nbsp;&nbsp;Help&nbsp;&nbsp;</th>
+      </tr>
+    </thead>
+  </table>
+  <h2>Notice: Code and Preferences have extension</h2>
+</body>
+
+</html>
