@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html {
+      height: 100%;
+    }
+
+    body {
+      width: 100%;
+      margin: 0;
+      position: relative;
+      min-height: 100%;
+      display: flow-root;
+    }
+
+    .menu {
+      width: 100%;
+      background-color: #F8F8F8;
+      white-space: nowrap;
+    }
+
+    .dropdown li {
+      position: relative;
+    }
+
+    ul {
+      display: inline-block;
+      list-style: none;
+    }
+
+    .dropdown ul {
+      display: none;
+    }
+
+    .dropdown li::after {
+      content: ">";
+
+    }
+
+    .dropdown li:hover ul {
+      display: inline-block;
+      position: absolute;
+      background-color: white;
+      left: 0;
+      top: 50px;
+    }
+
+    .dropdown li:hover li {
+      background-color: white;
+    }
+
+    .content {
+      margin: 0;
+      padding-left: 50px;
+      padding-right: 50px;
+      display: block;
+      display: flow-root;
+    }
+
+    .footer {
+      position: absolute;
+      display: inline-block;
+      text-indent: 50px;
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      background-color: #F8F8F8;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      white-space: nowrap;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="menu">
+    <ul>
+      <li>Project name</li>
+    </ul>
+    <ul>
+      <li>Home</li>
+    </ul>
+    <ul>
+      <li>About</li>
+    </ul>
+    <ul>
+      <li>Contact</li>
+    </ul>
+    <ul class="dropdown">
+      <li>Dropdown
+        <ul>
+          <li>Action</li>
+          <li>Another action</li>
+          <li>Something else here</li>
+          <li>Separated link</li>
+          <li>One more separated link</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <h1>Sticky footer with fixed navbar</h1>
+    <hr>
+    <p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A
+      fixed
+      navbar has been added with padding-top: 60px; on the body > .container.</p>
+    <p>Back to the default sticky footer minus the navbar.</p>
+  </div>
+  <div class="footer">Place sticky footer content here.</div>
+
+
+</body>
+
+</html>
