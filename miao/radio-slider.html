@@ -7,33 +7,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    body {
-      margin: 0;
+    h3 {
+      text-align: center;
     }
-    div {
+
+    section {
+      width: 288px;
+      height: 160px;
       position: relative;
-      width: 550px;
-      height: 350px;
+      margin: auto;
       overflow: hidden;
     }
 
-    img {
+    section input {
+      position: relative;
+      top: -20px;
+    }
+
+    section div.imgs {
+      height: 100%;
+      width: 100%;
       position: absolute;
+      top: 0;
+    }
+
+    section div.imgs div {
+      float: left;
+      width: 25%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      /* 给所有span的父元素加 */
+    }
+
+    section div.imgs div span {
+      position: absolute;
+      left: -100%;
       width: 100%;
       height: 100%;
-      left: -100%;
-      transition: 1s;
-      animation: move 1s;
-      opacity: 0.5;
+      box-shadow: inset 0 0 1px blue;
+      animation: leave 1s;
     }
 
-    img:target {
-      display: block;
-      left: 0;
-      transition: 1s;
-    }
-
-    @keyframes move {
+    @keyframes leave {
       from {
         left: 0;
       }
@@ -43,79 +59,129 @@
       }
     }
 
-    input:nth-child(1):checked~div img:nth-child(1),
-    input:nth-child(2):checked~div img:nth-child(2),
-    input:nth-child(3):checked~div img:nth-child(3) {
-      display: block;
-      left: 0;
-      animation: none;
+    section div.imgs div span {
+      background-size: 288px 100%;
+      background-repeat: no-repeat;
+      transition: 1s; //给所有span缓动
     }
 
+    /* 每个div里第一个span显示第一张图 */
+    section div.imgs div span:nth-child(1) {
+      background-image: url(https://travel.12306.cn/imgs/resources/uploadfiles/images/1716878f-79a2-4db1-af8c-b9c2039f0b3c_product_W572_H370.jpg);
+    }
+
+    /* 每个div里第二个span显示第二张图 */
+    section div.imgs div span:nth-child(2) {
+      background-image: url(https://travel.12306.cn/imgs/resources/uploadfiles/images/6d77d0ea-53d0-4518-b7e9-e53795b4920c_product_W572_H370.jpg);
+    }
+
+    section div.imgs div span:nth-child(3) {
+      background-image: url(https://travel.12306.cn/imgs/resources/uploadfiles/images/243945e6-c45d-4870-9cf5-77e488068646_product_W572_H370.jpg);
+    }
+
+    section div.imgs div span:nth-child(4) {
+      background-image: url(https://travel.12306.cn/imgs/resources/uploadfiles/images/b0c76b21-531b-4af4-a607-cf5672c72ded_product_W572_H370.jpg);
+    }
+
+    /* 第一个div里的所有span都需要显示每张图片的第一份 */
+    section div.imgs div:nth-child(1) span {
+      background-position: 0 0;
+    }
+
+    /* 第二个div里的所有span都需要显示每张图片都第二份 */
+    section div.imgs div:nth-child(2) span {
+      background-position: -72px 0;
+    }
+
+    section div.imgs div:nth-child(3) span {
+      background-position: -144px 0;
+    }
+
+    section div.imgs div:nth-child(4) span {
+      background-position: -216px 0;
+    }
+
+    /* 已进场span */
+    input:nth-child(1):checked~div.imgs div span:nth-child(1),
+    input:nth-child(2):checked~div.imgs div span:nth-child(2),
+    input:nth-child(3):checked~div.imgs div span:nth-child(3),
+    input:nth-child(4):checked~div.imgs div span:nth-child(4) {
+      left: 0;
+      transition: 0.3s;
+      animation: none;
+      z-index: 3;
+    }
+
+    .labels {
+      display: flex;
+      justify-content: space-around;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      z-index: 60;
+    }
+
+    .labels label {
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      background-color: greenyellow;
+      opacity: 0.4;
+      transition: 0.5s;
+      text-align: center;
+    }
+
+    input:nth-child(1):checked~div.labels label:nth-child(1),
+    input:nth-child(2):checked~div.labels label:nth-child(2),
+    input:nth-child(3):checked~div.labels label:nth-child(3),
+    input:nth-child(4):checked~div.labels label:nth-child(4) {
+      background-color: blue;
+      opacity: 0.8;
+    }
   </style>
 </head>
 
 <body>
-  <div>
-    <img id="a1"
-    src="https://travel.12306.cn/imgs/resources/uploadfiles/images/1716878f-79a2-4db1-af8c-b9c2039f0b3c_product_W572_H370.jpg"
-    alt="">
-    <img id="a2"
-    src="https://travel.12306.cn/imgs/resources/uploadfiles/images/c7c03732-3c86-4308-aea7-df747d4999e8_product_W572_H370.jpg"
-    alt="">
-    <img id="a3"
-    src="http://travel.12306.cn/imgs/resources/uploadfiles/images/584412d6-e8f9-40b8-b0bd-d4a7cf90d7cc_product_W572_H370.jpg"
-    alt="">
-  </div>
-  <a href="#a1">1</a>
-  <a href="#a2">2</a>
-  <a href="#a3">3</a>
-
+  <h3>Sliding Image Panels with CSS3</h3>
   <section>
-    <input type="radio" name="a">
-    <input type="radio" name="a" checked>
-    <input type="radio" name="a">
-    <div>
-      <img id="a1"
-        src="https://travel.12306.cn/imgs/resources/uploadfiles/images/1716878f-79a2-4db1-af8c-b9c2039f0b3c_product_W572_H370.jpg"
-        alt="">
-      <img id="a2"
-        src="https://travel.12306.cn/imgs/resources/uploadfiles/images/c7c03732-3c86-4308-aea7-df747d4999e8_product_W572_H370.jpg"
-        alt="">
-      <img id="a3"
-        src="http://travel.12306.cn/imgs/resources/uploadfiles/images/584412d6-e8f9-40b8-b0bd-d4a7cf90d7cc_product_W572_H370.jpg"
-        alt="">
+    <input type="radio" name="s1" id="i1" checked>
+    <input type="radio" name="s1" id="i2">
+    <input type="radio" name="s1" id="i3">
+    <input type="radio" name="s1" id="i4">
+    <div class="labels">
+      <label for="i1">1</label>
+      <label for="i2">2</label>
+      <label for="i3">3</label>
+      <label for="i4">4</label>
+    </div>
+    <div class="imgs">
+      <div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
     </div>
-    <div>
-      <img id="a1"
-        src="https://travel.12306.cn/imgs/resources/uploadfiles/images/1716878f-79a2-4db1-af8c-b9c2039f0b3c_product_W572_H370.jpg"
-        alt="">
-      <img id="a2"
-        src="https://travel.12306.cn/imgs/resources/uploadfiles/images/c7c03732-3c86-4308-aea7-df747d4999e8_product_W572_H370.jpg"
-        alt="">
-      <img id="a3"
-        src="http://travel.12306.cn/imgs/resources/uploadfiles/images/584412d6-e8f9-40b8-b0bd-d4a7cf90d7cc_product_W572_H370.jpg"
-        alt="">
-
-    </div>
-  </section>
-  <section>
-    <input type="radio" name=b">
-    <input type="radio" name=b">
-    <input type="radio" name=b" checked>
-    <div>
-      <img id=b1"
-        src="https://travel.12306.cn/imgs/resources/uploadfiles/images/1716878f-79a2-4db1-af8c-b9c2039f0b3c_product_W572_H370.jpg"
-        alt="">
-      <img id=b2"
-        src="https://travel.12306.cn/imgs/resources/uploadfiles/images/c7c03732-3c86-4308-aea7-df747d4999e8_product_W572_H370.jpg"
-        alt="">
-      <img id=b3"
-        src="http://travel.12306.cn/imgs/resources/uploadfiles/images/584412d6-e8f9-40b8-b0bd-d4a7cf90d7cc_product_W572_H370.jpg"
-        alt="">
-
-    </div>
-
   </section>
 </body>
 
