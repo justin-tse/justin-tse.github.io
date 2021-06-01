@@ -21,7 +21,10 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      left: 100%;
+      left: -100%;
+      transition: 1s;
+      animation: move 1s;
+      opacity: 0.5;
     }
 
     img:target {
@@ -30,12 +33,22 @@
       transition: 1s;
     }
 
+    @keyframes move {
+      from {
+        left: 0;
+      }
+
+      to {
+        left: 100%;
+      }
+    }
+
     input:nth-child(1):checked~div img:nth-child(1),
     input:nth-child(2):checked~div img:nth-child(2),
     input:nth-child(3):checked~div img:nth-child(3) {
       display: block;
       left: 0;
-      transition: 1s;
+      animation: none;
     }
 
   </style>
