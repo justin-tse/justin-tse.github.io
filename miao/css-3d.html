@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      height: 500px;
+      perspective: 1000px;
+    }
+
+    .box {
+      width: 200px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform-style: preserve-3d;
+      animation: rotate 5s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotateZ(40deg) rotateX(-30deg) rotateY(0);
+      }
+
+      50% {
+        transform: rotateZ(10deg) rotateX(-30deg) rotateY(180deg);
+      }
+
+      100% {
+        transform: rotateZ(40deg) rotateX(-30deg) rotateY(360deg);
+      }
+    }
+
+
+    .box div {
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      text-align: center;
+      line-height: 200px;
+      font-size: 30px;
+    }
+
+    .a1 {
+      background: blue;
+      transform: translateZ(100px);
+    }
+
+    .a2 {
+      background: yellow;
+      transform: translateZ(-100px);
+    }
+
+    .a2 {
+      background: orange;
+      transform: translateZ(-100px) rotateY(180deg);
+    }
+
+    .b1 {
+      background: greenyellow;
+      transform: translateX(-100px) rotateY(-90deg);
+    }
+
+    .b2 {
+      background: red;
+      transform: translateX(100px) rotateY(90deg);
+    }
+
+    .c1 {
+      background: fuchsia;
+      transform: translateY(-100px) rotateX(90deg);
+    }
+
+    .c2 {
+      background: green;
+      transform: translateY(100px) rotateX(-90deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="box">
+      <div class="a1">a1</div>
+      <div class="a2">a2</div>
+      <div class="b1">b1</div>
+      <div class="b2">b2</div>
+      <div class="c1">c1</div>
+      <div class="c2">c2</div>
+    </div>
+  </div>
+</body>
+
+</html>
