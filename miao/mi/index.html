@@ -6,10 +6,303 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="iconfont.css">
+  <style type="text/less">
+    * {
+    background-color: rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0 0 1px aquamarine;
+    box-sizing: border-box;
+  }
+
+    body {
+      margin: 0;
+      overflow-y: scroll;
+      font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+    }
+    a {
+      text-decoration: none;
+      display: inline-block;
+    }
+    .page-container {
+      min-width: 1226px;
+    }
+    .site-topbar {
+      background-color: #333;
+      /* 当窗口放大的时候topBar背景颜色无法充满，此时要使用min-width或者width为max-content解决,max-content会出现以点白色在做错 ，疑问？？*/
+      xwidth: max-content;
+      height: 40px;
+      .site-topbar-inner {
+        width: 1226px;
+        margin: auto;
+        line-height: 40px;
+        font-size: 12px;     
+        a {
+          color: #b0b0b0;
+        }
+        .sep {
+          margin: 0 4px;
+          color: #424242;
+        }
+        .site-topbar-nav {
+          float: left;
+          .downloadAPP {
+            position: relative;
+            &:hover .appCode {
+              height: 140px;
+            }
+            .appCode {
+              overflow: hidden;
+              position: absolute;
+              top: 100% ;
+              left: 50%;
+              transform: translateX(-50%);
+              padding: 0 15px;
+              background-color: white;
+              color: #333;
+              text-align: center;
+              line-height: normal;
+              font-size: 14px;  
+              height: 0;   
+              transition: 0.3s;
+              img {
+                margin-top: 15px;
+                width: 90px;
+                height: 90px;
+              }
+            }
+          }
+          .downloadAPP
+        }
+        .site-topbar-shopping-cart {
+          float: right;
+          margin-left: 15px;
+          text-align: center;
+          height: 40px;
+          width: 120px;
+          position: relative;
+          &:hover div {
+            height: 100px;
+          }
+          a {
+            height: 40px;
+            width: 100%;
+            em {
+              font-size: 20px;
+              height: 40px;
+              line-height: 40px;
+            }
+            div {
+              overflow: hidden;
+              position: absolute;
+              width: 300px;
+              height: 0;
+              background-color: white;
+              top: 100%;
+              left: 100%;
+              transform: translate(-100%);
+              line-height: 100px;
+              transition: 0.3s;
+            }
+          }
+        }
+        .site-topbar-user-info {
+          float: right;
+          .notifications {
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+    
+  </style>
 </head>
 
 <body>
+  <div class="page-container">
+    <div class="header">
+      <div class="site-topbar">
+        <div class="site-topbar-inner">
+          <div class="site-topbar-nav">
+            <a href="#">小米商城</a>
+            <span class=sep>|</span>
+            <a href="#">MIUI</a>
+            <span class=sep>|</span>
+            <a href="#">IoT</a>
+            <span class=sep>|</span>
+            <a href="#">云服务</a>
+            <span class=sep>|</span>
+            <a href="#">天星数科</a>
+            <span class=sep>|</span>
+            <a href="#">有品</a>
+            <span class=sep>|</span>
+            <a href="#">小爱开放平台</a>
+            <span class=sep>|</span>
+            <a href="#">企业团购</a>
+            <span class=sep>|</span>
+            <a href="#">资质证照</a>
+            <span class=sep>|</span>
+            <a href="#">协议规则</a>
+            <span class=sep>|</span>
+            <a href="#" class="downloadAPP">
+              下载app
+              <span class="appCode">
+                <img src="https://i1.mifile.cn/f/i/17/appdownload/download.png?1" alt="appCode">
+                小米商城 APP
+              </span>
+            </a>
+            <span class=sep>|</span>
+            <a href="#">智能生活</a>
+            <span class=sep>|</span>
+            <a href="#">Select Location</a>
+          </div>
+          <div class="site-topbar-shopping-cart">
 
+            <a href="https://www.mi.com/buy/cart"><em class="iconfont iconfont-cart"></em>
+              购物车(0)
+              <div>购物车中还没有商品，赶紧选购吧！
+              </div>
+            </a>
+          </div>
+          <div class="site-topbar-user-info">
+            <a
+              href="https://account.xiaomi.com/fe/service/login/password?_qrsize=180&sid=mi_eshop&qs=%253Fcallback%253Dhttp%25253A%25252F%25252Forder.mi.com%25252Flogin%25252Fcallback%25253Ffollowup%25253Dhttps%2525253A%2525252F%2525252Fwww.mi.com%2525252Fuser%2525252Fmessage%252526sign%25253DMjU3MjIzYmRhMTgzNDA4YzFhOTAzZGQzYzljMWEwNDM0MDlmMWY2OQ%25252C%25252C%2526sid%253Dmi_eshop%2526_qrsize%253D180&callback=http%3A%2F%2Forder.mi.com%2Flogin%2Fcallback%3Ffollowup%3Dhttps%253A%252F%252Fwww.mi.com%252Fuser%252Fmessage%26sign%3DMjU3MjIzYmRhMTgzNDA4YzFhOTAzZGQzYzljMWEwNDM0MDlmMWY2OQ%2C%2C&_sign=5KiMzKDSUV3MfmWs7%2BOu%2FtWklgk%3D&serviceParam=%7B%22checkSafePhone%22%3Afalse%2C%22checkSafeAddress%22%3Afalse%2C%22lsrp_score%22%3A0.0%7D&showActiveX=false&theme=&needTheme=false&bizDeviceType=&_locale=zh_CN">登陆</a>
+            <span class="sep">|</span>
+            <a href="https://cn.account.xiaomi.com/pass/register?sid=mi_eshop">注册</a>
+            <span class="sep">|</span>
+            <a href="https://www.mi.com/user/message" class="notifications">消息通知</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="less.min.js"></script>
 </body>
 
 </html>
+
+<!-- 
+
+  <div class="container">
+    <div class="container topbar">
+      <div class="header">
+        <ul>
+          <li>小米商城</li>
+          <li>MIUI</li>
+          <li>loT</li>
+          <li>云服务</li>
+          <li>天星数科</li>
+          <li>有品</li>
+          <li>小爱开放平台</li>
+          <li>企业团购</li>
+          <li>资质证照</li>
+          <li>协议规则</li>
+          <li>下载app</li>
+          <li>智能生活</li>
+          <li>Select Location</li>
+        </ul>
+        <ul class="login">
+          <li>登录</li>
+          <li>注册</li>
+          <li>消息通知</li>
+          <li>购物车</li>
+        </ul>
+      </div>
+      <div class="container secondbar">
+        <div class="xiaomi"><a href="https://www.mi.com/index.html"><img src="" alt=""></a></div>
+        <div class="navigation-top">
+          <ul>
+            <li>
+              小米手机
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </li>
+            <li>
+              Redmi 红米
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </li>
+            <li>
+              电视
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </li>
+            <li>
+              笔记本
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </li>
+            <li>
+              家电
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </li>
+            <li>
+              路由器
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </li>
+            <li>
+              智能硬件
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </li>
+            <li>服务
+              <a href="https://www.mi.com/service/"></a>
+            </li>
+            <li>社区
+              <a href="http://www.xiaomi.cn/"></a>
+            </li>
+          </ul>
+        </div>
+        <div class="search">
+          <input type="text">
+        </div>
+      </div>
+    </div>
+    <div class="container topcontent">
+      
+    </div>
+
+  </div> -->
