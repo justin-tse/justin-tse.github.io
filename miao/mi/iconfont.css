@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'iconfont';
+  src: url(./font/xiaomi.woff) format('woff');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+}
+
+.iconfont-cart:before {
+  content: "\E60C";
+}
+
+.iconfont-arrow-left-big:before {
+  content: "\E628";
+}
+
+.iconfont-arrow-right-big:before {
+  content: "\E623";
+}
+
+.iconfont-circle-arrow-right:before {
+  content: "\E615";
+}
+
+.iconfont-tool:before {
+  content: "\E634";
+}
+
+.iconfont-circle-7:before {
+  content: "\E635";
+}
+
+.iconfont-circle-15:before {
+  content: "\E636";
+}
+
+.iconfont-gift:before {
+  content: "\E638";
+}
+
+.iconfont-location:before {
+  content: "\E637";
+}
