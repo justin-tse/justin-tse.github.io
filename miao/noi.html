@@ -296,6 +296,70 @@
   console.log(money);
 </script>
 
+<script id="ch0104/15" type="xxx">
+  var a = Number(prompt('请输入a'));
+  var b = Number(prompt('请输入b'));
+  var c = Number(prompt('请输入c'));
+  if (a > b && a > c) {
+    console.log(a);
+  } else if (b > a && b > c) {
+    console.log(b);
+  } else {
+    console.log(c);
+  }
+</script>
+
+<script id="ch0104/16" type="xxx">
+  var a = Number(prompt('请输入a'));
+  var b = Number(prompt('请输入b'));
+  var c = Number(prompt('请输入c'));
+  if (a + b > c && a + c > b && b + c > a) {
+    console.log("YES");
+  } else {
+    console.log("NO");
+  }
+</script>
+
+<script id="ch0104/17" type="xxx">
+  var n = Number(prompt('请输入n'));
+  if (n % 400 == 0 || (n % 4 == 0 && n % 100 != 0)) {
+    console.log("Y")
+  } else {
+    console.log("N");
+  }
+</script>
+
+<script id="ch0104/18" type="xxx">
+  var x = Number(prompt('请输入x'));
+  var y = Number(prompt('请输入y'));
+  if ((x >= -1 && x <= 1) && (y >= -1 && y <= 1)) {
+    console.log("yes");
+  } else {
+    console.log("no");
+  }
+</script>
+
+<script id="ch0104/19" type="xxx">
+  var n1 = Number(prompt('请输入n1'));
+  var n2 = Number(prompt('请输入n2'));
+  var operator = prompt('请输入运算符');
+  if (operator == '+') {
+    console.log(n1 + n2);
+  } else if (operator == '-') {
+    console.log(n1 - n2);
+  } else if (operator == '*') {
+    console.log(n1 * n2);
+  } else if (operator == '/') {
+    if (n2 == 0) {
+      console.log("Divided by zero!");
+    } else {
+      console.log(n1 / n2);
+    }
+  } else {
+    console.log("Invalid operator!")
+  }
+</script>
+
 <script id="ch0104/1" type="xxx">
   var n = Number(prompt('请输入n'));
   if (n < 0) {
