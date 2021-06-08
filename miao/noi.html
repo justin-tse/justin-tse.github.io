@@ -80,7 +80,6 @@
 
   console.log((a % b).toFixed(4))
 </script>
-<!-- 0.4601  11题 -->
 
 <script id="ch0103/12" type="xxx">
   var r = Number(prompt('请输入半径r'))
@@ -100,7 +99,6 @@
 
   console.log(+(20 * 1000 / (3.14159 * r * r * h)).toFixed(0) + 1)
 </script>
-<!-- d -->
 
 <script id="ch0103/15" type="xxx">
   var n = Number(prompt('请输入n'))
@@ -154,3 +152,68 @@
 
   console.log(2 ** n)
 </script>
+
+<!-- ch0104 -->
+
+<script id="ch0104/01" type="xxx">
+  var n = Number(prompt('请输入n'))
+
+  if (n > 0) console.log("positive")
+  if (n === 0) console.log("zero")
+  if (n < 0) console.log("negative")
+</script>
+
+<script id="ch0104/02" type="xxx">
+  var n = Number(prompt('请输入n'));
+  if (n < 0) n = - n;
+  console.log(n);
+</script>
+
+<script id="ch0104/03" type="xxx">
+  var n = Number(prompt('请输入n'));
+  if (n % 2 == 0) console.log("even");
+  if (n % 2 == 1) console.log("odd");
+</script>
+
+<script id="ch0104/04" type="xxx">
+  var char = prompt('请输入char');
+  n = char.charCodeAt();
+  if (n % 2 == 1) {
+    console.log("YES");
+  } else {
+    console.log("NO");
+  }
+</script>
+
+<script id="ch0104/05" type="xxx">
+  var x = Number(prompt('请输入x'));
+  var y = Number(prompt('请输入y'));
+  if (x > y) {
+    console.log('>')
+  } else if(x == y) {
+    console.log('=')
+  } else {
+    console.log('<')
+  }
+</script>
+<!-- 
+<script id="ch0104/06" type="xxx">
+  var n = Number(prompt('请输入n'));
+  if (n < 0) {
+
+  }
+</script>
+
+<script id="ch0104/04" type="xxx">
+  var n = Number(prompt('请输入n'));
+  if (n < 0) {
+
+  }
+</script>
+
+<script id="ch0104/04" type="xxx">
+  var n = Number(prompt('请输入n'));
+  if (n < 0) {
+
+  }
+</script> -->
