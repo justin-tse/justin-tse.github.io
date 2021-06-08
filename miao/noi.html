@@ -200,9 +200,9 @@
   }
 </script>
 
-<script id="ch0104/06" type="xxx">
+<script id="ch0104/06" >
   var n = Number(prompt('请输入n'));
-  if (n / 100 >= 1) {
+  if (n / 10 >= 1) {
     console.log('1');
   } else {
     console.log('0');
@@ -314,9 +314,9 @@
   var b = Number(prompt('请输入b'));
   var c = Number(prompt('请输入c'));
   if (a + b > c && a + c > b && b + c > a) {
-    console.log("YES");
+    console.log("yes");
   } else {
-    console.log("NO");
+    console.log("no");
   }
 </script>
 
@@ -356,14 +356,34 @@
       console.log(n1 / n2);
     }
   } else {
-    console.log("Invalid operator!")
+    console.log("Invalid operator!");
   }
 </script>
 
-<script id="ch0104/1" type="xxx">
-  var n = Number(prompt('请输入n'));
-  if (n < 0) {
-
+<script id="ch0104/20" type="xxx">
+  var a = Number(prompt('请输入a'));
+  var b = Number(prompt('请输入b'));
+  var c = Number(prompt('请输入c'));
+  var part1 = -b / (2 * a);
+  if (b * b == 4 * a * c) {
+    console.log(`x1=x2=${part1.toFixed(5)}`)
   }
+  if (b * b > 4 * a * c) {
+    var part2 =  Math.sqrt(b * b - 4 * a * c) / (2 * a)
+    console.log(`x1=${(part1 + part2).toFixed(5)};x2=${(part1 - part2).toFixed(5)}`)
+  }
+  if (b * b < 4 * a * c) {
+    part2 = Math.sqrt(4 * a * c - b * b) / (2 * a)
+    console.log(`x1=${part1.toFixed(5)}+${part2.toFixed(5)}i;x2=${part1.toFixed(5)}-${part2.toFixed(5)}i`)
+  }
+
+
 </script>
 
+<script id="ch0104/21" type="xxx">
+  var n = Number(prompt('请输入n'))
+  var x = Number(prompt('请输入x'))
+  var y = Number(prompt('请输入y'))
+
+  console.log(n - Number((y / x) === +(y / x).toFixed(0) ? y / x : +(y / x).toFixed(0) + 1))
+</script>
