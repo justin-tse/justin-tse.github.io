@@ -18,14 +18,14 @@
   var b = Number(prompt('请输入b'))
   var c = Number(prompt('请输入c'))
 
-  console.log((a + b) / c)
+  console.log(((a + b) / c) - ((a + b) / c) % 1)
 </script>
 
 <script id="ch0103/04" type="xxx">
   var a = Number(prompt('请输入a'))
   var b = Number(prompt('请输入b'))
 
-  console.log(a / b)
+  console.log((a / b).toFixed(0))
   console.log(a % b)
 </script>
 
@@ -40,7 +40,7 @@
   var a = Number(prompt('请输入a'))
   var b = Number(prompt('请输入b'))
 
-  console.log((b / a) * 100 + "%")
+  console.log(((b / a) * 100).toFixed(3) + "%")
 </script>
 
 <script id="ch0103/07" type="xxx">
@@ -50,7 +50,7 @@
   var c = Number(prompt('请输入c'))
   var d = Number(prompt('请输入d'))
 
-  console.log(a * x * x * x + b * x * x + c * x + d)
+  console.log((a * x * x * x + b * x * x + c * x + d).toFixed(7))
 </script>
 
 <script id="ch0103/08" type="xxx">
@@ -62,11 +62,10 @@
 <script id="ch0103/09" type="xxx">
   var r = Number(prompt('请输入半径r'))
 
-  console.log(2 * r)
-  console.log(2 * 3.14159 * r)
-  console.log(3.14159 * r * r)
+  console.log((2 * r).toFixed(4))
+  console.log((2 * 3.14159 * r).toFixed(4))
+  console.log((3.14159 * r * r).toFixed(4))
 </script>
-<!-- 3.14159  pi -->
 
 <script id="ch0103/10" type="xxx">
   var r1 = Number(prompt('请输入r1'))
@@ -79,7 +78,7 @@
   var a = Number(prompt('请输入a'))
   var b = Number(prompt('请输入b'))
 
-  console.log(a % b)
+  console.log((a % b).toFixed(4))
 </script>
 <!-- 0.4601  11题 -->
 
@@ -127,9 +126,9 @@
   var y2 = Number(prompt('请输入y2'))
   var x3 = Number(prompt('请输入x3'))
   var y3 = Number(prompt('请输入y3'))
-  var a = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)))
-  var b = Math.sqrt((x1 - x3) * (x1 - x3) + (y1 - y3) * (y1 - y3)))
-  var c = Math.sqrt((x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2)))
+  var a = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))
+  var b = Math.sqrt((x1 - x3) * (x1 - x3) + (y1 - y3) * (y1 - y3))
+  var c = Math.sqrt((x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2))
   var p = (a + b + c) / 2
   var s = Math.sqrt(p * (p - a) * (p - b) * (p - c))
   console.log(s.toFixed(2))
@@ -155,4 +154,3 @@
 
   console.log(2 ** n)
 </script>
-
