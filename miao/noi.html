@@ -87,7 +87,7 @@
   console.log((4 / 3 * 3.14 * r * r * r).toFixed(2))
 </script>
 
-<script id="ch0103/13">
+<script id="ch0103/13" type="xxx">
   var a = Number(prompt('请输入a'))
   var unitDigit = a % 10;
   var tenDigit = (a - unitDigit) / 10 % 10;
@@ -230,23 +230,76 @@
 
 <script id="ch0104/09" type="xxx">
   var n = Number(prompt('请输入n'));
-  if (n % 3 == 0 && n % 5 ==0 && n % 7 ==0) {
-    console.log("3 5 7");
+  var output = '';
+  if (n % 3 != 0 && n % 5 != 0 && n % 7 !=0)  console.log('n');
+  if (n % 3 == 0) output += '3 ';
+  if (n % 5 == 0) output += '5 ';
+  if (n % 7 == 0) output += '7 ';
+  if (output[output.length - 1] == ' ') output = output.slice(0, -1);
+  if (output != '') console.log(output);
+</script>
+
+<script id="ch0104/10" type="xxx">
+  var a = Number(prompt('请输入a'));
+  var b = Number(prompt('请输入b'));
+  if ((a < 60 && b >= 60) || (a >= 60 && b < 60)) {
+    console.log('1');
   } else {
+    console.log('0');
+  }
+</script>
+
+<script id="ch0104/11" type="xxx">
+  var n = Number(prompt('请输入n'));
+  if (n == 1 || n == 3 || n == 5) {
     console.log("NO");
+  } else {
+    console.log("YES");
   }
 </script>
 
-<script id="ch0104/0" type="xxx">
+<script id="ch0104/12" type="xxx">
+  var s = Number(prompt('请输入s'));
+  var bikeTime = s / 3 + 50;
+  var walkTIme = s / 1.2;
+  if (bikeTime < walkTIme) {
+    console.log("Bike");
+  } else if (bikeTime > walkTIme) {
+    console.log("Walk");
+  } else {
+    console.log("All");
+  }
+</script>
+
+<script id="ch0104/13" type="xxx">
+  var x = Number(prompt('请输入x'));
+  if (x >= 0 && x < 5) {
+    var y = -x + 2.5;
+  } else if (x >= 5 && x < 10) {
+    y = 2 - 1.5 * (x - 3) * (x - 3);
+  } else {
+    y = x / 2 - 1.5;
+  }
+  console.log(y.toFixed(3))
+</script>
+
+<script id="ch0104/14" type="xxx">
+  var w = Number(prompt('请输入w'));
+  var quick = prompt('请输入是否加急 y or n');
+  var money = 8;
+  var exactWeightMoney = 0;
+  if (quick = 'y') money += 5;
+  if (w > 1000) {
+    exactWeightMoney = ((w - 1000) / 500 - (w - 1000) / 500 % 1) == ((w - 1000) / 500) ? 4 * ((w - 1000) / 500) : 4 * ((w - 1000) / 500 - (w - 1000) / 500 % 1 + 1)
+    money += exactWeightMoney;
+  }
+  console.log(money);
+</script>
+
+<script id="ch0104/1" type="xxx">
   var n = Number(prompt('请输入n'));
   if (n < 0) {
 
   }
 </script>
 
-<script id="ch0104/04" type="xxx">
-  var n = Number(prompt('请输入n'));
-  if (n < 0) {
-
-  }
-</script>
