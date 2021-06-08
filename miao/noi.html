@@ -87,10 +87,13 @@
   console.log((4 / 3 * 3.14 * r * r * r).toFixed(2))
 </script>
 
-<script id="ch0103/13" type="xxx">
+<script id="ch0103/13">
   var a = Number(prompt('请输入a'))
+  var unitDigit = a % 10;
+  var tenDigit = (a - unitDigit) / 10 % 10;
+  var hundredDigit = (a - a % 100) / 100 % 10;
 
-  console.log(a % 10 + String((a / 10) % 10) + (a / 100) % 10)
+  console.log(String(unitDigit) + tenDigit + hundredDigit)
 </script>
 
 <script id="ch0103/14" type="xxx">
@@ -199,7 +202,7 @@
 
 <script id="ch0104/06" type="xxx">
   var n = Number(prompt('请输入n'));
-  if (n / 100 > 1) {
+  if (n / 100 >= 1) {
     console.log('1');
   } else {
     console.log('0');
@@ -224,7 +227,7 @@
     console.log("NO");
   }
 </script>
-<!-- 
+
 <script id="ch0104/09" type="xxx">
   var n = Number(prompt('请输入n'));
   if (n % 3 == 0 && n % 5 ==0 && n % 7 ==0) {
@@ -246,4 +249,4 @@
   if (n < 0) {
 
   }
-</script> -->
+</script>
