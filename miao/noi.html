@@ -196,15 +196,45 @@
     console.log('<')
   }
 </script>
-<!-- 
+
 <script id="ch0104/06" type="xxx">
   var n = Number(prompt('请输入n'));
-  if (n < 0) {
-
+  if (n / 100 > 1) {
+    console.log('1');
+  } else {
+    console.log('0');
   }
 </script>
 
-<script id="ch0104/04" type="xxx">
+<script id="ch0104/07" type="xxx">
+  var n = Number(prompt('请输入幸运瓶盖数n'));
+  var m = Number(prompt('请输入鼓励瓶盖数m'));
+  if (n >= 10 || m >= 20) {
+    console.log('1');
+  } else {
+    console.log('0');
+  }
+</script>
+
+<script id="ch0104/08" type="xxx">
+  var n = Number(prompt('请输入n'));
+  if (n % 3 == 0 && n % 5 ==0) {
+    console.log("YES");
+  } else {
+    console.log("NO");
+  }
+</script>
+<!-- 
+<script id="ch0104/09" type="xxx">
+  var n = Number(prompt('请输入n'));
+  if (n % 3 == 0 && n % 5 ==0 && n % 7 ==0) {
+    console.log("3 5 7");
+  } else {
+    console.log("NO");
+  }
+</script>
+
+<script id="ch0104/0" type="xxx">
   var n = Number(prompt('请输入n'));
   if (n < 0) {
 
