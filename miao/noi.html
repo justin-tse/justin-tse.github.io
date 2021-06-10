@@ -200,7 +200,7 @@
   }
 </script>
 
-<script id="ch0104/06" >
+<script id="ch0104/06" type="xxx">
   var n = Number(prompt('请输入n'));
   if (n / 10 >= 1) {
     console.log('1');
@@ -231,12 +231,15 @@
 <script id="ch0104/09" type="xxx">
   var n = Number(prompt('请输入n'));
   var output = '';
-  if (n % 3 != 0 && n % 5 != 0 && n % 7 !=0)  console.log('n');
-  if (n % 3 == 0) output += '3 ';
-  if (n % 5 == 0) output += '5 ';
-  if (n % 7 == 0) output += '7 ';
-  if (output[output.length - 1] == ' ') output = output.slice(0, -1);
-  if (output != '') console.log(output);
+  if (n % 3 != 0 && n % 5 != 0 && n % 7 !=0) {
+    console.log('n');
+  } else {
+    if (n % 3 == 0) output += '3 ';
+    if (n % 5 == 0) output += '5 ';
+    if (n % 7 == 0) output += '7 ';
+    if (output[output.length - 1] == ' ') output = output.slice(0, -1);
+    console.log(output);
+  }
 </script>
 
 <script id="ch0104/10" type="xxx">
@@ -273,13 +276,14 @@
 
 <script id="ch0104/13" type="xxx">
   var x = Number(prompt('请输入x'));
-  if (x >= 0 && x < 5) {
+  if (x < 5) {
     var y = -x + 2.5;
-  } else if (x >= 5 && x < 10) {
+  } else if (x < 10) {
     y = 2 - 1.5 * (x - 3) * (x - 3);
   } else {
     y = x / 2 - 1.5;
   }
+
   console.log(y.toFixed(3))
 </script>
 
@@ -288,24 +292,23 @@
   var quick = prompt('请输入是否加急 y or n');
   var money = 8;
   var exactWeightMoney = 0;
-  if (quick = 'y') money += 5;
   if (w > 1000) {
-    exactWeightMoney = ((w - 1000) / 500 - (w - 1000) / 500 % 1) == ((w - 1000) / 500) ? 4 * ((w - 1000) / 500) : 4 * ((w - 1000) / 500 - (w - 1000) / 500 % 1 + 1)
+    exactWeightMoney = 4 * Math.ceil((w - 1000) / 500);
     money += exactWeightMoney;
   }
+  if (quick = 'y') money += 5;
   console.log(money);
 </script>
 
 <script id="ch0104/15" type="xxx">
-  var a = Number(prompt('请输入a'));
+  var max = Number(prompt('请输入a'));
   var b = Number(prompt('请输入b'));
   var c = Number(prompt('请输入c'));
-  if (a > b && a > c) {
-    console.log(a);
-  } else if (b > a && b > c) {
-    console.log(b);
-  } else {
-    console.log(c);
+  if (b > max) {
+    max = b;
+  } 
+  if (c > max) {
+    max = c;
   }
 </script>
 
@@ -376,8 +379,6 @@
     part2 = Math.sqrt(4 * a * c - b * b) / (2 * a)
     console.log(`x1=${part1.toFixed(5)}+${part2.toFixed(5)}i;x2=${part1.toFixed(5)}-${part2.toFixed(5)}i`)
   }
-
-
 </script>
 
 <script id="ch0104/21" type="xxx">
@@ -387,3 +388,4 @@
 
   console.log(n - Number((y / x) === +(y / x).toFixed(0) ? y / x : +(y / x).toFixed(0) + 1))
 </script>
+
