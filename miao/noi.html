@@ -389,3 +389,233 @@
   console.log(n - Number((y / x) === +(y / x).toFixed(0) ? y / x : +(y / x).toFixed(0) + 1))
 </script>
 
+<!-- ch0105 -->
+<script id="ch0105/01" type="xxx">
+  var n = Number(prompt('请输入n'));
+  var sum = 0;
+  var i = n;
+  while (i > 0) {
+    var age = Number(prompt('请输入age'));
+    sum += age;
+    i--;
+  }
+  var averageAge = sum / n;
+  console.log(averageAge.toFixed(2));
+</script>
+
+<script id="ch0105/02" type="xxx">
+  var sum = 0;
+  var i = 12;
+  while (i > 0) {
+    var monthRemainer = Number(prompt('请输入monthRemainer'));
+    sum += monthRemainer;
+    i--;
+  }
+  var averageAge = sum / 12;
+  console.log('$' + averageAge.toFixed(2));
+</script>
+
+<script id="ch0105/03" type="xxx">
+  var n = Number(prompt('请输入n'));
+  var sum = 0;
+  var i = n;
+  while (i > 0) {
+    var sample = Number(prompt('请输入sample'));
+    sum += sample;
+    i--;
+  }
+  var averageSample = sum / n;
+  console.log(averageSample.toFixed(4));
+</script>
+
+<script id="ch0105/04" type="xxx">
+  var n = Number(prompt('请输入n'));
+  var sum = 0;
+  var i = n;
+  while (i > 0) {
+    var num = Number(prompt('请输入num'));
+    sum += num;
+    i--;
+  }
+  var averageNum = sum / n;
+  console.log(`${sum} ${averageNum.toFixed(5)}`);
+</script>
+
+<script type="xxx">
+  var number = Math.floor(100 * Math.random())
+  do {
+    var guess = Number(prompt("你猜是多少？"));
+    if (guess > number) {
+      alert("你猜大了")
+    }
+    if (guess < number) {
+      alert("你猜小了")
+    }
+  } while (guess !== number) 
+    alert(`恭喜你🎉🎉，你猜中了，数字就是:  ${guess}`)
+</script>
+
+<script id="ch0105/05" type="xxx">
+  let n = Number(prompt('请输入n'));
+  let max = Number(prompt('请输入num'));
+  let i = n - 1;
+  while (i > 0) {
+    let num = Number(prompt('请输入num'));
+    if (num > max) max = num;
+    i--;
+  }
+  console.log(max);
+</script>
+
+<script id="ch0105/06" type="xxx">
+  let n = Number(prompt('请输入n'));
+  let max = Number(prompt('请输入num'));
+  let min = max;
+  let i = n - 1;
+  while (i > 0) {
+    let num = Number(prompt('请输入num'));
+    if (num > max) max = num;
+    if (num < min) min = num;
+    i--;
+  }
+  console.log(max - min);
+</script>
+
+<script id="ch0105/07" type="xxx">
+  var n = Number(prompt('请输入天数n'));
+  var goldCount = 0;
+  var silverCount = 0;
+  var copperCount = 0;
+  while (n > 0) {
+    var gold = Number(prompt('请输入当天gold数'));
+    var silver = Number(prompt('请输入当天silver数'));
+    var copper = Number(prompt('请输入当天copper数'));
+    goldCount += gold;
+    silverCount += silver;
+    copperCount += copper;
+    n--;
+  }
+  var sum = goldCount + silverCount + copperCount;
+  console.log(goldCount);
+  console.log(silverCount);
+  console.log(copperCount);
+  console.log(sum);
+</script>
+
+<script id="ch0105/08" type="xxx">
+  var n = Number(prompt('请输入n'));
+  var angleSum = (n - 2) * 180;
+  while (n > 1) {
+    var angle = Number(prompt('请输入angle'));
+    angleSum -= angle;
+    n--;
+  }
+  console.log(angleSum);
+</script>
+
+<script id="ch0105/09" type="xxx">
+  var m = Number(prompt('请输入m'));
+  var n = Number(prompt('请输入n'));
+  if (m % 2 == 0) m += 1;
+  if (n % 2 == 0) n -= 1;
+  var number = (n - m) / 2 + 1;
+  console.log((m + n) * number / 2);
+</script>
+
+<script id="ch0105/09" type="xxx">
+  var m = Number(prompt('请输入m'));
+  var n = Number(prompt('请输入n'));
+  var sum = 0;
+  if (m % 2 == 0) m += 1;
+  if (n % 2 == 0) n -= 1;
+  for (let i = m; i <= n; i += 2) {
+    sum += i;
+  }
+  console.log(sum);
+</script>
+
+<script id="ch0105/10" type="xxx">
+  var m = Number(prompt('请输入m'));
+  var n = Number(prompt('请输入n'));
+  var sum = 0;
+  if (m % 17 != 0) m += (17 - m % 17);
+  if (n % 17 != 0) n -= n % 17;
+  for (let i = m; i <= n; i += 17) {
+    sum += i;
+  }
+  console.log(sum);
+</script>
+
+<script id="ch0105/11" type="xxx">
+  var k = Number(prompt('请输入k'));
+  var countOne = 0;
+  var countFive = 0;
+  var countTen = 0;
+  while (k > 0) {
+    var n = Number(prompt('请输入n'));
+    if (n == 1) countOne += 1;
+    if (n == 5) countFive += 1;
+    if (n == 10) countTen += 1;
+    k--;
+  }
+  console.log(countOne);
+  console.log(countFive);
+  console.log(countTen);
+</script>
+
+<script id="ch0105/12" type="xxx">
+  var N = Number(prompt('请输入N'));
+  var target = Number(prompt('请输入target'));
+  var count = 0;
+  while (N > 0) {
+    var n = Number(prompt('请输入n'));
+    if (n == target) count += 1;
+    N--;
+  }
+  console.log(count);
+</script>
+
+<script id="ch0105/12" type="xxx">
+  var N = Number(prompt('请输入N'));
+  var target = Number(prompt('请输入target'));
+  var count = 0;
+  while (N > 0) {
+    var n = Number(prompt('请输入n'));
+    if (n == target) count += 1;
+    N--;
+  }
+  console.log(count);
+</script>
+
+<script id="ch0105/13" type="xxx">
+  var a = Number(prompt('请输入a'));
+  var n = Number(prompt('请输入n'));
+  var aNPower = 1;
+  while (n > 0) {
+    aNPower *= a
+    n--;
+  }
+  console.log(aNPower);
+</script>
+
+<script id="ch0105/14" type="xxx">
+  var num = Number(prompt('请输入num'));
+  var year = Number(prompt('请输入year'));
+  while (year > 0) {
+    num *= (1 + 0.001)
+    year--;
+  }
+  console.log(num.toFixed(4));
+</script>
+
+<script id="ch0105/15" type="xxx">
+  var interest = Number(prompt('请输入interest'));
+  var money = Number(prompt('请输入money'));
+  var year = Number(prompt('请输入year'));
+  while (year > 0) {
+    money *= (1 + interest * 0.01)
+    year--;
+  }
+  console.log(Math.trunc(money));
+</script>
+
