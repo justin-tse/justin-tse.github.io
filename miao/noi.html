@@ -310,6 +310,7 @@
   if (c > max) {
     max = c;
   }
+  console.log(max);
 </script>
 
 <script id="ch0104/16" type="xxx">
@@ -672,16 +673,53 @@ debugger
   }
 </script>
 
-<script id="ch0105/0" type="xxx">
-  var n = Number(prompt('请输入n'));
-  var sum = 0;
-  var i = n;
-  while (i > 0) {
-    var num = Number(prompt('请输入num'));
-    sum += num;
-    i--;
+<script id="ch0105/19" type="xxx">
+  let n = Number(prompt("输入n行数据"));
+  let time = 0;
+  while(n > 0) {
+    let x = Number(prompt("输入此次坐标x"));
+    let y = Number(prompt("输入此次坐标y"));
+    let count = Number(prompt("输入此次人数"));
+    time += count * (1 + 0.5) + 2 * (Math.sqrt(x * x + y * y) / 50)
+    n--;
   }
-  var averageNum = sum / n;
-  console.log(`${sum} ${averageNum.toFixed(5)}`);
+  console.log(Math.ceil(time))
 </script>
 
+<script id="ch0105/20" type="xxx">
+  let height = Number(prompt("输入初始高度height"));
+  let distance = 0;
+  let reboundHeight = 0;
+  
+  for (let i = 0; i < 10; i++) {
+    distance += height + reboundHeight;
+    height /= 2;
+    reboundHeight = height;
+  }
+  
+  console.log(distance, reboundHeight);
+</script>
+
+<script id="ch0105/21" type="xxx">
+  let num = Number(prompt("输入数num"));
+  let numOdd;
+  let numEven;
+  while (num != 1) {
+    if (num % 2 == 1) {
+      numOdd = num;
+      num = num * 3 + 1;
+      console.log(numOdd + '*' + '3' + '+' + '1' + "=" + num);
+    }
+    if (num % 2 == 0) {
+      numEven = num;
+      num = num / 2;
+      console.log(numEven + '/' + '2' + "=" + num);
+    }
+  }
+  console.log("End");
+</script>
+
+<script id="ch0105/2" type="xxx">
+  let n = Number(prompt("输入n行数据"));
+  
+</script>
