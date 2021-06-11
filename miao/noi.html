@@ -657,8 +657,10 @@
   let n = Number(prompt("输入n行数据"));
   let cocktailTherapy = 1 / Number(prompt("输入鸡尾酒疗法总病例数量")) * Number(prompt("输入鸡尾酒疗法疗效有效病例")) * 100;
   let count = 0;
+
   while (count < n - 1) {
     let improveTherapy = 1 / Number(prompt("输入改进疗法总病例数量")) * Number(prompt("输入改进疗法疗效有效病例")) * 100;
+    
     if (cocktailTherapy - improveTherapy > 5) {
       console.log("worse");
     } else if (improveTherapy - cocktailTherapy > 5) {
@@ -759,15 +761,34 @@
   let m = Number(prompt("每天开始时的药品总量m"));
   let n = Number(prompt("这一天取药的人数n"));
   let remainCount = n;
-
+  
   for (let i = 0; i < n; i++) {
     let takeMedicine = Number(prompt(`第${i + 1}个病人希望取走的药品数量`));
     if (m < takeMedicine) continue;
     m -= takeMedicine;
     remainCount--;
   }
-
+  
   console.log(remainCount);
+</script>
+
+<script id="ch0105/24" type="xxx">
+  let n = Number(prompt("输入n行数据"));
+  let timeCount = 0;
+
+  for (let i = 0; i < n; i++) {
+    let systolicPressure = Number(prompt(`输入第${i + 1}次收缩压数据`));
+    let diastolicPressure = Number(prompt(`输入第${i + 1}次舒张压数据`));
+
+    if (systolicPressure >= 90 && systolicPressure <= 140 && diastolicPressure >= 60 && diastolicPressure <= 90) {
+      timeCount += 1;
+    } else {
+      timeCount = 0;
+    }
+  }
+
+  console.log(timeCount);
+
 </script>
 
 
