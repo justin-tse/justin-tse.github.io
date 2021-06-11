@@ -697,26 +697,41 @@ debugger
     reboundHeight = height;
   }
   
-  console.log(distance, reboundHeight);
+  console.log(distance.toFixed(4), reboundHeight.toFixed(7));
 </script>
 
 <script id="ch0105/21" type="xxx">
   let num = Number(prompt("输入数num"));
   let numOdd;
   let numEven;
+
   while (num != 1) {
+
     if (num % 2 == 1) {
       numOdd = num;
       num = num * 3 + 1;
       console.log(numOdd + '*' + '3' + '+' + '1' + "=" + num);
     }
+
     if (num % 2 == 0) {
       numEven = num;
       num = num / 2;
       console.log(numEven + '/' + '2' + "=" + num);
     }
+
   }
+
   console.log("End");
+</script>
+
+<script id="ch0105/2" type="xxx">
+  let n = Number(prompt("输入n行数据"));
+  
+</script>
+
+<script id="ch0105/2" type="xxx">
+  let n = Number(prompt("输入n行数据"));
+  
 </script>
 
 <script id="ch0105/2" type="xxx">
