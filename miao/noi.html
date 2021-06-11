@@ -528,7 +528,6 @@
   var n = Number(prompt('请输入n'));
   var sum = 0;
   if (m % 2 == 0) m += 1;
-  if (n % 2 == 0) n -= 1;
   for (let i = m; i <= n; i += 2) {
     sum += i;
   }
@@ -540,7 +539,6 @@
   var n = Number(prompt('请输入n'));
   var sum = 0;
   if (m % 17 != 0) m += (17 - m % 17);
-  if (n % 17 != 0) n -= n % 17;
   for (let i = m; i <= n; i += 17) {
     sum += i;
   }
@@ -621,7 +619,6 @@
 </script>
 
 <script id="ch0105/16" type="xxx">
-debugger
   const salary = Number(prompt('请输入salary'));
   var interest = Number(prompt('请输入interest'));
   var housePrice = 200;
