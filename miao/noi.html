@@ -619,3 +619,69 @@
   console.log(Math.trunc(money));
 </script>
 
+<script id="ch0105/16" type="xxx">
+debugger
+  const salary = Number(prompt('请输入salary'));
+  var interest = Number(prompt('请输入interest'));
+  var housePrice = 200;
+  var year = 1;
+  var moneySUM = salary;
+  while (moneySUM <= housePrice && year != 20) {
+    housePrice *= (1 + interest * 0.01);
+    year++;
+    moneySUM += salary;
+  }
+  if (year <= 20 && moneySUM >= housePrice) {
+    console.log(year);
+  }  else {
+    console.log("Impossible")
+  }
+</script>
+
+<script id="ch0105/17" type="xxx">
+  let k = Number(prompt("求菲波那契数列中第k个数"));
+  let f1 = 1;
+  let f2 = 1;
+  let fk;
+  if (k <= 2) {
+    console.log(1);
+  } else {
+    for (let i = 3; i <= k; i++) {
+      fk = f1 + f2;
+      f1 = f2;
+      f2 = fk;
+    }
+    console.log(fk);
+  }
+</script>
+
+<script id="ch0105/18" type="xxx">
+  let n = Number(prompt("输入n行数据"));
+  let cocktailTherapy = 1 / Number(prompt("输入鸡尾酒疗法总病例数量")) * Number(prompt("输入鸡尾酒疗法疗效有效病例")) * 100;
+  let count = 0;
+  while (count < n - 1) {
+    let improveTherapy = 1 / Number(prompt("输入改进疗法总病例数量")) * Number(prompt("输入改进疗法疗效有效病例")) * 100;
+    if (cocktailTherapy - improveTherapy > 5) {
+      console.log("worse");
+    } else if (improveTherapy - cocktailTherapy > 5) {
+      console.log("better");
+    } else {
+      console.log("same");
+    }
+    count++;
+  }
+</script>
+
+<script id="ch0105/0" type="xxx">
+  var n = Number(prompt('请输入n'));
+  var sum = 0;
+  var i = n;
+  while (i > 0) {
+    var num = Number(prompt('请输入num'));
+    sum += num;
+    i--;
+  }
+  var averageNum = sum / n;
+  console.log(`${sum} ${averageNum.toFixed(5)}`);
+</script>
+
