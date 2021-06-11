@@ -587,14 +587,14 @@
 </script>
 
 <script id="ch0105/13" type="xxx">
-  var a = Number(prompt('请输入a'));
+  var power = Number(prompt('请输入power'));
   var n = Number(prompt('请输入n'));
-  var aNPower = 1;
+  var result = 1;
   while (n > 0) {
-    aNPower *= a
+    result *= power
     n--;
   }
-  console.log(aNPower);
+  console.log(result);
 </script>
 
 <script id="ch0105/14" type="xxx">
@@ -720,6 +720,56 @@
 
   console.log("End");
 </script>
+
+<script id="ch0105/22" type="xxx">
+  let count = 0;
+  let monthRemainMoney = 0;
+  let remainMoney = 0;
+  let monthSaveMoney = 0;
+  let saveMoney = 0;
+  debugger;
+  while (count < 12) {
+    monthUsedMoney = Number(prompt(`第${count + 1}月花费了多少钱`));
+    monthRemainMoney = 300 - monthUsedMoney;
+    remainMoney += monthRemainMoney;
+
+    // 每月超出部分100整数倍部分
+    if (remainMoney >= 100) {
+      monthSaveMoney = Math.trunc(remainMoney /100) * 100;
+      saveMoney += monthSaveMoney;
+      remainMoney -= monthSaveMoney;
+    }
+
+    // 当月不够花
+    if (remainMoney < 0) break;
+    count++;
+  }
+  // 当月不够花，返回月份
+  if (remainMoney < 0) {
+    console.log(-(++count));
+  } else {
+    // 一年储蓄
+    saveMoney *= 1.2;
+    remainMoney += saveMoney;
+    console.log(remainMoney);
+  }
+</script>
+
+<script id="ch0105/23" type="xxx">
+  let m = Number(prompt("每天开始时的药品总量m"));
+  let n = Number(prompt("这一天取药的人数n"));
+  let remainCount = n;
+
+  for (let i = 0; i < n; i++) {
+    let takeMedicine = Number(prompt(`第${i + 1}个病人希望取走的药品数量`));
+    if (m < takeMedicine) continue;
+    m -= takeMedicine;
+    remainCount--;
+  }
+
+  console.log(remainCount);
+</script>
+
 
 <script id="ch0105/2" type="xxx">
   let n = Number(prompt("输入n行数据"));
