@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>画图</title>
+  <style>
+    canvas {
+      border: 2px solid #f0f;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="500" height="500"></canvas>
+</body>
+<script>
+  var canvas = document.querySelector('canvas')
+  canvas.style.imageRendering = 'pixelated' //放大时的插帧方式：不插帧，直接放大像素
+  var ctx = canvas.getContext('2d')
+
+  function dot(x, y, color = 'black') {
+    x = Math.round(x)
+    y = Math.round(y)
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, 1, 1)
+  }
+  /**
+   * YOUR TASK
+      * 在 坐标 (42, 42) 画出一个点
+      * 画一条实线
+      * 画一条一个实点一个空点的虚线
+      * 画一条两个实点两个空点的虚线
+      * 画一条三个实点两个空点的虚线
+      * 画一条45度的斜线
+      * 画一条30度的斜线（与x轴或y轴的夹角呈30度）
+      * 画一条跨越画布左上角和右下角的对角线
+      * 画一个空心矩形
+      * 画一个实心矩形
+      * 画两个个空心的圆，居中：
+        * 一个半径为50像素
+        * 一个半径为200像素
+      * 画一个实心的圆，半径至少为100像素
+      * 画一个【大小合适】的sin(x)的图像
+
+      * 画出rgb色彩空间的某一面（尺寸要大于100x100）
+        如果做出上一题后，尝试将其每个点的坐标乘以一个矩阵（如(2,0,0,2)或(1,0.27得到新的位置，即绘制出被线性变幻后的色彩空间某一面
+        可以考虑如下几种矩阵：
+           2 0
+           0 2
+           ------
+           1  0.27
+           0  1
+           ------
+           0.5    0.87
+           -0.87  0.5
+
+   */
+</script>
+<script>
+  // 不可更改上面的代码
+  // 你的代码写在这里
+  // YOUR CODE GOES BELOW
+
+  // * 在 坐标 (42, 42) 画出一个点
+  dot(42, 42, 'red');
+  dot(341.2, 10, 'red');
+  dot(341.49, 10, 'red');
+
+  // * 画一条实线
+  for (let i = 10; i < 300; i++) {
+    dot(10, i, 'green');
+  }
+  
+  // * 画一条一个实点一个空点的虚线
+  for (let i = 10; i < 300; i = i + 2) {
+    dot(i, 10, 'blue');
+  }
+  
+  // * 画一条两个实点两个空点的虚线
+  for (let i = 10; i < 300; i = i + 4) {
+    dot(i, 20, 'red');
+    dot(i + 1, 20, 'red');
+  }
+  
+  // * 画一条三个实点两个空点的虚线
+  for (let i = 10; i < 300; i = i + 5) {
+    dot(i, 30, 'pink');
+    dot(i + 1, 30, 'pink');
+    dot(i + 2, 30, 'pink');
+  }
+  
+  // * 画一条45度的斜线
+  for (let i = 10; i < 300; i++) {
+    dot(i, i + 50, 'yellow');
+  }
+  
+  // * 画一条30度的斜线（与x轴或y轴的夹角呈30度）
+  for (let i = 10; i < 300; i++) {
+    dot(i, -2 * i + 300, "yellow");
+    dot(0.5 * i, - i + 300, "yellow");
+  }
+  
+  // * 画一条跨越画布左上角和右下角的对角线
+  for (let i = 0; i < 500; i++) {
+    dot(i, i, "orange");
+    dot(i, -i + 500, "orange");
+  }
+
+  // * 画一个空心矩形
+  for (let i = 40; i < 80; i++) {
+    dot(40, i, 'green');
+    dot(80, i, 'green');
+    dot(i, 40, 'green');
+    dot(i, 80, 'green');
+  }
+  
+  // * 画一个实心矩形
+  for (let i = 90; i < 130; i++) {
+    for (let j = 90; j < 130; j++) {
+      dot(i, j, 'green');
+    }
+  }
+
+  // * 画两个个空心的圆，居中：
+  // * 一个半径为50像素
+  for (let i = 200; i <= 300; i++) {
+    dot(i, 250 + Math.sqrt(2500 - (i - 250) ** 2), "blueviolet");
+    dot(i, 250 - Math.sqrt(2500 - (i - 250) ** 2), "blueviolet");
+  }
+  
+  // * 一个半径为200像素
+  for (let i = 50; i <= 450; i++) {
+    dot(i, 250 + Math.sqrt(40000 - (i - 250) ** 2), "aqua");
+    dot(i, 250 - Math.sqrt(40000 - (i - 250) ** 2), "aqua");
+  }
+  
+  // * 画一个实心的圆，半径至少为100像素
+  for (let r = 0; r <= 100; r++) {
+    for (let i = 300; i <= 500; i++) {
+      dot(i, 300 + Math.sqrt(r ** 2 - (i - 400) ** 2), "gold");
+      dot(i, 300 - Math.sqrt(r ** 2 - (i - 400) ** 2), "gold");
+    }
+  }
+  
+  // * 画一个【大小合适】的sin(x)的图像
+  for (let x = 0; x < 300; x++) {
+    dot(x, 400 + Math.sin(x))
+  }
+  
+  // * 画出rgb色彩空间的某一面（尺寸要大于100x100）
+  //   如果做出上一题后，尝试将其每个点的坐标乘以一个矩阵（如(2,0,0,2)或(1,0.27得到新的位置，即绘制出被线性变幻后的色彩空间某一面
+  //   可以考虑如下几种矩阵：
+
+  for (let i =150; i < 250; i++) {
+    for (let j = 0; j < 100; j++) {
+      dot(i, j, 'chartreuse');
+    }
+  }
+    
+  //      2 0
+  //      0 2
+  for (let i = 150; i < 250; i++) {
+      for (let j = 0; j < 100; j++) {
+        dot(2 * i, 2 * j, 'skyblue');
+      }
+    }
+
+  //      1  0.27
+  //      0  1
+
+  for (let i = 150; i < 250; i++) {
+      for (let j = 0; j < 100; j++) {
+        dot(i, 0.27 * i + j, 'floralwhite');
+      }
+    }
+
+  //      ------
+  //      0.5    0.87
+  //      -0.87  0.5
+
+  for (let i = 150; i < 250; i++) {
+    for (let j = 0; j < 100; j++) {
+      dot(0.5 * i - 0.87 * j, 0.87 * i + 0.5 * j, "salmon");
+    }
+  }
+
+</script>
+</html>
