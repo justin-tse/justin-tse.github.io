@@ -483,7 +483,7 @@
     if (guess < number) {
       alert("你猜小了")
     }
-  } while (guess !== number)
+  } while (guess !== number);
 
     alert(`恭喜你🎉🎉，你猜中了，数字就是:  ${guess}`)
 </script>
@@ -839,34 +839,181 @@
 <script id="ch0105/24" type="xxx">
   let n = Number(prompt("输入n行数据"));
   let timeCount = 0;
-
+  
   for (let i = 0; i < n; i++) {
     let systolicPressure = Number(prompt(`输入第${i + 1}次收缩压数据`));
     let diastolicPressure = Number(prompt(`输入第${i + 1}次舒张压数据`));
-
+    
     if (systolicPressure >= 90 && systolicPressure <= 140 && diastolicPressure >= 60 && diastolicPressure <= 90) {
       timeCount += 1;
     } else {
       timeCount = 0;
     }
   }
-
+  
   console.log(timeCount);
-
-</script>
-
-
-<script id="ch0105/2" type="xxx">
-  let n = Number(prompt("输入n行数据"));
   
 </script>
 
-<script id="ch0105/2" type="xxx">
-  let n = Number(prompt("输入n行数据"));
+<script id="十进制转换为其他进制" type="xxx">
+  var n = Number(prompt("输入十进制数n"));
+  var factor = Number(prompt("输入你要转换的进制数"))
+  var str = '';
+
+  do {
+    var digit = n % factor;
+    n = (n - digit) / factor;
+    if (digit >= 10) digit = String.fromCharCode(digit + 55);
+    str = digit + str;
+
+  } while (n > 0);
+  console.log(str);
+</script>
+
+<script id="ch0105/25" type="xxx">
+  var n = 81;
+  var factor;
+  var str7, str9;
+  var n7, n9;
+
+  while (true) {
+    // 把10进制转化为7进制
+    factor = 7;
+    n7 = n;
+    str7 = '';
+    do {
+      var digit = n7 % factor;
+      n7 = (n7 - digit) / factor;
+      if (digit >= 10) digit = String.fromCharCode(digit + 55);
+      str7 = digit + str7;
+
+    } while (n7 > 0);
+
+    // 把10进制转化为9进制
+    factor = 9;
+    n9 = n;
+    str9 = '';
+    do {
+      var digit = n9 % factor;
+      n9 = (n9 - digit) / factor;
+      if (digit >= 10) digit = String.fromCharCode(digit + 55);
+      str9 = digit + str9;
+
+    } while (n9 > 0);
+
+    // 找出7进制与9进制逆序的自然数
+    if (str7.split('').reverse().join('') === str9) {
+      console.log("（不提供）")
+      console.log(n);
+      console.log(str7);
+      console.log(str9);
+      break;
+    }
+
+    n++;
+  }
+
+</script>
+
+<script id="ch0105/26" type="xxx">
+  let n = Number(prompt("输入n个数位数"));
+  let count = 0;
+  
+  for (let i = 0; i < n; i++) {
+    num = Number(prompt(`输入第${i + 1}个四位数`));
+    let unitDigit = num % 10;
+    let digit = unitDigit;
+    
+    do {
+      num = (num - digit) / 10;
+      digit = num % 10;
+      unitDigit -=  digit;
+    } while (num > 0 && unitDigit > 0);
+    
+    if (unitDigit > 0) count++;
+  }
+  
+  console.log(count);
+</script>
+
+<script id="ch0105/27" type="xxx">
+  let k = Number(prompt("输入一个整数k"));
+  let sum = 0;
+  let n = 1;
+  
+  while (true) {
+    sum += 1 / n;
+    
+    if (sum > k) {
+      console.log(n);
+      console.log(sum);
+      break;
+    }
+    
+    n++;
+  }
+</script>
+
+<script id="ch0105/28" type="xxx">
+  n = Number(prompt("输入一个整数n"));
+
+  do {
+    let digit = n % 10;
+    console.log(digit);
+    n = (n - digit) / 10;
+  } while (n > 0);
+</script>
+
+<script id="ch0105/29" type="xxx" >
+  n = Number(prompt("输入一个整数n"));
+  let digit;
+  str = '';
+
+  let sign = 1;
+  if (n < 0) {
+    sign = -1;
+    n = -n;
+  }
+
+  for (i = 0; n >= 0; i++) {
+    digit = n % 10;
+    n = (n - digit) / 10;
+    if (i == 0 && digit == 0) continue;
+    str += digit;
+    if (n <= 0) break;
+  }
+
+  console.log(str * sign);
   
 </script>
 
-<script id="ch0105/2" type="xxx">
-  let n = Number(prompt("输入n行数据"));
+
+<script id="ch0105/30" type="xxx">
+  let n = Number(prompt("输入整数n"));
+  let k = Number(prompt("输入有k个3"));
+  let count = 0;
+  let digit;
+  let yes = true;
+
+  if (n % 19 !== 0) {
+    console.log("NO");
+    yes = false;
+  }
+
+  do {
+    digit = n % 10;
+    if (digit === 3) count += 1;
+    n = (n - digit) / 10;
+  } while (n > 0 && yes);
   
+  if (count === k && yes) {
+    console.log("YES");
+  } 
+
 </script>
+
+<script id="ch0105/3" type="xxx">
+  let n = Number(prompt("输入n"));
+</script>
+  
+
