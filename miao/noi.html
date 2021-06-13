@@ -93,14 +93,14 @@
   var tenDigit = (a - unitDigit) / 10 % 10;
   var hundredDigit = (a - a % 100) / 100 % 10;
 
-  console.log(String(unitDigit) + tenDigit + hundredDigit)
+  console.log(String(unitDigit) + tenDigit + hundredDigit);
 </script>
 
 <script id="ch0103/14" type="xxx">
-  var h = Number(prompt('请输入深度h'))
-  var r = Number(prompt('请输入半径r'))
+  var h = Number(prompt('请输入深度h'));
+  var r = Number(prompt('请输入半径r'));
 
-  console.log(+(20 * 1000 / (3.14159 * r * r * h)).toFixed(0) + 1)
+  console.log(+(20 * 1000 / (3.14159 * r * r * h)).toFixed(0) + 1);
 </script>
 
 <script id="ch0103/15" type="xxx">
@@ -184,6 +184,7 @@
 <script id="ch0104/04" type="xxx">
   var char = prompt('请输入char');
   n = char.charCodeAt();
+
   if (n % 2 == 1) {
     console.log("YES");
   } else {
@@ -194,6 +195,7 @@
 <script id="ch0104/05" type="xxx">
   var x = Number(prompt('请输入x'));
   var y = Number(prompt('请输入y'));
+
   if (x > y) {
     console.log('>')
   } else if(x == y) {
@@ -205,6 +207,7 @@
 
 <script id="ch0104/06" type="xxx">
   var n = Number(prompt('请输入n'));
+
   if (n / 10 >= 1) {
     console.log('1');
   } else {
@@ -412,7 +415,9 @@
   console.log(n - Number((y / x) === +(y / x).toFixed(0) ? y / x : +(y / x).toFixed(0) + 1))
 </script>
 
+
 <!-- ch0105 -->
+
 <script id="ch0105/01" type="xxx">
   var n = Number(prompt('请输入n'));
   var sum = 0;
@@ -867,6 +872,7 @@
     str = digit + str;
 
   } while (n > 0);
+
   console.log(str);
 </script>
 
@@ -1011,8 +1017,37 @@
 
 </script>
 
-<script id="ch0105/3" type="xxx">
-  let n = Number(prompt("输入n"));
+<script id="ch0105/31" type="xxx">
+  let n = Number(prompt('请输入n'))
+  let m = Number(prompt('请输入m'))
+  let count = 0;
+  let output = '';
+
+  //遍历全部灯泡
+  for (let i = 1; i <= n; i++) {
+    count = 0;
+
+    //记录第i个灯泡的翻滚次数
+    for (let j = 1; j <= m; j++) {
+      if (i % j == 0) {
+        count++;
+      }
+
+    }
+
+    //把翻滚次数为奇数的位置输出
+    if (count % 2 == 1) {
+      if (output == '') {
+        output += String(i);
+      } else {
+        output += ',' + i;
+      }
+    }
+
+  }
+
+  console.log(output);
+
 </script>
 
 <script id="ch0105/32" type="xxx">
@@ -1121,6 +1156,7 @@
 
   for (let k = 1; k <= n; k++) {
     power = Number(prompt(`输入第${k}组数据的最高次幂power`));
+
       for (i = power; i >= 0; i--) {
         let c = Number(prompt(`输入系数第${k}组数据的第${power - i + 1}个系数c`));
         if (power == 0) {
@@ -1148,6 +1184,7 @@
     judge = true;
     if (i % 7 == 0) continue;
     num = i;
+
     do {
       digit = num % 10;
       if (digit == 7) {
@@ -1168,7 +1205,7 @@
   let n = Number(prompt("输入正整数n"));
   let count = 0;
   let num;
-  debugger
+
   for (let i = 1; i <= n; i++) {
     num  = i;
     do {
@@ -1190,7 +1227,7 @@
   let r = Number(prompt("输入正整数r"));
   let count = 0;
   let num;
-  debugger
+  
   for (let i = l; i <= r; i++) {
     num  = i;
     do {
@@ -1295,6 +1332,3 @@
   console.log(sum);
 
 </script>
-
-
-
