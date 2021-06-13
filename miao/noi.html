@@ -1220,10 +1220,20 @@
   
 </script>
 
-<script id="ch0105/43" type="xxx">
+<script id="ch0105/43" typ>
   let n = Number(prompt("输入正整数n"));
   let small = 2;
   let big;
+
+  var prime = function (n) {
+    if (n <= 1) return false;
+
+    for (let i = 2; i < n; i++) {
+      if (n % i == 0) return false;
+    }
+
+    return true;
+  }
   
   while (!(prime(small) && prime(big) && n == small * big)) {
     if (prime(small) && n % small == 0) {
@@ -1235,16 +1245,6 @@
     } else {
       small++
     }
-  }
-  
-  var prime = function(n) {
-    if (n <= 1) return false;
-    
-    for (let i = 2; i < n; i++) {
-      if (n % i == 0) return false;
-    }
-    
-    return true;
   }
   
 </script>
@@ -1289,6 +1289,5 @@
 
 31 37 38 43
 
-42
 
 
