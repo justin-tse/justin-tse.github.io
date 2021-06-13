@@ -1014,5 +1014,282 @@
 <script id="ch0105/3" type="xxx">
   let n = Number(prompt("输入n"));
 </script>
+
+<script id="ch0105/32" type="xxx">
+  let n = Number(prompt("输入n"));
+  let q1 = 2;
+  let p1 = 1;
+  let sum = 0;
+  let temp;
   
+  for (let i = 0; i < n; i++) {
+    sum += q1 / p1;
+    temp = q1;
+    q1 = q1 + p1;
+    p1 = temp; 
+  }
+
+  console.log(sum);
+
+</script>
+
+<script id="ch0105/33" type="xxx">
+  let n = Number(prompt("输入n"));
+  let sum = 0;
+  let sign = 1;
+  
+  for (let i = 1; i <= n; i++) {
+    sum += (1 / i) * sign;
+    sign = -sign;
+  }
+
+  console.log(sum.toFixed(4));
+
+</script>
+
+<script id="ch0105/34" type="xxx">
+  let n = Number(prompt("输入n"));
+  let sum = 0;
+  let factorial;
+  
+  for (let i = 1; i <= n; i++) {
+    factorial = 1;
+    for (let j = 1; j <= i; j++) {
+      factorial *= j; 
+    }
+    sum += factorial;
+  }
+  
+  console.log(sum);
+  
+</script>
+
+<script id="ch0105/35" type="xxx">
+  let n = Number(prompt("输入n"));
+  let sum = 1;
+  let factorial;
+  
+  for (let i = 1; i <= n; i++) {
+    factorial = 1;
+    for (let j = 1; j <= i; j++) {
+      factorial *= j; 
+    }
+    sum += 1 / factorial;
+  }
+  
+  console.log(sum.toFixed(10));
+  
+</script>
+
+<script id="ch0105/36" type="xxx">
+  let x = Number(prompt("输入x"));
+  let n = Number(prompt("输入n"));
+  let sum = 0;
+
+  for (i = 0; i <= n; i++) {
+    sum += x ** i;
+  }
+
+  console.log(sum.toFixed(2));
+
+</script>
+
+<script id="ch0105/37" type="xxx">
+  let m = Number(prompt("输入m"));
+  let attack = Number(prompt("输入attack"));
+  let x = Number(prompt("输入x"));
+  let maxAttack = 0;
+
+  for (i = 0; i <= n; i++) {
+    sum += x ** i;
+  }
+
+  console.log(sum.toFixed(2));
+
+</script>
+
+<script id="ch0105/38" type="xxx">
+  let n = Number(prompt("输入n组数据"));
+  let power = Number(prompt("输入最高次幂power"));
+  let derivative;
+  for (let k = 1; k <= n; k++) {
+      for (i = power; i >= 0; i--) {
+        let c = Number(prompt("输入系数c"));
+        if (i !== 0) {
+          derivativeC = i * c;
+          console.log(derivativeC);
+        }
+        if (power == 0) {
+          console.log(0);
+        }
+        
+      }
+  }
+
+</script>
+
+<script id="ch0105/39" type="xxx">
+  let n = Number(prompt("输入正整数n"));
+  let sum = 0;
+  let digit;
+  let num;
+  let judge;
+
+  for (let i = 1; i <= n; i++) {
+    judge = true;
+    if (i % 7 == 0) continue;
+    num = i;
+    do {
+      digit = num % 10;
+      if (digit == 7) {
+        judge = false;
+        break;
+      }
+      num = (num - digit) / 10
+    } while (num > 0);
+
+    if (judge) sum += i * i;
+  }
+
+  console.log(sum);
+
+  </script>
+
+<script id="ch0105/40" type="xxx">
+  let n = Number(prompt("输入正整数n"));
+  let count = 0;
+  let num;
+  debugger
+  for (let i = 1; i <= n; i++) {
+    num  = i;
+    do {
+      digit = num % 10;
+      if (digit == 1) {
+        count += 1;
+      }
+      num = (num - digit) / 10
+    } while (num > 0);
+    
+  }
+  
+  console.log(count);
+  
+</script>
+
+<script id="ch0105/41" type="xxx">
+  let l = Number(prompt("输入正整数l"));
+  let r = Number(prompt("输入正整数r"));
+  let count = 0;
+  let num;
+  debugger
+  for (let i = l; i <= r; i++) {
+    num  = i;
+    do {
+      digit = num % 10;
+      if (digit == 2) {
+        count += 1;
+      }
+      num = (num - digit) / 10
+    } while (num > 0);
+    
+  }
+  
+  console.log(count);
+  
+</script>
+
+<script id="ch0105/42" type="xxx">
+  let height = Number(prompt("输入正整数height"));
+  let width = Number(prompt("输入正整数width"));
+  let symbol = prompt("输入正整数symbol");
+  let filled = Number(prompt("输入正整数filled"));
+  let row = '';
+  
+  for (let i = 0; i < height; i++) {
+    row = ''
+    for (let j = 0; j < width; j++) {
+      if (i == 0 || i == length - 1 || j == 0 || j == width - 1 || filled == 1) {
+        row += symbol; 
+      } else {
+        row += ' ';
+      }
+    }
+    
+    console.log(row);
+  }
+  
+</script>
+
+<script id="ch0105/43" type="xxx">
+  let n = Number(prompt("输入正整数n"));
+  let small = 2;
+  let big;
+  
+  while (!(prime(small) && prime(big) && n == small * big)) {
+    if (prime(small) && n % small == 0) {
+      big = n / small;
+      if (prime(big)) {
+        console.log(big);
+        break;
+      }
+    } else {
+      small++
+    }
+  }
+  
+  var prime = function(n) {
+    if (n <= 1) return false;
+    
+    for (let i = 2; i < n; i++) {
+      if (n % i == 0) return false;
+    }
+    
+    return true;
+  }
+  
+</script>
+
+<script id="ch0105/44" type="xxx">
+  let n = Number(prompt("输入正整数n"));
+  let primeMax = 2;
+  let count = 1;
+  
+  for (i = 3; count < n; i++) {
+    for (let j = 2; j < i ; j++) {
+      if (i % j == 0) break;
+      if (i == (j + 1)) {
+        count += 1;
+        primeMax = i;
+      }
+    }
+  }
+  
+  console.log(primeMax);
+  
+</script>
+
+<script id="ch0105/45" type="xxx">
+  let n = Number(prompt("输入正整数n"));
+  let base = 1;
+  let count = 0;
+  let sum = 0;
+
+  for (let i = 1; count < n ; i++) {
+    for (let j = 0; j < i; j++) {
+      sum += base;
+      count += 1;
+    }
+
+    base += 1;
+  }
+
+  console.log(sum);
+
+</script>
+
+37 38 43
+
+
+
+
 
