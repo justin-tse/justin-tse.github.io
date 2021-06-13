@@ -1029,7 +1029,7 @@
     p1 = temp; 
   }
 
-  console.log(sum);
+  console.log(sum.toFixed(4));
 
 </script>
 
@@ -1208,7 +1208,7 @@
   for (let i = 0; i < height; i++) {
     row = ''
     for (let j = 0; j < width; j++) {
-      if (i == 0 || i == length - 1 || j == 0 || j == width - 1 || filled == 1) {
+      if (i == 0 || i == height - 1 || j == 0 || j == width - 1 || filled == 1) {
         row += symbol; 
       } else {
         row += ' ';
@@ -1287,9 +1287,8 @@
 
 </script>
 
-37 38 43
+31 37 38 43
 
-
-
+42
 
 
