@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>画图</title>
@@ -11,6 +12,7 @@
     }
   </style>
 </head>
+
 <body>
   <canvas width="500" height="500"></canvas>
 </body>
@@ -71,36 +73,36 @@
   for (let i = 10; i < 300; i++) {
     dot(10, i, 'green');
   }
-  
+
   // * 画一条一个实点一个空点的虚线
   for (let i = 10; i < 300; i = i + 2) {
     dot(i, 10, 'blue');
   }
-  
+
   // * 画一条两个实点两个空点的虚线
   for (let i = 10; i < 300; i = i + 4) {
     dot(i, 20, 'red');
     dot(i + 1, 20, 'red');
   }
-  
+
   // * 画一条三个实点两个空点的虚线
   for (let i = 10; i < 300; i = i + 5) {
     dot(i, 30, 'pink');
     dot(i + 1, 30, 'pink');
     dot(i + 2, 30, 'pink');
   }
-  
+
   // * 画一条45度的斜线
   for (let i = 10; i < 300; i++) {
     dot(i, i + 50, 'yellow');
   }
-  
+
   // * 画一条30度的斜线（与x轴或y轴的夹角呈30度）
   for (let i = 10; i < 300; i++) {
     dot(i, -2 * i + 300, "yellow");
     dot(0.5 * i, - i + 300, "yellow");
   }
-  
+
   // * 画一条跨越画布左上角和右下角的对角线
   for (let i = 0; i < 500; i++) {
     dot(i, i, "orange");
@@ -114,76 +116,76 @@
     dot(i, 40, 'green');
     dot(i, 80, 'green');
   }
-  
+
   // * 画一个实心矩形
   for (let i = 90; i < 130; i++) {
     for (let j = 90; j < 130; j++) {
       dot(i, j, 'green');
     }
   }
-
+  
   // * 画两个个空心的圆，居中：
   // * 一个半径为50像素
-  for (let i = 200; i <= 300; i++) {
+  for (let i = 200; i <= 300; i = i + 0.01) {
     dot(i, 250 + Math.sqrt(2500 - (i - 250) ** 2), "blueviolet");
     dot(i, 250 - Math.sqrt(2500 - (i - 250) ** 2), "blueviolet");
   }
   
   // * 一个半径为200像素
-  for (let i = 50; i <= 450; i++) {
+  for (let i = 50; i <= 450; i = i + 0.01) {
     dot(i, 250 + Math.sqrt(40000 - (i - 250) ** 2), "aqua");
     dot(i, 250 - Math.sqrt(40000 - (i - 250) ** 2), "aqua");
   }
   
   // * 画一个实心的圆，半径至少为100像素
   for (let r = 0; r <= 100; r++) {
-    for (let i = 300; i <= 500; i++) {
+    for (let i = 300; i <= 500; i = i + 0.05) {
       dot(i, 300 + Math.sqrt(r ** 2 - (i - 400) ** 2), "gold");
       dot(i, 300 - Math.sqrt(r ** 2 - (i - 400) ** 2), "gold");
     }
   }
   
   // * 画一个【大小合适】的sin(x)的图像
-  for (let x = 0; x < 300; x++) {
-    dot(x, 400 + Math.sin(x))
+  for (let x = 0; x < 300; x = x + 0.1) {
+    dot(x, 400 + 100 * Math.sin(0.1 * x))
   }
   
   // * 画出rgb色彩空间的某一面（尺寸要大于100x100）
   //   如果做出上一题后，尝试将其每个点的坐标乘以一个矩阵（如(2,0,0,2)或(1,0.27得到新的位置，即绘制出被线性变幻后的色彩空间某一面
   //   可以考虑如下几种矩阵：
 
-  for (let i =150; i < 250; i++) {
+  for (let i = 150; i < 250; i++) {
     for (let j = 0; j < 100; j++) {
-      dot(i, j, 'chartreuse');
+      dot(i, j, 'rgb(' + i + ',185,' + j + ')');
     }
   }
-    
+
   //      2 0
   //      0 2
   for (let i = 150; i < 250; i++) {
-      for (let j = 0; j < 100; j++) {
-        dot(2 * i, 2 * j, 'skyblue');
-      }
+    for (let j = 0; j < 100; j++) {
+      dot(2 * i, 2 * j, 'rgb(170 , 185,' + j + ')');
     }
+  }
 
   //      1  0.27
   //      0  1
 
   for (let i = 150; i < 250; i++) {
-      for (let j = 0; j < 100; j++) {
-        dot(i, 0.27 * i + j, 'floralwhite');
-      }
+    for (let j = 0; j < 100; j++) {
+      dot(i, 0.27 * i + j, 'rgb(' + j + ',105, 150)');
     }
+  }
 
-  //      ------
   //      0.5    0.87
   //      -0.87  0.5
 
   for (let i = 150; i < 250; i++) {
     for (let j = 0; j < 100; j++) {
-      dot(0.5 * i - 0.87 * j, 0.87 * i + 0.5 * j, "salmon");
+      dot(0.5 * i - 0.87 * j, 0.87 * i + 0.5 * j, 'rgb(50 ,85,' + j + ')');
     }
   }
 
 </script>
+
 </html>
