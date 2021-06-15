@@ -138,12 +138,23 @@
   }
   
   // * 画一个实心的圆，半径至少为100像素
+  // 有缺陷，这种画法无法填满内部，在i下，j有不连续问题
   for (let r = 0; r <= 100; r++) {
     for (let i = 300; i <= 500; i = i + 0.05) {
       dot(i, 300 + Math.sqrt(r ** 2 - (i - 400) ** 2), "gold");
       dot(i, 300 - Math.sqrt(r ** 2 - (i - 400) ** 2), "gold");
     }
   }
+  
+  // 这种画法可以填满内部，i，j都是连续的
+  for (var i = 0; i <= 100; i++) {
+      for (var j = 0; j <= Math.sqrt(100 * 100 - i * i); j++) {
+        dot(200 + i, 400 + j, "springgreen")
+        dot(200 + i, 400 - j, "springgreen")
+        dot(200 - i, 400 + j, "springgreen")
+        dot(200 - i, 400 - j, "springgreen")
+      }
+    }
   
   // * 画一个【大小合适】的sin(x)的图像
   for (let x = 0; x < 300; x = x + 0.1) {
