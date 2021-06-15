@@ -909,7 +909,6 @@
 
     // 找出7进制与9进制逆序的自然数
     if (str7.split('').reverse().join('') === str9) {
-      console.log("（不提供）")
       console.log(n);
       console.log(str7);
       console.log(str9);
@@ -1085,13 +1084,10 @@
 <script id="ch0105/34" type="xxx">
   let n = Number(prompt("输入n"));
   let sum = 0;
-  let factorial;
+  let factorial = 1;
   
   for (let i = 1; i <= n; i++) {
-    factorial = 1;
-    for (let j = 1; j <= i; j++) {
-      factorial *= j; 
-    }
+    factorial *= i; 
     sum += factorial;
   }
   
@@ -1102,13 +1098,10 @@
 <script id="ch0105/35" type="xxx">
   let n = Number(prompt("输入n"));
   let sum = 1;
-  let factorial;
+  let factorial = 1;
   
   for (let i = 1; i <= n; i++) {
-    factorial = 1;
-    for (let j = 1; j <= i; j++) {
-      factorial *= j; 
-    }
+    factorial *= i;
     sum += 1 / factorial;
   }
   
@@ -1330,5 +1323,10 @@
   }
 
   console.log(sum);
+
+</script>
+
+<!-- ch0106 -->
+<script id="ch0106/0" type="xxx">
 
 </script>
