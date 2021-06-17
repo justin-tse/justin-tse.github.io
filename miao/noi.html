@@ -1514,64 +1514,49 @@ function factorial(i) {
   
   function findDayInWeek(year, month) {
     let k = 0;
-    swich (month) {
-      case: 1:
-        console.log('1')
+    switch (month) {
+      case 1:
+        if (countLeap(year) > 0) k = countLeap(year) - 1;
+        return (firstYJanDate + year - 1 + k) % 7;
         break;
-      case: 2:
-        console.log('2')
+      case 2:
+        if (countLeap(year) > 0) k = countLeap(year) - 1;
+        return (firstYFebDate + year - 1 + k) % 7;
+        break;
+      case 3:
+        return (firstYMarDate + year - 1 + countLeap(year)) % 7;
+        break;
+      case 4:
+        return (firstYAprDate + year - 1 + countLeap(year)) % 7;
+        break;
+      case 5:
+        return (firstYMayDate + year - 1 + countLeap(year)) % 7;
+        break;
+      case 6:
+        return (firstYJunDate + year - 1 + countLeap(year)) % 7;
+        break;
+      case 7:
+        return (firstYJulDate + year - 1 + countLeap(year)) % 7;
+        break;
+      case 8:
+        return (firstYAugDate + year - 1 + countLeap(year)) % 7;
+        break;
+      case 9:
+        return (firstYSeptDate + year - 1 + countLeap(year)) % 7;
+        break;
+      case 10:
+        return (firstYOctDate + year - 1 + countLeap(year)) % 7;
+        break;
+      case 11:
+        return (firstYNovDate + year - 1 + countLeap(year)) % 7;
+        break;
+      case 12:
+        return (firstYDecDate + year - 1 + countLeap(year)) % 7;
+        break;
+      default:
+        console("请输入正确月份整数")
         break;
     }
-    if (month == 1) {
-      if (countLeap(year) > 0) k = countLeap(year) - 1;
-      return (firstYJanDate + year - 1 + k) % 7;
-    }
-    
-    if (month == 2) {
-      if (countLeap(year) > 0) k = countLeap(year) - 1;
-      return (firstYFebDate + year - 1 + k) % 7;
-    }
-    
-    if (month == 3) {
-      return (firstYMarDate + year - 1 + countLeap(year)) % 7;
-    }
-    
-    if (month == 4) {
-      return (firstYAprDate + year - 1 + countLeap(year)) % 7;
-    }
-    
-    if (month == 5) {
-      return (firstYMayDate + year - 1 + countLeap(year)) % 7;
-    }
-    
-    if (month == 6) {
-      return (firstYJunDate + year - 1 + countLeap(year)) % 7;
-    }
-    
-    if (month == 7) {
-      return (firstYJulDate + year - 1 + countLeap(year)) % 7;
-    }
-    
-    if (month == 8) {
-      return (firstYAugDate + year - 1 + countLeap(year)) % 7;
-    }
-    
-    if (month == 9) {
-      return (firstYSeptDate + year - 1 + countLeap(year)) % 7;
-    }
-    
-    if (month == 10) {
-      return (firstYOctDate + year - 1 + countLeap(year)) % 7;
-    }
-    
-    if (month == 11) {
-      return (firstYNovDate + year - 1 + countLeap(year)) % 7;
-    }
-    
-    if (month == 12) {
-      return (firstYDecDate + year - 1 + countLeap(year)) % 7;
-    }
-
   }
   
   function countLeap(year) {
