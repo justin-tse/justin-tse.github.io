@@ -240,12 +240,12 @@
   var n = Number(prompt('请输入n'));
   var output = '';
 
-  if (n % 3 != 0 && n % 5 != 0 && n % 7 !=0) {
+  if (n % 3 != 0 && n % 5 != 0 && n % 7; !=0) {
     console.log('n');
   } else {
     if (n % 3 == 0) output += '3 ';
     if (n % 5 == 0) output += '5 ';
-    if (n % 7 == 0) output += '7 ';
+    if (n % 7; == 0) output += '7 ';
     if (output[output.length - 1] == ' ') output = output.slice(0, -1);
     console.log(output);
   }
@@ -1175,7 +1175,7 @@
 
   for (let i = 1; i <= n; i++) {
     judge = true;
-    if (i % 7 == 0) continue;
+    if (i % 7; == 0) continue;
     num = i;
 
     do {
@@ -1328,5 +1328,381 @@
 
 <!-- ch0106 -->
 <script id="ch0106/0" type="xxx">
+  let n = Number(prompt("输入数组长度n"));
+  let arr = [];
+  let count = 0; 
+  for (let i = 0; i < n; i++) {
+    arr[i] = Number(prompt(`输入第${i + 1}个整数`))
+  }
+  
+  let m = Number(prompt("输入整数m"));
+  for (let i = 0; i < n; i++) {
+    if (arr[i] === m) count++;
+  }
+  
+  console.log(m);
+  
+</script>
 
+<script type="xxxx">
+
+  let primeMax = 2;
+let count = 1;
+var ccc = 0;
+
+for (let i = 3; count < n; i++) {
+  for (let j = 2; j < i ; j++) {
+    ccc++;
+    if (i % j == 0) break;
+    if (i == (j + 1)) {
+      count += 1;
+      primeMax = i;
+    }
+  }
+}
+
+console.log(ccc);
+console.log(primeMax);
+
+function count3(n) {
+  let count = 0;
+  do {
+    let digit = n % 10;
+    if (digit == 3) count++
+    n = (n - digit) / 10
+  } while (n > 0)
+  return count;
+}
+
+function isPrime(n) {
+  let sqrtI = Math.sqrt(i)
+  for(let i = 2; i <= sqrtI; i++) {
+    if (n % i == 0) return false;
+  }
+  return true;
+}
+
+function isPrime(i) {
+  var sqrt_i = Math.sqrt(i)
+
+  for (var j = 2; j <= sqrt_i; j++) {
+    if (i % j == 0) { // 拿i除以2到i-1之间的所有数
+      return false
+    }
+  }
+
+  return true
+}
+
+function count3(n) {
+  return count(n, 3)
+}
+// 计算数值n的十进制里k的个数
+function count(n, k) {
+  var count = 0
+  do {
+    var digit = n % 10
+    if (digit == k) {
+      count++
+    }
+    n = (n - digit) / 10
+  } while (n)
+  return count
+}
+
+function factorial(i) {
+  var fact = 1
+  for (var j = 2; j <= i; j++) {
+    fact *= j
+  }
+  return fact
+}
+</script>
+
+<!-- narcissistic: 输入一个数，判断是否是水仙花数 -->
+<script id="narcissistic" type="xxx">
+  let n = Number(prompt("输入n"));
+  if (isNarcissistic(n)) {
+    console.log("YES");
+  } else {
+    console.log("NO");
+  }
+
+  function isNarcissistic(n) {
+    let num = n;
+    let digit;
+    let sum = 0;
+    let k = String(n).length;
+    do {
+      digit = num % 10;
+      sum += Math.pow(digit, k)
+      num = (num - digit) / 10;
+    } while(num);
+
+    return sum == n;
+  }
+
+</script>
+
+<!-- narcissistics: 输出10000以内的水仙花数 -->
+<script id="narcissistics" type="xxx">
+  for (let i = 1; i < 10000; i++) {
+    if (isNarcissistic(i)) {
+      console.log(i)
+    }
+  }
+
+   function isNarcissistic(n) {
+    let num = n;
+    let digit;
+    let sum = 0;
+    let k = String(n).length;
+    do {
+      digit = num % 10;
+      sum += Math.pow(digit, k)
+      num = (num - digit) / 10;
+    } while(num);
+
+    return sum == n;
+  }
+  
+</script>
+
+<!-- palindrom: 判断一个数是否是回文数字 -->
+<script id="palindrom" type="xxx">
+  let n = Number(prompt("输入n"));
+  if (isPalindrom(n)) {
+    console.log("YES");
+  } else {
+    console.log("NO");
+  }
+
+  function isPalindrom(n) {
+    let num = n;
+    let digit;
+    let palindrom = 0;
+    do {
+      digit = num % 10;
+      palindrom = palindrom * 10 + digit;
+      num = (num - digit) / 10;
+    } while (num > 0);
+
+    return n === palindrom;
+  }
+  
+</script>
+
+<!-- weekday: 输入年份与月份，输出这个月的第一天是周几 -->
+<script id="weekday" type="xxx">
+  let year = Number(prompt("输入年份"));
+  let month = Number(prompt("输入月份"));
+  
+  let firstYJanDate = 1;
+  let firstYFebDate = (firstYJanDate + 31) % 7;
+  let firstYMarDate = (firstYFebDate + 28) % 7;
+  let firstYAprDate = (firstYMarDate + 31) % 7;
+  let firstYMayDate = (firstYAprDate + 30) % 7;
+  let firstYJunDate = (firstYMayDate + 31) % 7;
+  let firstYJulDate = (firstYJunDate + 30) % 7;
+  let firstYAugDate = (firstYJulDate + 31) % 7;
+  let firstYSeptDate = (firstYAugDate + 31) % 7;
+  let firstYOctDate = (firstYSeptDate + 30) % 7;
+  let firstYNovDate = (firstYOctDate + 31) % 7;
+  let firstYDecDate = (firstYNovDate + 30) % 7;
+
+  console.log(findWeek(year, month))
+  
+  function findWeek(year, month) {
+    let k = 0;
+    if (countLeap(year) > 0) k = countLeap(year) - 1;
+    if (month == 1) {
+      return (firstYJanDate + year - 1 + k) % 7;
+    }
+    
+    if (month == 2) {
+      return (firstYFebDate + year - 1 + k) % 7;
+    }
+    
+    if (month == 3) {
+      return (firstYMarDate + year - 1 + countLeap(year)) % 7;
+    }
+    
+    if (month == 4) {
+      return (firstYAprDate + year - 1 + countLeap(year)) % 7;
+    }
+    
+    if (month == 5) {
+      return (firstYMayDate + year - 1 + countLeap(year)) % 7;
+    }
+    
+    if (month == 6) {
+      return (firstYJunDate - 1 + countLeap(year)) % 7;
+    }
+    
+    if (month == 7) {
+      return (firstYJulDate + year - 1 + countLeap(year)) % 7;
+    }
+    
+    if (month == 8) {
+      return (firstYAugDate + year - 1 + countLeap(year)) % 7;
+    }
+    
+    if (month == 9) {
+      return (firstYSeptDate + year - 1 + countLeap(year)) % 7;
+    }
+    
+    if (month == 10) {
+      return (firstYOctDate + year - 1 + countLeap(year)) % 7;
+    }
+    
+    if (month == 11) {
+      return (firstYNovDate + year - 1 + countLeap(year)) % 7;
+    }
+    
+    if (month == 12) {
+      return (firstYDecDate + year - 1 + countLeap(year)) % 7;
+    }
+
+  }
+  
+  function countLeap(year) {
+    let count = 0;
+    for (let i = 1; i <= year; i++) {
+      if (isLeap(i)) count++;
+    }
+    return count;
+  }
+
+  function isLeap(year) {
+    if ((year % 4 === 0 && year % 100 !== 0) || year % 400 == 0) return true;
+    return false
+  }
+
+</script>
+
+<!-- complete-number: 判断一个数是否是完全数 -->
+<script id="complete-number" type="xxx">
+  let n = Number(prompt("输入n"));
+  if (isCompleteNumber(n)) {
+    console.log("YES");
+  } else {
+    console.log("NO");
+  }
+
+  function isCompleteNumber(n) {
+    let sum = 0;
+    for (let i = 1; i < n; i++) {
+      if (n % i == 0) sum += i;
+    }
+
+    return sum === n;
+  }
+</script>
+
+<!-- complete-numbers: 输出1000以内的完全数 -->
+<script id="complete-numbers" type="xxx">
+  for (let i = 1; i < 1000; i++) {
+    if (isCompleteNumber(i)) {
+      console.log(i)
+    }
+  }
+
+  function isCompleteNumber(n) {
+    let sum = 0;
+    for (let i = 1; i < n; i++) {
+      if (n % i == 0) sum += i;
+    }
+
+    return sum === n;
+  }
+  
+</script>
+
+<!-- prime: 判断一个数是否是素数 -->
+<script id="prime" type="xxx">
+  let n = Number(prompt("输入n"));
+  if (isPrime(n)) {
+    console.log("YES");
+  } else {
+    console.log("NO");
+  }
+
+  function isPrime(n) {
+    let sqrtN = Math.sqrt(n);
+    for (let i = 2; i <= sqrtN; i++) {
+      if (n % i == 0) return false;
+    }
+    
+    return true;
+  }
+</script>
+
+<!-- primes: 输出1000以内的素数 -->
+<script id="primes" type="xxx">
+  for (let i = 1; i < 1000; i++) {
+    if (isPrime(i)) {
+      console.log(i)
+    }
+  }
+  
+  function isPrime(n) {
+    let sqrtN = Math.sqrt(n);
+    for (let i = 2; i <= sqrtN; i++) {
+      if (n % i == 0) return false;
+    }
+    
+    return true;
+  }
+</script>
+
+<!-- lcf&lcm: 输入两个数，输出它们的最大公约数和最小公倍数 -->
+<script id="lcf&lcm" type="xxx">
+  let n = Number(prompt("输入n"));
+  let m = Number(prompt("输入m"));
+  console.log(greatestCommonDivisor(n, m))
+  console.log(leastCommonMultiple(n, m))
+
+  function greatestCommonDivisor(n, m) {
+    let min = n / 2;
+    let temp = m / 2;
+    if (temp < min) min = temp;
+    min = Math.floor(min);
+    for (let i = min; i > 0; i--) {
+      if (n % i == 0 && m % i == 0) {
+        return i;
+      }
+    }
+  }
+
+	function leastCommonMultiple(n, m) {
+    return n * m / greatestCommonDivisor(n, m);
+  }
+  
+</script>
+
+<!-- sqrt: 求一个数的平方根 -->
+<script id="sqrt:" type="xxx">
+  let n = Number(prompt("输入n"));
+  console.log(sqrt(n));
+
+  function sqrt(n) {
+    let l = 0;
+    let r = n;
+    let mid;
+    let result;
+    while (l <= r) {
+      mid = (l + r) / 2 
+        result = mid;
+      if (mid * mid < n) {
+
+        l = mid + 0.001;
+      } else if (mid * mid == n) {
+        return mid;
+      } else {
+        r = mid - 0.001;
+      }
+    }
+
+    return result;
+  }  
 </script>
