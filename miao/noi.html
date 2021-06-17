@@ -1442,6 +1442,13 @@ function factorial(i) {
     return sum == n;
   }
 
+  function digitWidth(n) {
+    do {
+      let digit = n % 10;
+      let n = (n - digit) / 10;
+    } while (n > 0)
+  }
+
 </script>
 
 <!-- narcissistics: 输出10000以内的水仙花数 -->
@@ -1690,7 +1697,7 @@ function factorial(i) {
 </script>
 
 <!-- sqrt: 求一个数的平方根 -->
-<script id="sqrt:" type="xxx">
+<script id="sqrt" type="xxx">
   let n = Number(prompt("输入n"));
   console.log(sqrt(n));
 
