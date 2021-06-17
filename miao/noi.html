@@ -1590,9 +1590,17 @@ function factorial(i) {
   }
 
   function isCompleteNumber(n) {
-    let sum = 0;
-    for (let i = 1; i < n; i++) {
-      if (n % i == 0) sum += i;
+    let sum = 1;
+    let sqrtN = Math.sqrt(n);
+
+    for (let i = 2; i <= sqrtN; i++) {
+      if (n % i == 0) {
+        if (i === sqrtN) {
+          sum += i;
+        } else {
+        sum += i + n / i;
+        }
+      }
     }
 
     return sum === n;
@@ -1606,16 +1614,23 @@ function factorial(i) {
       console.log(i)
     }
   }
-
+  
   function isCompleteNumber(n) {
-    let sum = 0;
-    for (let i = 1; i < n; i++) {
-      if (n % i == 0) sum += i;
+    let sum = 1;
+    let sqrtN = Math.sqrt(n);
+
+    for (let i = 2; i <= sqrtN; i++) {
+      if (n % i == 0) {
+        if (i === sqrtN) {
+          sum += i;
+        } else {
+        sum += i + n / i;
+        }
+      }
     }
 
     return sum === n;
   }
-  
 </script>
 
 <!-- prime: 判断一个数是否是素数 -->
