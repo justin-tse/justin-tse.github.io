@@ -1510,16 +1510,17 @@ function factorial(i) {
   let firstYNovDate = (firstYOctDate + 31) % 7;
   let firstYDecDate = (firstYNovDate + 30) % 7;
 
-  console.log(findWeek(year, month))
+  console.log(findDayInWeek(year, month))
   
-  function findWeek(year, month) {
+  function findDayInWeek(year, month) {
     let k = 0;
-    if (countLeap(year) > 0) k = countLeap(year) - 1;
     if (month == 1) {
+      if (countLeap(year) > 0) k = countLeap(year) - 1;
       return (firstYJanDate + year - 1 + k) % 7;
     }
     
     if (month == 2) {
+      if (countLeap(year) > 0) k = countLeap(year) - 1;
       return (firstYFebDate + year - 1 + k) % 7;
     }
     
@@ -1536,7 +1537,7 @@ function factorial(i) {
     }
     
     if (month == 6) {
-      return (firstYJunDate - 1 + countLeap(year)) % 7;
+      return (firstYJunDate + year - 1 + countLeap(year)) % 7;
     }
     
     if (month == 7) {
@@ -1614,7 +1615,7 @@ function factorial(i) {
       console.log(i)
     }
   }
-  
+
   function isCompleteNumber(n) {
     let sum = 1;
     let sqrtN = Math.sqrt(n);
