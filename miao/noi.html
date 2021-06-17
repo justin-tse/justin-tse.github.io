@@ -1514,6 +1514,14 @@ function factorial(i) {
   
   function findDayInWeek(year, month) {
     let k = 0;
+    swich (month) {
+      case: 1:
+        console.log('1')
+        break;
+      case: 2:
+        console.log('2')
+        break;
+    }
     if (month == 1) {
       if (countLeap(year) > 0) k = countLeap(year) - 1;
       return (firstYJanDate + year - 1 + k) % 7;
