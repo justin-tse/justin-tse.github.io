@@ -1344,25 +1344,7 @@
   
 </script>
 
-<script type="xxxx">
-
-  let primeMax = 2;
-let count = 1;
-var ccc = 0;
-
-for (let i = 3; count < n; i++) {
-  for (let j = 2; j < i ; j++) {
-    ccc++;
-    if (i % j == 0) break;
-    if (i == (j + 1)) {
-      count += 1;
-      primeMax = i;
-    }
-  }
-}
-
-console.log(ccc);
-console.log(primeMax);
+<script id="老师给的写法" type="xxxx">
 
 function count3(n) {
   let count = 0;
@@ -1417,6 +1399,8 @@ function factorial(i) {
   }
   return fact
 }
+
+
 </script>
 
 <!-- narcissistic: 输入一个数，判断是否是水仙花数 -->
@@ -1430,12 +1414,11 @@ function factorial(i) {
 
   function isNarcissistic(n) {
     let num = n;
-    let digit;
     let sum = 0;
-    let k = String(n).length;
+    let k = digitWidth(n);
     do {
-      digit = num % 10;
-      sum += Math.pow(digit, k)
+      let digit = num % 10;
+      sum += power(digit, k)
       num = (num - digit) / 10;
     } while(num);
 
@@ -1443,10 +1426,21 @@ function factorial(i) {
   }
 
   function digitWidth(n) {
+    let width = 0;
     do {
       let digit = n % 10;
-      let n = (n - digit) / 10;
-    } while (n > 0)
+      n = (n - digit) / 10;
+      width++;
+    } while (n > 0);
+    return width;
+  }
+
+  function power(a, n) {
+    let result = 1;
+    for (let i = 0; i < n; i++) {
+      result *= a;
+    }
+    return result;
   }
 
 </script>
@@ -1459,18 +1453,35 @@ function factorial(i) {
     }
   }
 
-   function isNarcissistic(n) {
+  function isNarcissistic(n) {
     let num = n;
-    let digit;
     let sum = 0;
-    let k = String(n).length;
+    let k = digitWidth(n);
     do {
-      digit = num % 10;
-      sum += Math.pow(digit, k)
+      let digit = num % 10;
+      sum += power(digit, k)
       num = (num - digit) / 10;
     } while(num);
 
     return sum == n;
+  }
+
+  function digitWidth(n) {
+    let width = 0;
+    do {
+      let digit = n % 10;
+      n = (n - digit) / 10;
+      width++;
+    } while (n > 0);
+    return width;
+  }
+
+  function power(a, n) {
+    let result = 1;
+    for (let i = 0; i < n; i++) {
+      result *= a;
+    }
+    return result;
   }
   
 </script>
@@ -1580,6 +1591,94 @@ function factorial(i) {
   }
 
 </script>
+
+<script id="老师给的写法" type="xxxx">
+  function isCompleteNumber(n) {
+    var sum = 0
+
+    for (var i = 1; i < n; i++) {
+        if (n % i == 0) {
+            sum += i 
+        }
+    }
+
+    return sum == n 
+  }
+
+  function isCompleteNumber(n) {
+    var sum = 1
+    var sqrt_n = Math.sqrt(n)
+
+    for (var i = 2; i <= sqrt_n; i++) {
+        if (n % i == 0) {
+            var cp = n / i 
+            if (cp == i) {
+                sum += i 
+            } else {
+                sum += i + cp 
+            }
+        }
+    }
+
+    return sum == n 
+  }
+
+  function digitWidth(n) {
+    var count = 0
+    do {
+        var digit = n % 10
+        count++
+        n = (n - digit) / 10
+    } while(n)
+    return count
+  }
+
+  function power(a, x = 2) {
+    var result = 1
+    for (var i = 0; i < x; i++) {
+        result *= a 
+    }
+    return result
+  }
+
+  function isNarcissistic(n) {
+    var m = n
+    var width = 0
+    do {
+        var digit = n % 10
+        width++
+        n = (n - digit) / 10
+    } while(n)
+    var sum = 0
+
+    while(n) {
+        var digit = n % 10
+        var r = 1
+        for (var i = 0; i < width; i++) {
+            r *= digit
+        }
+        sum += r
+        n = (n - digit) / 10
+    }
+
+    return sum == m
+  }
+
+  function isNarcissistic2(n) {
+    var m = n
+    var width = digitWidth(n)
+    var sum = 0
+
+    while(n) {
+        var digit = n % 10
+        sum += power(digit, width)
+        n = (n - digit) / 10
+    }
+
+    return sum == m
+  }
+</script>
+
 
 <!-- complete-number: 判断一个数是否是完全数 -->
 <script id="complete-number" type="xxx">
