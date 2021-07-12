@@ -59,13 +59,29 @@ var justin_tse = function () {
   }
 
   // https://lodash.com/docs/4.17.15#difference
-  function difference(arr, ...array) {
+  function difference(arr, ...arrays) {
     let result = [];
-    let excludeArray = concat(...array);
+    let excludeArray = concat(...arrays);
     
     for (let i = 0; i < arr.length; i++) {
       if (!excludeArray.includes(arr[i])) {
         result.push(arr[i]);
+      }
+    }
+
+    return result;
+  }
+
+  https://lodash.com/docs/4.17.15#uniq
+  function uniq(array) {
+    let mapped = {};
+    let result = [];
+    
+    for (let i = 0; i < array.length; i++) {
+      let ele = array[i];
+      if (!mapped[ele]) {
+        mapped[ele] = true;
+        result.push(ele);
       }
     }
 
@@ -77,5 +93,6 @@ var justin_tse = function () {
     compact: compact,
     concat: concat,
     difference: difference,
+    uniq: uniq,
   }
 }()
