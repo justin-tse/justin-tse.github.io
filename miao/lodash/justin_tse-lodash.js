@@ -110,12 +110,15 @@ var justin_tse = function () {
   }
 
   // https://lodash.com/docs/4.17.15#flattenDeep
-  let result = [];
   function flattenDeep(array) {
+    let result = [];
     for (let i = 0; i < array.length; i++) {
       let item = array[i];
       if (Array.isArray(item)) {
-        flattenDeep(item);
+        item = flattenDeep(item);
+        for (let j = 0; j < item.length; j++) {
+          result.push(item[j]);
+        }
       } else {
         result.push(item);
       }
@@ -124,21 +127,6 @@ var justin_tse = function () {
     return result;
   }
   
-  // https://lodash.com/docs/4.17.15#flattenDepth
-  let result = [];
-  function flattenDepth(array, depth=1) {
-    for (let i = 0; i < array.length; i++) {
-      let item = array[i];
-      if (Array.isArray(item)) {
-        flattenDeep(item);
-      } else {
-        result.push(item);
-      }
-    }
-
-    return result;
-  }
-
   return {
     chunk: chunk,
     compact: compact,
