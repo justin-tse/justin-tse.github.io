@@ -109,6 +109,21 @@ var justin_tse = function () {
     return result;
   }
 
+  // https://lodash.com/docs/4.17.15#flattenDeep
+  let result = [];
+  function flattenDeep(array) {
+    for (let i = 0; i < array.length; i++) {
+      let item = array[i];
+      if (Array.isArray(item)) {
+          flattenDeep(item);
+      } else {
+        result.push(item);
+      }
+    }
+
+    return result;
+  }
+
   return {
     chunk: chunk,
     compact: compact,
@@ -116,5 +131,6 @@ var justin_tse = function () {
     difference: difference,
     uniq: uniq,
     uniqBy: uniqBy,
+    flattenDeep: flattenDeep,
   }
 }()
