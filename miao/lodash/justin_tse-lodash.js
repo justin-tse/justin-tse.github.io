@@ -115,7 +115,22 @@ var justin_tse = function () {
     for (let i = 0; i < array.length; i++) {
       let item = array[i];
       if (Array.isArray(item)) {
-          flattenDeep(item);
+        flattenDeep(item);
+      } else {
+        result.push(item);
+      }
+    }
+    
+    return result;
+  }
+  
+  // https://lodash.com/docs/4.17.15#flattenDepth
+  let result = [];
+  function flattenDepth(array, depth=1) {
+    for (let i = 0; i < array.length; i++) {
+      let item = array[i];
+      if (Array.isArray(item)) {
+        flattenDeep(item);
       } else {
         result.push(item);
       }
