@@ -126,6 +126,29 @@ var justin_tse = function () {
     
     return result;
   }
+
+  // https://lodash.com/docs/4.17.15#flattenDepth
+  function flattenDepth(array, depth = 1) {
+    if (depth == 0) {
+      return array.slice();
+    }
+
+    let result = [];
+    for (let i = 0; i < array.length; i++) {
+      let item = array[i];
+
+      if (Array.isArray(item)) {
+        item = flattenDepth(item, depth - 1);
+        for (let j = 0; j < item.length; j++) {
+          result.push(item[j]);
+        }
+      } else {
+        result.push(item);
+      }
+    }
+
+    return result;
+  }
   
   return {
     chunk: chunk,
@@ -135,5 +158,6 @@ var justin_tse = function () {
     uniq: uniq,
     uniqBy: uniqBy,
     flattenDeep: flattenDeep,
+    flattenDepth: flattenDepth,
   }
 }()
