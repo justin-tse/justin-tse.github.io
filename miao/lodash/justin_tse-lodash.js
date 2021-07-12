@@ -74,14 +74,35 @@ var justin_tse = function () {
 
   https://lodash.com/docs/4.17.15#uniq
   function uniq(array) {
-    let mapped = {};
+    let mapped = new Map();
     let result = [];
-    
+
     for (let i = 0; i < array.length; i++) {
       let ele = array[i];
-      if (!mapped[ele]) {
-        mapped[ele] = true;
-        result.push(ele);
+      if (!mapped.has(ele)) {
+        mapped.set(ele, true);
+        result.push(array[i]);
+      }
+    }
+
+    return result;
+  }
+
+  // https://lodash.com/docs/4.17.15#uniqBy
+  function uniqBy(array, f = it => it) {
+    let mapped = new Map();
+    let result = [];
+    let ele;
+
+    for (let i = 0; i < array.length; i++) {
+      if ((typeof f) === "function") {
+        ele = f(array[i]);
+      } else {
+        ele = array[i][f];
+      }
+      if (!mapped.has(ele)) {
+        mapped.set(ele, true);
+        result.push(array[i]);
       }
     }
 
@@ -94,5 +115,6 @@ var justin_tse = function () {
     concat: concat,
     difference: difference,
     uniq: uniq,
+    uniqBy: uniqBy,
   }
 }()
