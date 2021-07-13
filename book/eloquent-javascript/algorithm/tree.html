@@ -135,7 +135,6 @@
     return root;
   }
 
-
   function treeToKuoHao(tree) {
     if (tree) {
       if (!tree.left && !tree.right) {
@@ -146,7 +145,6 @@
       return ''
     }
   }
-
 
   function treeToHtml(tree) {
     let html = '';
@@ -173,20 +171,18 @@
 
   function inOrderTraverse(root) {
     if (root) {
-      inOrderTraverse(root.left);
+      inOrderTraverse(root.left, action);
       action(root.val);
-      inOrderTraverse(root.right);
+      inOrderTraverse(root.right, action);
     }
   }
 
   function postOrderTraverse(root) {
     if (root) {
-      postOrderTraverse(root.left);
-      postOrderTraverse(root.right);
+      postOrderTraverse(root.left, action);
+      postOrderTraverse(root.right, action);
       action(root.val);
     }
   }
-
-
 
 </script>
