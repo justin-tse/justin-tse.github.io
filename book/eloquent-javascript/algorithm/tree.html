@@ -31,7 +31,6 @@
     return array;
   }
 
-
   function treeToCondensedArray(root) {
     if (!root) {
       return [];
@@ -135,5 +134,59 @@
 
     return root;
   }
+
+
+  function treeToKuoHao(tree) {
+    if (tree) {
+      if (!tree.left && !tree.right) {
+        return '' + tree.val;
+      }
+      return tree.val + '(' + treeToKuoHao(tree.left) + ')(' + treeToKuoHao(tree.right) + ')';
+    } else {
+      return ''
+    }
+  }
+
+
+  function treeToHtml(tree) {
+    let html = '';
+    if (tree) {
+      html += '<div>';
+        html += '<header style="text-align:center">' + tree.val + '</header>';
+        html += '<main style="display: flex;">';
+          html += '<aside style="flex-grow:1;">' + treeToHtml(tree.left) + '</aside>';
+          html += '<aside style="flex-grow:1;">' + treeToHtml(tree.right) + '</aside>';
+        html += '</main>';
+      html += '</div>';
+    }
+
+    return html;
+  }
+
+  function preOrderTraverse(root, action) {
+    if (root) {
+      action(root.val);
+      preOrderTraverse(root.left, action);
+      preOrderTraverse(root.right, action);
+    }
+  }
+
+  function inOrderTraverse(root) {
+    if (root) {
+      inOrderTraverse(root.left);
+      action(root.val);
+      inOrderTraverse(root.right);
+    }
+  }
+
+  function postOrderTraverse(root) {
+    if (root) {
+      postOrderTraverse(root.left);
+      postOrderTraverse(root.right);
+      action(root.val);
+    }
+  }
+
+
 
 </script>
