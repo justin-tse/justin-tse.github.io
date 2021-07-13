@@ -31,4 +31,109 @@
     return array;
   }
 
+
+  function treeToCondensedArray(root) {
+    if (!root) {
+      return [];
+    }
+
+    let nodes = [root];
+    let result = [];
+    while (nodes.length) {
+      let node = nodes.shift();
+
+      if (node) {
+        result.push(node.val);
+        nodes.push(node.left);
+        nodes.push(node.right);
+      } else {
+        result.push(null);
+      }
+    }
+
+    return result;
+  }
+
+  function treeToCondensedArray(root) {
+    if (!root) {
+      return [];
+    }
+
+    let nodes = [root];
+    let result = [];
+    for (let i = 0; i < nodes.length; i++) {
+      let node = nodes[i];
+
+      if (node) {
+        result.push(node.val);
+        nodes.push(node.left);
+        nodes.push(node.right);
+      } else {
+        result.push(null);
+      }
+    }
+
+    return result;
+  }
+
+  function CArrayToTree(array) {
+    if (array.length == 0) {
+      return null;
+    }
+
+    var root = createTreeNode(array[0]);
+
+    let nodes = [root];
+    let j = 0;
+    for (let i = 1; i < array.length; i = i + 2) {
+      let node = nodes[j++];
+
+      if (array[i] == null) {
+        node.left = null;
+      } else {
+        node.left = createTreeNode(array[i]);
+        nodes.push(node.left)
+      }
+
+      if (array[i + 1] == null) {
+        node.right = null;
+      } else {
+        node.right = createTreeNode(array[i + 1]);
+        nodes.push(node.right);
+      }
+    }
+
+    return root;
+  }
+
+  function CArrayToTree(array) {
+    if (array.length == 0) {
+      return null;
+    }
+
+    var root = createTreeNode(array[0]);
+
+    let nodes = [root];
+    let j = 0;
+    for (let i = 1; i < array.length; i = i + 2) {
+      let node = nodes.shift();
+
+      if (array[i] == null) {
+        node.left = null;
+      } else {
+        node.left = createTreeNode(array[i]);
+        nodes.push(node.left)
+      }
+
+      if (array[i + 1] == null) {
+        node.right = null;
+      } else {
+        node.right = createTreeNode(array[i + 1]);
+        nodes.push(node.right);
+      }
+    }
+
+    return root;
+  }
+
 </script>
