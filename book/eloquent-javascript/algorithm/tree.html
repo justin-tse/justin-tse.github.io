@@ -1,0 +1,34 @@
+<script>
+  function createTreeNode(val) {
+    return {
+      val: val,
+      left: null,
+      right: null
+    }
+  }
+
+  function arrayToTree(array, rootIdx = 0) {
+    let rootVal = array[rootIdx];
+    if (rootVal == null) {
+      return null;
+    } 
+    let rootNode = createTreeNode(rootVal);
+
+    rootNode.left = arrayToTree(array, rootIdx * 2 + 1);
+    rootNode.right = arrayToTree(array, rootIdx * 2 + 2);
+
+    return rootNode;
+  }
+
+
+  function treeToArray(root, idx = 0, array=[]) {
+    if (root) {
+      array[idx] = root.val;
+      treeToArray(root.left, idx * 2 + 1, array);
+      treeToArray(root.right, idx * 2 + 2, array);
+    }
+
+    return array;
+  }
+
+</script>
