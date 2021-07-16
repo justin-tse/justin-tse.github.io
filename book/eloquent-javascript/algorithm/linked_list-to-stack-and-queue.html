@@ -1,0 +1,70 @@
+<script>
+  function ListNode(val) {
+      this.val = val;
+      this.next = null;
+    }
+
+  // 用链表实现一个栈
+  function Stack() {
+    this.head = null;
+    this._size = 0;
+  }
+
+  // 往栈顶增加一个元素
+  Stack.prototype.push = function (val) {
+    let node = new ListNode(val);
+    node.next = this.head;
+    this.head = node;
+    this._size++;
+    return this.size;
+  }
+  // 从栈顶删除并返回一个元素
+  Stack.prototype.pop = function () {
+    if (this.head) {
+      let val = this.head.val;
+      this.head = this.head.next;
+      this._size--;
+      return val;
+    }
+  }
+  // 查看栈顶元素，不删除
+  Stack.prototype.peek = function () {
+    if (this.head) {
+      return this.head.val;
+    }
+  }
+
+  // 用链表实现一个队列
+  function Queue() {
+    this.head = null;
+    this.tail = null;
+    this._size = 0;
+  }
+  // 往队列里增加一个元素
+  Queue.prototype.enqueue = function (val) {
+    let node = new ListNode(val);
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      this.tail.next = node;
+      this.tail = node;
+    }
+    this._size++;
+    return this.size;
+  }
+  // 从队列中删除并返回一个元素
+  Queue.prototype.dequeue = function () {
+    if (this.head) {
+      this._size--;
+      let val = this.head.val;
+      this.head = this.head.next;
+
+      if (!this.head) {
+        this.tail = null;
+      }
+      return val;
+    }
+  }
+
+</script>
