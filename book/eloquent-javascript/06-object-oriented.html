@@ -1,0 +1,238 @@
+<script>
+    function Vector(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+    
+    var a = new Vector(2, 3) // a表示向量(2, 3)
+    var b = new Vector(-1, 5)
+
+    Vector.prototype.plus = function (v) {
+      return new Vector(this.x += v.x, this.y += v.y);
+    }
+    var c = a.plus(b) // c表示向量(1,8)
+
+    Vector.prototype.minus = function(v) {
+      return new Vector(this.x - v.x, this.y - v.y)
+    }
+    var d = a.minus(c);
+    
+    class Vector {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+      }
+      plus(v) {
+        return new Vector(this.x += v.x, this.y += v.y);
+      }
+      
+      minus(v) {
+        return new Vector(this.x - v.x, this.y - v.y)
+      }
+    }
+
+    function Complex(real, imag) {
+      this.real = real;
+      this.imag = imag;
+    }
+    
+    Complex.fromString = function(str) {
+      str = str.trim();
+      let real = parseInt(str);
+      let index = str.indexOf('+', 1);
+      if (index == -1) {
+        index = str.indexOf('-', 1)
+      }
+      let imag = parseInt(str.slice(index));
+      return new Complex(real, imag);
+    }
+
+    var a = new Complex(2, 3) // a表示2+3i
+    var b = new Complex(5, -4) // b表示5-4i
+    Complex.prototype.plus = function(c) {
+      return new Complex(this.real + c.real, this.imag + c.imag)
+    }
+
+    var e = a.plus(b)
+
+    Complex.prototype.minus = function(c) {
+      return new Complex(this.real - c.real, this.imag - c.imag);
+    }
+
+    var f = a.minus(b)
+    
+    Complex.prototype.multiple = function(c) {
+      let real = this.real * c.real - this.imag * c.imag;
+      let imga = this.real * c.imag + this.imag * c.real;
+      return new Complex(real, imga);
+    }
+    
+    var c = a.multiple(b) // c表示22+7i
+    
+    Complex.prototype.division = function(c) {
+      let divitor = v.real * v.real + v.imag * v.imag;
+      let real = this.real * v.real + this.imag * v.imag;
+      this.imag = this.imag * v.real - this.real * v.imag;
+      this.real = real;
+      return this;
+    }
+    var d = a.division(b)
+    
+    Complex.prototype.toString = function() {
+      if (this.imag < 0) {
+            return this.real + '' + this.imag + 'i'
+          }
+          return this.real + '+' + this.imag + 'i'
+    }
+    
+    a.toString() // 得到 "2+3i"
+
+  function MySet() {
+    this.set = [];
+    this.size = 0;
+  }
+
+   MySet.prototype.add = function(val) {
+    if (!(this.set.includes(val))) {
+      this.set.push(val);
+      this.size++;
+    }
+    return this.set;
+   }
+
+
+  MySet.prototype.has = function(val) {
+    if (this.set.includes(val)) {
+      return true;
+    }
+    return false;
+  }
+
+  
+  MySet.prototype.delete = function (val) {
+    let index = this.set.indexOf(val);
+    if (index >= 0) {
+      for (let i = index; i < this.size; i++) {
+        this.set[i] = this.set[i + 1];
+      }
+      this.size--;
+      this.set.length = this.size;
+
+      return true;
+    }
+    return false;
+  }
+
+  MySet.prototype.clear = function() {
+    this.set.length = 0;
+    this.size = 0;
+    return this;
+  }
+
+  MySet.prototype.size = function() {
+    return this.size;
+  }
+
+  function MySet() {
+    this.elements = [];
+  }
+
+  MySet.prototype = {
+    constructor: MySet,
+    add: function(val) {
+      if (!this.elements.includes(val)) {
+        this.elements.push(val);
+      }
+    },
+
+    delete: function(val) {
+      let index = this.elements.indexOf(val);
+      if (index >= 0) {
+        this.elements.splice(index, 1);
+        return true;
+      }
+      
+      return false;
+    },
+    
+    has: function(val) {
+      return this.elements.includes(val);
+    },
+
+    clear: function() {
+      return this.elements = [];
+    },
+
+    get size() {
+      this.elements.length;
+    }
+  }
+
+  function MyMap() {
+    this._keys = [];
+    this._values = [];
+  }
+
+  MyMap.prototype = {
+    _keyIndex: function(key) {
+      if (key !== key) {
+        return this._keys.findIndex(it => it !== it)
+      } else {
+        return this._keys.indexOf(key);
+      }
+    },
+
+    set: function (key, val) {
+      if (!this.has(key)) {
+        this._keys.push(key);
+        this._values.push(val);
+      } else {
+        let index = this._keyIndex(key);
+        this._values[index] = val;
+      }
+      this.elements[key] = val;
+      return this.elements;
+    },
+
+    get: function (key) {
+      let index = this._keyIndex(key);
+      if (index >= 0) {
+        return this._values[index];
+      }
+
+      return false;
+    },
+
+    has: function (key) {
+      return this._keys.includes(key);
+    },
+
+    delete: function (key) {
+      let index = this._keyIndex(key);
+      if (index >= 0) {
+        this._keys.splice(index, 1);
+        this._values.splice(index, 1);
+      }
+    },
+
+    clear: function () {
+      this._keys.length = 0;
+      this._values.length = 0;
+    },
+
+    get size() {
+      this._keys.length;
+    }
+  }
+</script>
+
+
+Array.prototype.myIndexOf = function(val) {
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] == val) {
+      return i;
+    }
+  }
+
+  return -1;
+}
