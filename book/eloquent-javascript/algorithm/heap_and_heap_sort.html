@@ -1,0 +1,101 @@
+<script>
+  class ProiorityQueue {
+    constructor(inits = [], predicate = it => it) {
+      this.elements = [];
+      this.predicate = predicate;
+      if (inits.length) {
+        this.elements.push(...inits);
+        this.heapify();
+      }
+    }
+
+    heapify() {
+      for (let i = 0; i < this.elements.length; i++) {
+        this.heapUp(i);
+      }
+      // heapDown O( Nlog(N) ) heapUp O(N)
+      // for (let i = (this.elements.length - 1) >> 1; i >= 0; i--) {
+      //   this.heapDown(i);
+      // }
+    }
+
+    _swap(i, j) {
+      var t = this.elements[i];
+      this.elements[i] = this.elements[j];
+      this.elements[j] = t;
+    }
+
+    // 从idx位置开始向上调整
+    heapUP(idx) {
+      while (idx > 0) {
+        let pIdx = (idx - 1) >> 1;
+        if (this.elements[idx] > this.elements[pIdx]) {
+          this._swap(idx, pIdx);
+          idx = pIdx;
+        } else {
+          return;
+        }
+      }
+    }
+    
+    // 递归版本
+    heapUP2(idx) {
+      if (idx > 0) {
+        let pIdx = (idx - 1) >> 1;
+        if (this.elements[idx] > this.elements[pIdx]) {
+          this._swap(idx, pIdx);
+          this.heapUP2(pIdx);
+        } else {
+          return;
+        }
+      }
+    }
+
+    // 从idx开始位置向下调整
+    heapDown(idx) {
+      let l = this.elements.length;
+
+      while (idx < l) {
+        let maxIdx = idx;
+        let lIdx = maxIdx * 2 + 1;
+        let rIdx = maxIdx * 2 + 2;
+
+        if (lIdx < l && this.predicate(this.elements[lIdx]) > this.predicate(this.elements[maxIdx])) {
+          maxIdx = lIdx;
+        }
+
+        if (rIdx < l && this.predicate(this.elements[rIdx]) > this.predicate(this.elements[maxIdx])) {
+          maxIdx = rIdx;
+        }
+
+        if (maxIdx !== idx) {
+          this._swap(maxIdx, idx);
+          idx = maxIdx;
+        } else {
+          return;
+        }
+      }
+    }
+
+    // 往堆里增加一个元素
+    push(val) {
+      this.elements.push(val);
+      this.heapUP(this.elements.length - 1);
+      return this;
+    }
+
+    // 往堆里增加一个元素
+    pop() {
+      let result = this.elements[0];
+      this.elements[0] = this.elements.pop();
+      this.heapDown(0);
+      return result;
+    }
+
+    // 查看堆顶元素，不删除它
+    peek() {
+      return this.elements[0];
+    }
+  }
+
+</script>
