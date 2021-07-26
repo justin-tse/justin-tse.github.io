@@ -1,0 +1,466 @@
+<script>
+
+/**
+ * 时间复杂度：O(n * n)
+ * 空间复杂度：O(1)
+ */
+function bubbleSort(array) {
+  for (var j = 0; j < array.length - 1; j++) {
+    var swapped = false
+    for (var i = 0; i < array.length - 1 - j; i++) {
+      if (array[i] > array[i + 1]) {
+        swapped = true
+        swap(array, i, i + 1)
+      }
+    }
+    if (!swapped) {
+      break
+    }
+  }
+  return array
+}
+
+function swap(array, i, j) {
+  var t = array[i]
+  array[i] = array[j]
+  array[j] = t
+  return array
+}
+
+/**
+ * 时间复杂度：O(n * n)
+ * 空间复杂度：O(1)
+ */
+function selectSort(array) {
+  for (var i = 0; i < array.length - 1; i++) {
+    var minIdx = i
+    for (var j = i + 1; j < array.length; j++) {
+      if (array[j] < array[minIdx]) {
+        minIdx = j
+      }
+    }
+    swap(array, i, minIdx)
+  }
+  return array
+}
+
+/**
+ * 插入排序：将无序部分的第一个数插入到有序部分的正确位置
+ * 时间复杂度：O(n*n)
+ * 空间复杂度：O(1)
+ */
+function insertSort(array) {
+  for (var i = 1; i < array.length; i++) {
+    var t = array[i]
+    for (var j = i - 1; j >= 0; j--) {
+      if (array[j] > t) {
+        array[j + 1] = array[j]
+      } else {
+        break
+      }
+    }
+    array[j + 1] = t
+  }
+  return array
+}
+
+/**
+ * 归并排序：将数组一分为二分别排序，再将两个有序数组合并
+ * 时间复杂度：n*log(n)
+ * 空间复杂度：n
+ */
+function mergeSort(array) {
+  if (array.length < 2) {
+    return array
+  }
+  var midIdx = array.length >> 1
+  var leftArray = array.slice(0, midIdx)
+  var rightArray = array.slice(midIdx)
+  leftArray = mergeSort(leftArray)
+  rightArray = mergeSort(rightArray)
+
+  var i = 0
+  var j = 0
+  var k = 0
+  while (i < leftArray.length && j < rightArray.length) {
+    if (leftArray[i] < rightArray[j]) {
+      array[k++] = leftArray[i++]
+    } else {
+      array[k++] = rightArray[j++]
+    }
+  }
+
+  while (i < leftArray.length) {
+    array[k++] = leftArray[i++]
+  }
+  while (j < rightArray.length) {
+    array[k++] = rightArray[j++]
+  }
+
+  return array
+}
+
+
+function quickSort2(array) {
+  if (array.length < 2) {
+    return array
+  }
+  var randIdx = Math.floor(Math.random() * array.length)
+  var randItem = array[randIdx]
+  var a = [] // 所有小于randItem的元素
+  var b = [] // 所有等于randItem的元素
+  var c = [] // 所有大于randItem的元素
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] < randItem) {
+      a.push(array[i])
+    } else if (array[i] > randItem) {
+      c.push(array[i])
+    } else {
+      b.push(array[i])
+    }
+  }
+  a = quickSort2(a)
+  c = quickSort2(c)
+
+  return a.concat(b, c)
+}
+
+
+// 对数组中start到end（包含）范围内的数执行快速排序
+function quickSort(array, start = 0, end = array.length - 1) {
+  if (end - start < 1) {
+    return array
+  }
+  var pivotIdx = Math.floor(Math.random() * (end - start + 1)) + start
+  var pivot = array[pivotIdx]
+  swap(array, pivotIdx, end)
+  var i = start
+  var j = start
+  for (; j < end; j++) {
+    if (array[j] < pivot) {
+      swap(array, i++, j)
+    }
+  }
+  swap(array, i, end)
+
+  quickSort(array, start, i - 1)
+  quickSort(array, i + 1, end)
+
+  return array
+}
+
+function quickSort3(array, start = 0, end = array.length - 1) {
+  if (end - start < 1) {
+    return array
+  }
+  var pivotIdx = Math.floor(Math.random() * (end - start + 1)) + start
+  var pivot = array[pivotIdx]
+
+  var i = start
+  var j = end
+
+  while(i < j) {
+    while(array[i] <= pivot) {
+      i++
+    }
+    while(array[j] > pivot) {
+      j--
+    }
+    swap(array, i, j)
+  }
+
+  quickSort3(array, start, i - 1)
+  quickSort3(array, i + 1, end)
+
+  return array
+}
+
+function isSorted(array) {
+  for (var i = 0; i < array.length - 1; i++) {
+    if (array[i] > array[i + 1]) {
+      return false
+    }
+  }
+  return true
+}
+
+
+function heapify(ary) {
+    for (var i = (ary.length - 1) >> 1; i >= 0; i--) {
+      heapDown(ary, i)
+    }
+  }
+  function heapDown(ary, idx, end = ary.length) {
+    var l = end
+
+    while (idx < l) {
+      var maxIdx = idx
+      var lIdx = maxIdx * 2 + 1
+      var rIdx = maxIdx * 2 + 2
+
+      if (lIdx < l && ary[lIdx] > ary[maxIdx]) {
+        maxIdx = lIdx
+      }
+      if (rIdx < l && ary[rIdx] > ary[maxIdx]) {
+        maxIdx = rIdx
+      }
+
+      if (maxIdx !== idx) {
+        swap(ary, maxIdx, idx)
+        idx = maxIdx
+      } else {
+        return
+      }
+    }
+  }
+
+  function swap(ary, i, j) {
+    var t = ary[i]
+    ary[i] = ary[j]
+    ary[j] = t
+  }
+
+
+
+  // 稳定性：不稳定
+  // 复杂度：空间O(1)，时间n*log(n)
+  function heapSort2(ary) {
+    heapify(ary)
+    for (var i = ary.length - 1; i > 0; i--) {
+      swap(ary, 0, i)
+      heapDown(ary, 0, i) // 从根元素开始调整，只调整i以内的元素，不包含i
+    }
+    return ary
+  }
+
+
+
+function selectSortByAge(array) {
+  for (var i = 0; i < array.length - 1; i++) {
+    var minIdx = i
+    for (var j = i + 1; j < array.length; j++) {
+      if (array[j].age < array[minIdx].age) {
+        minIdx = j
+      }
+    }
+    swap(array, i, minIdx)
+  }
+  return array
+}
+
+function selectSortBy(array, f = it => it) {// f接收数组中的某一项，返回一个用于确定该项位置的数值
+  for (var i = 0; i < array.length - 1; i++) {
+    var minIdx = i
+    for (var j = i + 1; j < array.length; j++) {
+      if (     f(array[j]) < f(array[minIdx])      ) {
+        minIdx = j
+      }
+    }
+    swap(array, i, minIdx)
+  }
+  return array
+}
+
+function selectSortBy2(array, compare) {// compare函数接收数组中的两个元素，通过返回正，负，零来表示a跟b的顺序
+  for (var i = 0; i < array.length - 1; i++) {
+    var minIdx = i
+    for (var j = i + 1; j < array.length; j++) {
+      if (    compare(array[j], array[minIdx]) < 0    ) {
+        minIdx = j
+      }
+    }
+    swap(array, i, minIdx)
+  }
+  return array
+}
+
+var positionMap = {
+  老板: 0,
+  主管: 1,
+  扫地僧: 2,
+  产品经理: 3,
+  设计师: 4,
+  程序员: 999,
+}
+var persons = [
+  {
+    name: 'zhangshan',
+    position: '主管'
+  },
+  {
+    name: 'zhaoliu',
+    position: '产品经理'
+  },
+  {
+    name: 'wangwu',
+    position: '扫地僧'
+  },
+  {
+    name: 'zhaoliu',
+    position: '程序员'
+  },
+  {
+    name: 'lishi',
+    position: '老板'
+  },
+  {
+    name: 'zhaoliu',
+    position: '设计师'
+  }
+]
+
+var data = [{
+  name: 'zhangshan',
+  age: 18,
+  no: 2,
+  yuwen: 68,
+  shuxue: 76,
+  yingyu: 94
+}, {
+  name: 'wangwu',
+  age: 22,
+  no: 1,
+  yuwen: 48,
+  shuxue: 56,
+  yingyu: 64
+}, {
+  name: 'lishi',
+  age: 15,
+  no: 3,
+  yuwen: 78,
+  shuxue: 16,
+  yingyu: 64
+}, {
+  name: 'zhaoliu',
+  age: 28,
+  no: 4,
+  yuwen: 98,
+  shuxue: 86,
+  yingyu: 54
+}]
+
+data.sort((a, b) => {
+  var total1 = a.yuwen + a.shuxue + a.yingyu
+  var total2 = b.yuwen + b.shuxue + b.yingyu
+  if (total1 == total2) {//总分相同
+    if (a.yuwen == b.yuwen) {
+      if (a.shuxue == b.shuxue) {
+        return b.yingyu - a.yingyu
+      } else {
+        return b.shuxue - a.shuxue
+      }
+    } else {
+      return b.yuwen - a.yuwen
+    }
+  } else { // 总分不同，由总分来确定ab的相对位置
+    return total2 - total1
+  }
+})
+
+data
+  .sort((a,b) => b.yuwen - a.yuwen)
+  .sort((a,b) => b.yingyu - a.yingyu)
+  .sort((a,b) => b.shuxue - a.shuxue)
+
+
+// | 姓名 | 学号 | 语文 | 数学 | 英语 |
+// | ls   | 2   | 99   | 88   | 77 |
+// | mq   | 5   | 95   | 89   | 95 |
+// | zs   | 1   | 95   | 89   | 66 |
+// | ww   | 3   | 95   | 87   | 88 |
+// | zl   | 4   | 87   | 35   | 99 |
+
+
+/**
+  * 排序算法的稳定性：排序前后相同元素的相对位置有没有发生变化。
+  * 稳定的排序算法：
+  *   冒泡排序
+  *   插入排序
+  *   归并排序
+  *   二叉排序
+  *
+  * 不稳定的排序算法：
+  *   选择排序
+  *   快速排序
+  *
+  *   堆排序
+  *
+  * 稳定性的一个重要应用就是多级排序（类似成绩单：总分相同按语文排，以此类推）
+  */
+
+
+
+  /**
+   * 时间复杂度：最优n*log(n)，最差n*n
+   * 空间复杂度：n
+   */
+
+  function bstSort(array) {
+    var bst = null
+    for (var i = 0; i < array.length; i++) {
+      bst = insertIntoBST(bst, array[i])
+    }
+    // var bst = array.reduce(insertIntoBST, null) // 以上代码等价于
+
+    var i = 0
+    inorderTraverse(bst, val => {
+      array[i++] = val
+    })
+    return array
+  }
+
+  function createTreeNode(val) {
+    return {
+      val: val,
+      left: null,
+      right: null,
+    }
+  }
+
+  function insertIntoBST2(bst, val) {
+    if (bst) {
+      var p = bst
+      while (true) {
+        if (val < p.val) {
+          if (p.left) {
+            p = p.left
+          } else {
+            p.left = createTreeNode(val)
+            break
+          }
+        } else {
+          if (p.right) {
+            p = p.right
+          } else {
+            p.right = createTreeNode(val)
+            break
+          }
+        }
+      }
+      return bst
+    }
+    return createTreeNode(val)
+  }
+  // 将val插入bst中
+  function insertIntoBST(bst, val) {
+    if (!bst) {
+      return createTreeNode(val)
+    } else {
+      if (val < bst.val) {
+        bst.left = insertIntoBST(bst.left, val)
+      } else {
+        bst.right = insertIntoBST(bst.right, val)
+      }
+      return bst
+    }
+  }
+
+  function inorderTraverse(root, action) {
+    if (root) {
+      inorderTraverse(root.left, action)
+      action(root.val)
+      inorderTraverse(root.right, action)
+    }
+  }
+
+</script>
