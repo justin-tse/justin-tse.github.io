@@ -4,7 +4,7 @@
       this.elements = [];
       this.predicate = predicate;
       if (inits.length) {
-        this.elements.push(...inits);
+        this.elements.push(...inits);// = inits.slice();
         this.heapify();
       }
     }
@@ -20,7 +20,7 @@
     }
 
     _swap(i, j) {
-      var t = this.elements[i];
+      let t = this.elements[i];
       this.elements[i] = this.elements[j];
       this.elements[j] = t;
     }
@@ -98,4 +98,73 @@
     }
   }
 
+function heapSort(ary) {
+  let pq = new ProiorityQueue();
+  for (let i = 0; i < ary.length; i++) {
+    pq.push(ary[i]);
+  }
+
+  for (let i = ary.length - 1; i >= 0; i--) {
+    ary[i] = pq.pop();
+  }
+
+  return ary;
+}
+
+function heapify(ary) {
+  for (let i = (ary.length - 1) >> 1; i >= 0; i--) {
+    heapDown(ary, i);
+  }
+}
+
+function heapDown(ary, idx, end = ary.length) {
+  let l = end;
+
+  while (idx < l) {
+    let maxIdx = idx;
+    let lIdx = maxIdx * 2 + 1;
+    let rIdx = maxIdx * 2 + 2;
+
+    if (lIdx < l && ary[lIdx] > ary[maxIdx]) {
+      maxIdx = lIdx;
+    }
+    if (rIdx < l && ary[rIdx] > ary[maxIdx]) {
+      maxIdx = rIdx;
+    }
+
+    if (maxIdx !== idx) {
+      swap(ary, maxIdx, idx);
+      idx = maxIdx;
+    } else {
+      return;
+    }
+  }
+}
+
+function swap(ary, i, j) {
+  let t = ary[i];
+  ary[i] = ary[j];
+  ary[j] = t;
+}
+
+function heapSort2(ary) {
+  heapify(ary);
+  for (let i = ary.length - 1; i > 0; i--) {
+    swap(ary, 0, i);
+    heapDown(ary, 0, i); // 从根元素开始调整，只调整i以内的元素，不包含i
+  }
+
+  return ary;
+}
+
+function isSorted(array) {
+  for (let i = 0; i < array.length - 1; i++) {
+    if (array[i] > array[i + 1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+  // pq = new PriorityQueue(item => item.身高)
 </script>
