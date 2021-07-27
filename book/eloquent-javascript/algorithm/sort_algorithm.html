@@ -175,17 +175,18 @@ function quickSort3(array, start = 0, end = array.length - 1) {
   return array
 }
 
-function isSorted(array) {
-  for (var i = 0; i < array.length - 1; i++) {
-    if (array[i] > array[i + 1]) {
-      return false
+  // 稳定性：不稳定
+  // 复杂度：空间O(1)，时间n*log(n)
+  function heapSort2(ary) {
+    heapify(ary)
+    for (var i = ary.length - 1; i > 0; i--) {
+      swap(ary, 0, i)
+      heapDown(ary, 0, i) // 从根元素开始调整，只调整i以内的元素，不包含i
     }
+    return ary
   }
-  return true
-}
 
-
-function heapify(ary) {
+  function heapify(ary) {
     for (var i = (ary.length - 1) >> 1; i >= 0; i--) {
       heapDown(ary, i)
     }
@@ -221,19 +222,63 @@ function heapify(ary) {
   }
 
 
+  /**
+   * 希尔排序：初始跨度为数组长度的一半，每次减半，直到1，做插入排序，
+   * 是插入排序的改进版本
+   * 时间复杂度：O(n*logn) ～ O(n^2)
+   * 空间复杂度：O(1)
+   */
 
-  // 稳定性：不稳定
-  // 复杂度：空间O(1)，时间n*log(n)
-  function heapSort2(ary) {
-    heapify(ary)
-    for (var i = ary.length - 1; i > 0; i--) {
-      swap(ary, 0, i)
-      heapDown(ary, 0, i) // 从根元素开始调整，只调整i以内的元素，不包含i
+  function shellSort(ary) {
+        // 初始跨度为数组长度的一半，       直到1，         每次减半
+    for (let step = ary.length >> 1; step > 0; step = step >> 1) {
+      for (let i = step; i < ary.length; i++) {
+        let t = ary[i];
+        for (var j = i - step; j >= 0; j -= step) {
+          if (ary[j] > t) {
+            ary[j + step] = ary[j];
+          } else {
+            break;
+          }
+        }
+        ary[j + step] = t;
+      }
     }
-    return ary
+    return ary;
   }
 
+  // 希尔排序优化，由于希尔排序经过多次排序后已经比较有序了，用swap效率更高
+  function shellSort(ary) {
+    // 初始跨度为数组长度的一半，       直到1，         每次减半
+    for (let step = ary.length >> 1; step > 0; step = step >> 1) {
+      for (let i = step; i < ary.length; i++) {
+        for (var j = i - step; j >= 0; j -= step) {
+          if (ary[j] > ary[j + step]) {
+            swap(ary, j, j + step);
+          } else {
+            break;
+          }
+        }
+      }
+    }
+    return ary;
+  }
 
+  function swap(ary, i, j) {
+    var t = ary[i]
+    ary[i] = ary[j]
+    ary[j] = t
+  }
+
+  // 验证是否已经有序
+  function isSorted(array) {
+    for (var i = 0; i < array.length - 1; i++) {
+      if (array[i] > array[i + 1]) {
+        return false
+      }
+    }
+    return true
+  }
 
 function selectSortByAge(array) {
   for (var i = 0; i < array.length - 1; i++) {
@@ -463,4 +508,19 @@ data
     }
   }
 
+  // 比较排序，通过对比数组中任意两个元素的位置来最终确定数组的顺序
+  //   比较排序算法属于通用排序算法，其性能上限为 n*log(n)
+  // 非比较排序，并不通过比较数组中任意两个元素来进行排序
+  //   非比较排序一般只能对数值进行排序，如计数排序
+
+  // 把数组变为随机分布数组,下面链接有图例
+  // 【链接】WillItShuffle  https://bost.ocks.org/mike/shuffle/compare.html
+  function shuffle(ary) {
+    for (var i = ary.length - 1; i > 0; i--) {
+      var randIdx = Math.floor(Math.random() * (i + 1))
+      // ary[i] = ary[randIdx]
+      swap(ary, i, randIdx)
+    }
+    return ary
+  }
 </script>
