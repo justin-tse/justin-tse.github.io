@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    input[type='text'],
+    textarea {
+      width: 300px;
+      box-sizing: border-box;
+    }
+
+    label {
+      font-family: consolas;
+      cursor: pointer;
+    }
+
+    label input {
+      cursor: pointer;
+    }
+
+    em {
+      background-color: #3fcfff;
+      font-style: normal;
+    }
+
+    em:nth-of-type(even) {
+      background-color: #d5ebff;
+    }
+
+    em:empty {
+      /* outline: 1px dotted red; 只要用不影响布局就可以，和下面2行等价效果*/
+      border-right: 1px dotted red;
+      margin-right: -1px;
+      background-color: transparent;
+    }
+
+    section {
+      width: 300px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    section textarea,
+    section pre {
+      line-height: 1.3;
+      display: block;
+      padding: 5px;
+      margin: 0;
+      border: 1px solid;
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      font-family: consolas;
+      font-size: 16px;
+      white-space: pre-wrap;
+      overflow-y: scroll;
+      word-break: break-all;
+      /* overflow-y: scroll; */
+    }
+
+    section textarea {
+      position: relative;
+      z-index: 8;
+      background-color: transparent;
+      color: transparent;
+    }
+
+    section pre {
+      position: absolute;
+      top: 0;
+    }
+
+    p#regError {
+      font-size: 11px;
+      color: red;
+      margin: 0%;
+      margin-top: 2px;
+      height: 1em;
+    }
+
+    div:nth-of-type(even) input[type='text']
+    {
+      width: 300px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    请输入正则表达式:
+    <label>
+      <input type="checkbox" checked onclick="run()" id="global">g
+    </label>
+    <label>
+      <input type="checkbox" onclick="run()" id="multiline">m
+    </label>
+    <label>
+      <input type="checkbox" onclick="run()" id="insensitive">i
+    </label>
+    <br>
+    <input type="text" id="reg" value="fo." oninput="run()"> <br>
+    <p id="regError"></p>
+    请输入内容: <br>
+    <section>
+      <textarea id="strInput" spellcheck="false" onscroll="setScroll()" oninput="run()" cols="30" rows="10">dfgdd sdfsdfaf dsf sdf foo foc fob fox foosdf fsf sdf
+      </textarea>
+      <pre id="result">
+      </pre>
+    </section>
+
+  </div>
+  <div>
+    输入替换的内容:<br>
+    <label>
+      <input type="text" id="replacement" value="fo." oninput="run()"> <br>
+    </label>
+    <section>
+      <pre id="replaceStr">
+            </pre>
+    </section>
+  </div>
+  <script>
+    function run() {
+      console.time('run');
+      let regSource = reg.value;
+      let flags = getFlags();
+
+      if (regSource == '') {
+        result.innerHTML = '';
+        regError.innerHTML = "Please input the regexp!";
+        return;
+      }
+
+      let re;
+      try {
+        re = new RegExp(regSource, flags);
+        regError.innerHTML = '';
+      } catch (e) {
+        console.log(e);
+        regError.innerHTML = e.message;
+        window.e = e;
+        result.innerHTML = '';
+        return;
+      }
+      
+      console.log(re);
+      let str = strInput.value;
+      let match;
+      let resultHTML;
+      let lastIndex;
+      if (re.global) {
+        resultHTML = '';
+        lastIndex = re.lastIndex;
+        
+        while (match = re.exec(str)) {
+          resultHTML += str.slice(lastIndex, match.index);
+          resultHTML += '<em>' + match[0] + '</em>';
+          lastIndex = re.lastIndex;
+
+          if (match[0] == '') {
+            re.lastIndex++;
+          }
+        }
+        resultHTML += str.slice(lastIndex);
+      } else {
+        resultHTML = '';
+        match = re.exec(str);
+        resultHTML += str.slice(0, match.index);
+        resultHTML += '<em>' + match[0] + '</em>';
+        resultHTML += str.slice(match[0].length + match.index);
+      }
+      result.innerHTML = resultHTML + '\n';
+      console.timeEnd('run');
+    }
+    
+    run()
+
+    function getFlags() {
+      let flags = '';
+      if (global.checked) {
+        flags += 'g';
+      }
+      if (multiline.checked) {
+        flags += 'm';
+      }
+      if (insensitive.checked) {
+        flags += 'i';
+      }
+      return flags;
+    }
+
+    function setScroll() {
+      let scrollTop = strInput.scrollTop;
+      result.scrollTop = scrollTop;
+    }
+    </script>
+</body>
+
+</html>
