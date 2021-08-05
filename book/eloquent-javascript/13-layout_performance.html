@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <span></span>
+</body>
+<script>
+  $0.textContent = '';
+  // method-1 
+  console.time('aaa');
+  let span = $0;
+  while (span.offsetWidth < 2000) {
+    span.append(document.createTextNode('x'));
+  }
+  console.timeEnd('aaa');
+  // aaa: 189.143798828125 ms
+
+  // method-2;
+  console.time('bbb');
+  let span = $0;
+  span.appendChild(document.createTextNode('xxxxx'));
+  let total = Math.floor(2000 / (span.offsetWidth / 5));
+
+  for (let i = 5; i < total; i++) {
+    span.append(document.createTextNode('x'));
+  }
+
+  console.timeEnd('bbb')
+  // bbb: 1.48876953125 ms
+
+  // 通过对比我们可以清楚的了解到：
+  // 改变了影响布局的属性后立马读取布局的状态将会触发浏览器重新计算布局，
+  // 于是频繁的修改并读取布局的属性则会让代码运行相当慢。
+  // method-1很慢
+</script>
+
+</html>
