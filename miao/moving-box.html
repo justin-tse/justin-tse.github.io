@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #player1, #player2 {
+      width: 30px;
+      height: 30px;
+      background-color: blue;
+      position: absolute;
+    }
+    
+    #player2 {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id='player1' style="left: 50px; top: 50px;"></div>
+  <div id='player2' style="left: 1150px; top: 50px;"></div>
+  <script>
+    // 'use strict'
+    let player1 = document.querySelector('#player1')
+    let player2 = document.querySelector('#player2')
+    let vx1 = vx2 = 0;
+    let vy1 = vy2 = 0;
+    let playerPress1 = [false, false, false, false]; // The order is left, right, up and down
+    let playerPress2 = [false, false, false, false];
+    
+    document.addEventListener('keydown', function(e) {
+      console.log(e);
+      // player1
+      if (e.key == 'a') {
+        playerPress1[0] = true;
+        vx1 = -1;
+      }
+      if (e.key == 'd') {
+        playerPress1[1] = true;
+        vx1 = 1;
+      }
+      if (e.key == 'w') {
+        playerPress1[2] = true;
+        vy1 = -1;
+      }
+      if (e.key == 's') {
+        playerPress1[3] = true;
+        vy1 = 1;
+      }
+      
+      // player2
+      if (e.key == 'ArrowLeft') {
+        playerPress2[0] = true;
+        vx2 = -1;
+      }
+      if (e.key == 'ArrowRight') {
+        playerPress2[1] = true;
+        vx2 = 1;
+      }
+      if (e.key == 'ArrowUp') {
+        playerPress2[2] = true;
+        vy2 = -1;
+      }
+      if (e.key == 'ArrowDown') {
+        playerPress2[3] = true;
+        vy2 = 1;
+      }
+    })
+
+    document.addEventListener('keyup', function(e) {
+      console.log(e);
+      // player1
+      if (e.key == 'a') {
+        playerPress1[0] = false;
+        if (playerPress1[1]) {
+          vx1 = 1;
+        } else {
+          vx1 = 0;
+        }
+      }
+      if (e.key == 'd') {
+        playerPress1[1] = false;
+        if (playerPress1[0]) {
+          vx1 = -1;
+        } else {
+          vx1 = 0;
+        }
+      }
+      if (e.key == 'w') {
+        playerPress1[2] = false;
+        if (playerPress1[3]) {
+          vy1 = -1;
+        } else {
+          vy1 = 0;
+        }
+      }
+      if (e.key == 's') {
+        playerPress1[3] = false;
+        if (playerPress1[2]) {
+          vy1 = 1;
+        } else {
+          vy1 = 0;
+        }
+      }
+      
+      // player2
+      if (e.key == 'ArrowLeft') {
+        playerPress2[0] = false;
+        if (playerPress2[1]) {
+          vx2 = 1;
+        } else {
+          vx2 = 0;
+        }
+      }
+      if (e.key == 'ArrowRight') {
+        playerPress2[1] = false;
+        if (playerPress2[0]) {
+          vx2 = -1;
+        } else {
+          vx2 = 0;
+        }
+      }
+      if (e.key == 'ArrowUp') {
+        playerPress2[2] = false;
+        if (playerPress2[3]) {
+          vy2 = -1;
+        } else {
+          vy2 = 0;
+        }
+      }
+      if (e.key == 'ArrowDown') {
+        playerPress2[3] = false;
+        if (playerPress2[2]) {
+          vy2 = 1;
+        } else {
+          vy2 = 0;
+        }
+      }
+    })
+
+    var lastTime = 0;
+    requestAnimationFrame(function move(time) {
+      let timeDiff =  time - lastTime;
+      lastTime = time;
+      
+      // player1
+      player1.style.left = parseFloat(player1.style.left) + vx1 * timeDiff * 0.2 + 'px';
+      player1.style.top = parseFloat(player1.style.top) + vy1 * timeDiff * 0.2 + 'px'
+      
+      // player2
+      player2.style.left = parseFloat(player2.style.left) + vx2 * timeDiff * 0.2 + 'px';
+      player2.style.top = parseFloat(player2.style.top) + vy2 * timeDiff * 0.2 + 'px'
+
+      requestAnimationFrame(move);
+    })
+    
+  </script>
+</body>
+</html>
