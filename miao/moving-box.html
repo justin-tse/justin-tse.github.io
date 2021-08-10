@@ -20,7 +20,7 @@
 </head>
 <body>
   <div id='player1' style="left: 50px; top: 50px;"></div>
-  <div id='player2' style="left: 1150px; top: 50px;"></div>
+  <div id='player2' style="left: 50px; top: 200px;"></div>
   <script>
     // 'use strict'
     let player1 = document.querySelector('#player1')
@@ -140,7 +140,7 @@
       }
     })
 
-    var lastTime = 0;
+    let lastTime = 0;
     requestAnimationFrame(function move(time) {
       let timeDiff =  time - lastTime;
       lastTime = time;
