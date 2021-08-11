@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box1, #box2, #box3 {
+      background: red;
+      width: 60px;
+      height: 60px;
+      position: absolute;
+    }
+
+    #box2 {
+      background: greenyellow;
+    }
+
+    #box3 {
+      background: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box1" style="top: 20px; left: 20px;"></div>
+  <div id="box2" style="top: 80px; left: 20px;"></div>
+  <div id="box3" style="top: 140px; left: 20px;"></div>
+  <script>
+    let lastX, lastY;
+    let rect1 = document.querySelector("#box1");
+    let rect2 = document.querySelector("#box2");
+    let rect3 = document.querySelector("#box3");
+    
+    callDrag(rect1);
+    callDrag(rect2);
+    callDrag(rect3);
+
+    function callDrag(rect) {
+      rect.addEventListener("mousedown", function (event) {
+        console.log(event)
+        if (event.which == 1) {
+          lastX = event.pageX;
+          addEventListener("mousemove", moved);
+          event.preventDefault();
+        }
+      });
+  
+      function buttonPressed(event) {
+        if (event.buttons == null) {
+          return event.which != 0;
+        } else {
+          return event.buttons != 0;
+        }
+      }
+  
+      function moved(event) {
+        console.log(event)
+        if (!buttonPressed(event)) {
+          removeEventListener("mousemove", moved);
+        } else {
+          let distX = event.pageX - lastX;
+          let distY = event.pageY - lastY;
+          let leftPos = event.pageX + distX - 30;
+          if (leftPos < 0) {
+            leftPos = 0;
+          } else if (leftPos > document.documentElement.clientWidth - 60) {
+            leftPos = document.documentElement.clientWidth - 60;
+          }
+          rect.style.left = leftPos + "px";
+  
+          let topPos = event.pageY + distY - 30;
+          if (topPos < 0) {
+            topPos = 0;
+          } else if (topPos > document.documentElement.clientHeight - 60) {
+            topPos = document.documentElement.clientHeight - 60;
+          }
+          rect.style.top = topPos + "px";
+          lastX = event.pageX;
+          lastY = event.pageY;
+          document.body.append(rect)
+        }
+      }
+    }
+
+  </script>
+</body>
+
+</html>
