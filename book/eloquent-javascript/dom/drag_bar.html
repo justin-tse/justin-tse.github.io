@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div style="background: red; width: 60px; height: 20px;"></div>
+  <script>
+    let lastX;
+    let rect = document.querySelector("div");
+    rect.addEventListener("mousedown", function(event) {
+      console.log(event)
+      if (event.which == 1) {
+        lastX = event.pageX;
+        addEventListener("mousemove", moved);
+        event.preventDefault();
+      }
+    });
+
+    function buttonPressed(event) {
+      if (event.buttons == null) {
+        return event.which != 0;
+      } else {
+        return event.buttons != 0;
+      }
+    }
+
+    function moved(event) {
+      console.log(event)
+      if (!buttonPressed(event)) {
+        removeEventListener("mousemove", moved);
+      } else {
+        let dist = event.pageX - lastX;
+        let newWidth = Math.max(10, rect.offsetWidth + dist);
+        rect.style.width = newWidth + "px";
+        lastX = event.pageX;
+      }
+    }
+
+  </script>
+</body>
+</html>
