@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p>Name: <input type="text" data-help="Your full name"></p>
+  <p>Age: <input type="text" data-help="Age in years"></p>
+  <p id="help"></p>
+  <script>
+    let help = document.querySelector("#help");
+    let fields = document.querySelectorAll("input");
+    for (let i = 0; i < fields.length; i++) {
+      fields[i].addEventListener("focus", function(event) {
+        let test = event.target.getAttribute("data-help");
+        help.textContent = test;
+      });
+      fields[i].addEventListener("blur", function(event) {
+        help.textContent = "";
+      });
+    }
+  </script>
+</body>
+</html>
