@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #fire1,
+    #fire2,
+    #fire3 {
+      position: absolute;
+      background: red;
+      width: 30px;
+      height: 30px;
+    }
+    
+    #fire2 {
+      background: blue;
+    }
+    
+    #fire3 {
+      background: greenyellow;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='fire1'></div>
+  <div id='fire2'></div>
+  <div id='fire3'></div>
+  <script>
+    let fire1 = document.querySelector('#fire1');
+    let fire2 = document.querySelector('#fire2');
+    let fire3 = document.querySelector('#fire3');
+
+    let angle1;
+    let angle2;
+    let angle3;
+    const PI = Math.PI;
+
+    document.addEventListener('mousemove', function (e) {
+      let mouseX = e.clientX;
+      let mouseY = e.clientY;
+
+      requestAnimationFrame(function animate(time) {
+        angle1 = time * 0.005;
+        angle2 = time * 0.005;
+        angle3 = time * 0.005;
+  
+        let x1 = Math.cos(angle1) * 50;
+        let y1 = Math.sin(angle1) * 50;
+        fire1.style.left = mouseX + x1 - 15 + 'px';
+        fire1.style.top = mouseY + y1 - 15 + 'px';
+  
+        let x2 = Math.cos(angle2 + Math.PI * 2 / 3) * 50;
+        let y2 = Math.sin(angle2 + Math.PI * 2 / 3) * 50;
+        fire2.style.left = mouseX + x2 - 15 + 'px';
+        fire2.style.top = mouseY + y2 - 15 + 'px';
+  
+        let x3 = Math.cos(angle3 + Math.PI * 4 / 3) * 50;
+        let y3 = Math.sin(angle3 + Math.PI * 4 / 3) * 50;
+        fire3.style.left = mouseX + x3 - 15 + 'px';
+        fire3.style.top = mouseY + y3 - 15 + 'px';
+  
+        requestAnimationFrame(animate);
+      });
+    });
+  </script>
+</body>
+
+</html>
