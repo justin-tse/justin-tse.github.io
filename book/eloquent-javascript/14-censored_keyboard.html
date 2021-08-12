@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text">
+  <script>
+    let input = document.querySelector('input');
+    input.addEventListener('keydown', function(e) {
+      console.log(e);
+      if (e.key == 'q' || e.key == 'w' || e.key == 'x') {
+        alert("You must not be allowed to use the character of q, w and x!");
+        e.preventDefault();
+      }
+    })
+    
+    input.addEventListener('paste', function(e) {
+      console.log(e);
+      let paste = (e.clipboardData || window.clipboardData).getData('text').toLowerCase();
+      if (paste.includes('q') || paste.includes('w') || paste.includes('x')) {
+        alert("You must not be allowed to use the character of q, w and x!");
+        e.preventDefault();
+      }
+    })
+    
+    input.addEventListener('drop', function(e) {
+      console.log(e);
+      let data = e.dataTransfer.getData('text/plain').toLowerCase();
+      if (data.includes('q') || data.includes('w') || data.includes('x')) {
+        alert("You must not be allowed to use the character of q, w and x!");
+        e.preventDefault();
+      }
+    })
+  </script>
+</body>
+</html>
