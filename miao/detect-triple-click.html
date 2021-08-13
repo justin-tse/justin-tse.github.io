@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    let last1 = 0;
+    let last2 = 0;
+    let last3 = 0;
+
+    window.addEventListener('click', e => {
+      console.log("click");
+      let time = Date.now();
+      if (time - last2 < 400 && last2 - last1 > 400) {
+        console.log("triple click");
+      }
+
+      last1 = last2;
+      last2 = last3;
+      last3 = time;
+    })
+  </script>
+
+</body>
+
+</html>
