@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div.mouse-shadow {
+      width: 4px;
+      height: 4px;
+      border-radius: 4px;
+      position: fixed;
+      background-color: greenyellow;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    let i = 0;
+    document.addEventListener('mousemove', function(event) {
+      if (i++ % 2) {
+        return;
+      }
+
+      let div = document.createElement('div');
+      div.classList.add('mouse-shadow');
+      div.style.left = event.clientX + 'px';
+      div.style.top = event.clientY + 'px';
+
+      document.body.append(div);
+      setTimeout(function() {
+        document.body.removeChild(div);
+      }, 100);
+
+    });
+  </script>
+</body>
+</html>
