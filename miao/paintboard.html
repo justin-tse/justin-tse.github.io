@@ -13,37 +13,42 @@
     }
 
     svg {
-      border: 1px solid cyan;
+      border: 1px solid dodgerblue;
     }
   </style>
 </head>
 
 <body>
-  <svg width="500" height="500"></svg>
+  <svg width="500" height="500" version="1.1" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"></svg>
   <br>
   <input type="color" id="colorInput">
-  <input type="range" min='2' max='16' value='8 step ='2' id="rangeInput">
-  <span id="line-width-value">8</span>
+  <input type="range" min='1' max='9' value='4' step='2' id="rangeInput">
+  <span id="line-width-value">4</span>
+  <button onclick="save()">save</button>
   <script>
-    
+
     let draw = false;
     let svg = document.querySelector('svg');
     let lastPos = null;
+    let paintWithoutSave = false;
+
     document.addEventListener('mousedown', function (e) {
+      paintWithoutSave = true;
       // draw points
-      document.addEventListener('click', function (e) {
+      svg.addEventListener('click', function (e) {
         console.log(e);
         let point = document.createElement('div');
         point.className = 'point';
         point.style.left = e.pageX + rangeInput.value / 2 + 'px';
         point.style.top = e.pageY + rangeInput.value / 2 + 'px';
-  
+
         point.style.width = rangeInput.value + 'px';
         point.style.height = rangeInput.value + 'px';
         point.style.backgroundColor = colorInput.value;
         document.body.append(point);
       })
-      
+
       // drawLine
       function drawLine(e) {
         let pos = mousePos(svg);
@@ -84,10 +89,36 @@
       }
     }
 
+    document.addEventListener('keydown', function (e) {
+      console.log(e)
+      if (e.ctrlKey && e.key == 'z' || e.metaKey && e.key == 'z') {
+        if (svg.lastElementChild) {
+          svg.removeChild(svg.lastElementChild);
+        }
+      }
+    })
+
     let widthSpan = document.querySelector('#line-width-value');
     rangeInput.addEventListener('input', e => {
-        widthSpan.textContent = rangeInput.value;
-      })
+      widthSpan.textContent = rangeInput.value;
+    })
+
+    window.addEventListener('beforeunload', e => {
+      if (paintWithoutSave) {
+        return e.returnValue = 'without save';
+      }
+    })
+
+    function save() {
+      paintWithoutSave = false;
+      let svgSource = svg.outerHTML;
+      let blob = new Blob(['<?xml version="1.0" encoding="utf-8"?>', svgSource], { type: 'image/xml+svg' })
+      let url = URL.createObjectURL(blob)
+      let anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = 'paint.svg';
+      anchor.click();
+    }
   </script>
 </body>
 
