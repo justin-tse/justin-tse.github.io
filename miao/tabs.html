@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <div data-tabname="Home">Web technology for developers
+      The open Web presents incredible opportunities for developers. To take full advantage of these technologies, you
+      need to
+      know how to use them. Below you'll find links to our Web technology documentation.</div>
+    <div data-tabname="Link"><a href="https://developer.mozilla.org/en-US/">MDN</a></div>
+    <div data-tabname="About">Mozilla makes browsers, apps, code and tools that put people before profit.
+      Our mission: Keep the internet open and accessible to all.</div>
+  </div>
+  <script>
+    function asTabs(node) {
+      let children = Array.from(node.children);
+      let buttons = [];
+
+      for (let child of children.reverse()) {
+        let button = document.createElement('button');
+        buttons.push(button);
+        button.textContent = child.dataset.tabname;
+
+        child.style.display = 'none';
+        button.addEventListener('click', function () {
+          children.forEach(it => it.style.display = 'none');
+          child.style.display = 'block';
+          buttons.forEach(it => it.style.background = '');
+          button.style.background = 'gainsboro';
+        })
+
+        node.prepend(button);
+      }
+      node.firstElementChild.click();
+    }
+
+    asTabs(document.querySelector('body > div'));
+  </script>
+</body>
+
+</html>
