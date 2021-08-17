@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    td {
+      margin-left: 8px;
+      height: 10px;
+      width: 10px;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body onload="run()">
+  <table></table>
+  <br>
+  <button id="initial">initial cells</button>
+  <button id="play">next life</button>
+  <button id="auto">auto play</button>
+  <script>
+    // seeting the size of the game
+    const SIZE = 30;
+    function run() {
+      function buildTable(x, y) {
+        let tbody = document.createElement('tbody');
+        document.body.firstElementChild.append(tbody);
+        for (let j = 0; j < x; j++) {
+          var tr = document.createElement('tr');
+          tbody.append(tr);
+          for (let i = 0; i < y; i++) {
+            let td = document.createElement('td');
+            let input = document.createElement('input');
+            input.type = "checkbox";
+            tr.append(td);
+            td.append(input);
+          }
+        }
+      }
+      buildTable(SIZE, SIZE);
+
+      let button1 = document.getElementById('initial');
+      let button2 = document.getElementById('play');
+      let button3 = document.getElementById('auto');
+   
+      button1.addEventListener('click', function (e) {
+        let iniCellsNum = prompt("input initial cells' number");
+        let matrix = new Array(SIZE).fill(false).map(() => new Array(SIZE).fill(false));
+        let inputs = document.getElementsByTagName('input');
+        randomCell(iniCellsNum);
+        checkInput(inputs, matrix);
+
+        button2.addEventListener('click', function (e) {
+          matrix = changeMatrix(matrix);
+          checkInput(inputs, matrix);
+        })
+
+        let id;
+        button3.addEventListener('click', function (e) {
+          id = setInterval(function () {
+            let changed = true;
+            let oldMatrix = matrix;
+            document.getElementById("play").click();
+            changed = isChange(oldMatrix, matrix);
+            if (!changed) {
+              clearInterval(id);
+            }
+          }, 1000);
+
+          function isChange(oldMatrix, newMatrix) {
+            for (let i = 0; i < newMatrix.length; i++) {
+              for (let j = 0; j < newMatrix[0].length; j++) {
+                if (oldMatrix[i][j] !== newMatrix[i][j]) {
+                  return true;
+                }
+              }
+            }
+            return false;
+          }
+        });
+
+        function randomCell(iniCellsNum) {
+          for (let k = 0; k < iniCellsNum; k++) {
+            let i = Math.random() * SIZE | 0;
+            let j = Math.random() * SIZE | 0;
+            matrix[i][j] = true;
+          }
+        }
+
+        function checkInput(inputs, matrix) {
+          for (let i = 0; i < (matrix.flat()).length; i++) {
+            if (matrix.flat()[i]) {
+              inputs[i].checked = true;
+            } else {
+              inputs[i].checked = false;
+            }
+          }
+        }
+
+        function changeMatrix(matrix) {
+          const newState = new Array(SIZE).fill(false).map(() => new Array(SIZE).fill(false));
+          for (let i = 0; i < matrix.length; i++) {
+            for (let j = 0; j < matrix[0].length; j++) {
+              newState[i][j] = changeState(matrix, i, j);
+            }
+          }
+          matrix = newState;
+          return matrix;
+        }
+
+        function changeState(matrix, row, col) {
+          // Each generation (turn),
+          // the following rules are applied:
+          // • Any live cell with fewer than two or more than three live neighbors
+          // dies.
+          // • Any live cell with two or three live neighbors lives on to the next
+          // generation.
+          // • Any dead cell with exactly three live neighbors becomes a live cell.
+          // A neighbor is defined as any adjacent cell, including diagonally adjacent
+          // ones.
+          let sum = 0;
+          let count = 0;
+
+          let rowBefore = row - 1;
+          let rowAfter = row + 1;
+          let colBefore = col - 1;
+          let colAfter = col + 1;
+
+          if (rowBefore == -1) {
+            rowBefore = SIZE - 1;
+          }
+          if (rowAfter == SIZE) {
+            rowAfter = 0;
+          }
+          if (colBefore == -1) {
+            colBefore = SIZE - 1;
+          }
+          if (colAfter == SIZE) {
+            colAfter = 0;
+          }
+
+          let indexs = [[rowBefore, colBefore], [rowBefore, col], [rowBefore, colAfter], [row, colBefore], [row, colAfter], [rowAfter, colBefore], [rowAfter, col], [rowAfter, colAfter]];
+          if (matrix[row][col]) {
+            for (let i = 0; i < indexs.length; i++) {
+              if (matrix[indexs[i][0]][indexs[i][1]]) {
+                sum++;
+                if (sum > 3) {
+                  return false;
+                }
+              }
+            }
+            if (sum == 2 || sum == 3) {
+              return true;
+            }
+          } else {
+            for (let i = 0; i < indexs.length; i++) {
+              if (matrix[indexs[i][0]][indexs[i][1]]) {
+                sum++;
+                if (sum > 3) {
+                  return false;
+                }
+              }
+            }
+            if (sum == 3) {
+              return true;
+            }
+          }
+          return false;
+        }
+
+      })
+    }
+  </script>
+</body>
+
+</html>
