@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul {
+      list-style-type: none;
+      margin-left: -36px;
+    }
+    ul, input {
+      font-size: 20px;
+      font-family:'Times New Roman', Times, serif;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text">
+  <ul></ul>
+  <script>
+    let input = document.querySelector('input');
+    let ul = document.querySelector('ul');
+    let currentShowStartTime = 0;
+
+    input.addEventListener('input', debounce(e => {
+      let startTime = Date.now();
+      console.log(startTime, 'startTime');
+
+      getSuggest(e.target.value, (suggests) => {
+        if (currentShowStartTime > startTime) {
+          return;
+        }
+        currentShowStartTime = startTime;
+        ul.innerHTML = '';
+        suggests.forEach(suggest => {
+          let li = document.createElement('li');
+          li.textContent = suggest;
+          ul.append(li);
+        })
+      })
+    }, 200)
+  )
+
+  function getSuggest(word, callback) {
+    let suggests = Array(10).fill(0).map((a, i) => {
+      return word + i;
+    })
+    setTimeout(() => {
+      callback(suggests);
+    }, 1000 + 2000 * Math.random());
+  }
+
+  function debounce(f, duration) {
+    let id;
+    let latestArgs;
+    let latestThis;
+    let latestReturnValue;
+    return function(...args) {
+      latestArgs = args;
+      latestThis = this;
+      clearTimeout(id);
+      id = setTimeout(() => {
+        latestReturnValue = f.call(latestThis, ...latestArgs);
+      }, duration)
+      return latestReturnValue;
+    }
+  }
+  </script>
+</body>
+
+</html>
