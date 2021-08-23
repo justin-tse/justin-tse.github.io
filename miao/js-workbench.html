@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <textarea id="codeInput" cols="30" rows="10">
+    var a = 8
+    var b = 8
+    var c = 0
+  
+    console.log(a)
+    console.log(b)
+  
+    c = a * b
+  </textarea>
+  <pre id="resultShow"></pre>
+  
+  <button onclick="run()">Run</button>
+  
+  <script>
+    function run() {
+      resultShow.textContent = '';
+  
+      var console = {
+        log: function (...args) {
+          window.console.log(...args);
+          resultShow.textContent += args.join(' ') + '\n';
+        }
+      }
+  
+      var code = codeInput.value;
+      var result = eval(code);
+      resultShow.textContent += '> ' + result;
+    }
+  </script>
+</body>
+</html>
