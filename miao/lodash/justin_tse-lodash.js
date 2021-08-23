@@ -1,4 +1,69 @@
 var justin_tse = function () {
+  // Base function
+    function bind(f, thisArg, ...fixedArgs) { // bind(f, {}, 1, _, _, 3, _, 4)
+      return function (...args) { // 5,8
+        var ary = fixedArgs.slice()
+        var j = 0
+        for (var i = 0; i < ary.length; i++) {
+          if (Object.is(ary[i], bind.placeholder)) {
+            if (j < args.length) {
+              ary[i] = args[j++]
+            } else {
+              ary[i] = undefined
+            }
+          }
+        }
+        while (j < args.length) {
+          ary.push(args[j++])
+        }
+        return f.apply(thisArg, ary)
+      }
+    }
+    bind.placeholder = NaN
+
+  // function f(a,b) {
+  //   return Math.max(10,a,b)
+  // }
+  // var f = Math.max.bind(null, 10)
+  function isEqual(value, other) {
+    if (value === other) {
+      return true;
+    }
+
+    if (typeof value != typeof other) {
+      return false;
+    }
+
+    if (typeof value == "object") {
+      if ((Array.isArray(value) && !Array.isArray(other)) || (!Array.isArray(value) && Array.isArray(other))) {
+        return false;
+      }
+
+      if (Array.isArray(value)) {
+        if (value.length !== other.length) {
+          return false;
+        }
+      } else {
+        let keysValue = Object.keys(value);
+        let keysOther = Object.keys(other);
+        if (keysValue !== keysOther) {
+          return false;
+        }
+      }
+      for (let key in value) {
+        if (!(key in other)) {
+          return false;
+        }
+        if (!isEqual(value[key], other[key])) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    return false;
+  }
+
   /* Lodash: Array */
   //https://lodash.com/docs/4.17.15#chunk
   function chunk(arr, n) {
@@ -149,6 +214,17 @@ var justin_tse = function () {
 
     return result;
   }
+
+  https://lodash.com/docs/4.17.15#forEach
+  function forEach(array, f) {
+    for (let i = 0; i < array.length; i++) {
+      f(array[i]);
+    }
+  }
+
+  function identity(val) {
+    return val
+  }
   
   return {
     chunk: chunk,
@@ -159,5 +235,8 @@ var justin_tse = function () {
     uniqBy: uniqBy,
     flattenDeep: flattenDeep,
     flattenDepth: flattenDepth,
+    isEqual: isEqual,
+    property: property,
+
   }
 }()
