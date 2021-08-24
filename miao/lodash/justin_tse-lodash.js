@@ -1,25 +1,76 @@
 var justin_tse = function () {
   // Base function
-    function bind(f, thisArg, ...fixedArgs) { // bind(f, {}, 1, _, _, 3, _, 4)
-      return function (...args) { // 5,8
-        var ary = fixedArgs.slice()
-        var j = 0
-        for (var i = 0; i < ary.length; i++) {
-          if (Object.is(ary[i], bind.placeholder)) {
-            if (j < args.length) {
-              ary[i] = args[j++]
-            } else {
-              ary[i] = undefined
-            }
+  function iteratee(predicate) {
+    if (typeof predicate === "function") {
+      return predicate;
+    }
+    if (typeof predicate === "string") {
+      return property(predicate);
+    }
+    if (Array.isArray(predicate)) {
+      return matchesProperty(...predicate);
+    }
+    if (typeof predicate === "object") {
+      return matches(predicate);
+    }code 
+  }
+
+  function get(object, path, defaultValue = undefined) {
+    if (object == undefined || path.length == 0) {
+      return defaultValue;
+    }
+
+    path = toPath(path);
+    for (let i = 0; i < path.length; i++) {
+      object = object[path[i]];
+    }
+    return object;
+  }
+
+  function toPath(val) {
+    if (Array.isArray(val)) {
+      return val;
+    } else {
+      return val.split('][')
+        .reduce((ary, it) => ary.concat(it.split('].')), [])
+        .reduce((ary, it) => ary.concat(it.split('[')), [])
+        .reduce((ary, it) => ary.concat(it.split('.')), [])
+    }
+  }
+  // 传入什么属性名，它返回的函数就用来获取对象的什么属性名
+  function property(prop) {// a.b
+    return get.bind(null, window, prop);
+    // 下面两句等价于 return get.bind(null, window, prop);
+    // return function(obj) {
+    //   return get(obj, prop);
+    // }
+
+  function matchesProperty(path, val) {
+    return function (object) {
+      return isEqual(get(object, path), val);
+    }
+  }
+
+  function bind(f, thisArg, ...fixedArgs) { // bind(f, {}, 1, _, _, 3, _, 4)
+    return function (...args) { // 5,8
+      var ary = fixedArgs.slice()
+      var j = 0
+      for (var i = 0; i < ary.length; i++) {
+        if (Object.is(ary[i], bind.placeholder)) {
+          if (j < args.length) {
+            ary[i] = args[j++]
+          } else {
+            ary[i] = undefined
           }
         }
-        while (j < args.length) {
-          ary.push(args[j++])
-        }
-        return f.apply(thisArg, ary)
       }
+      while (j < args.length) {
+        ary.push(args[j++])
+      }
+      return f.apply(thisArg, ary)
     }
-    bind.placeholder = NaN
+  }
+  bind.placeholder = NaN
 
   // function f(a,b) {
   //   return Math.max(10,a,b)
