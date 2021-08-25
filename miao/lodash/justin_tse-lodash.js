@@ -74,6 +74,13 @@ var justin_tse = function () {
       return true;
     }
 
+    function matches(src) {
+      // return bind(isMatch, null, window, src);
+      return function (obj) {
+        return isMatch(obj, src);
+      }
+    }
+
     function bind(f, thisArg, ...fixedArgs) { // bind(f, {}, 1, _, _, 3, _, 4)
       return function (...args) { // 5,8
         var ary = fixedArgs.slice()
