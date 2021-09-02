@@ -128,7 +128,7 @@ var justin_tse = function () {
         } else {
           let keysValue = Object.keys(value);
           let keysOther = Object.keys(other);
-          if (keysValue !== keysOther) {
+          if (keysValue.length !== keysOther.length) {
             return false;
           }
         }
@@ -417,6 +417,9 @@ var justin_tse = function () {
       }
     }
 
+  function differenceBy(ary, value, iteratee) {
+
+  }
 
 
   return {
