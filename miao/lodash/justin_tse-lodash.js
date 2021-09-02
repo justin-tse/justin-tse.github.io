@@ -16,13 +16,17 @@ var justin_tse = function () {
   }
 
   function get(object, path, defaultValue = undefined) {
-    if (object == undefined || path.length == 0) {
+    if (path.length == 0) {
       return defaultValue;
     }
 
     path = toPath(path);
     for (let i = 0; i < path.length; i++) {
-      object = object[path[i]];
+      if (object == undefined) {
+        return defaultValue;
+      } else {
+        object = object[path[i]];
+      }
     }
     return object;
   }
