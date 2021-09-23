@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const cookieParser = require('cookie-parser');
+const e = require('express');
 
 const port = 8008;
 const app = express();
@@ -10,6 +11,7 @@ app.set('views', __dirname + '/templates');
 
 const users = loadfile('./users.json');
 const posts = loadfile('./posts.json');
+const comments = loadfile('./comments.json');
 
 function loadfile(file) {
   try {
@@ -23,6 +25,7 @@ function loadfile(file) {
 setInterval(() => {
   fs.writeFileSync('./users.json', JSON.stringify(users, null, 2));
   fs.writeFileSync('./posts.json', JSON.stringify(posts, null, 2));
+  fs.writeFileSync('./comments.json', JSON.stringify(comments, null, 2));
   console.log('saved');
 }, 5000)
 
@@ -34,7 +37,18 @@ app.use((req, res, next) => {
 app.use(cookieParser('cookie sign secert'))
 app.use(express.static(__dirname + '/static'));
 app.use(express.json());
-app.use(express.urlencoded()); 
+app.use(express.urlencoded());
+
+app.use((req, res, next) => {
+  if (req.signedCookies.loginUser) {
+    req.isLogin = true;
+    // req.loginUser = users.find(it => it.name == req.signedCookies.loginUser)
+  } else {
+    req.isLogin = false;
+    // req.loginUser = null;
+  }
+  next();
+})
 
 app.get('/', (req, res, next) => {
   res.setHeader('Content-Type', 'text/html; charset=UTF-8');
@@ -43,7 +57,7 @@ app.get('/', (req, res, next) => {
     <h1>BBS</h1>
     <div>
       ${
-        req.signedCookies.loginUser ?
+        req.isLogin ?
           `
             <a href="/post">post</a>
             <a href="/logout">logout</a>  
@@ -146,7 +160,7 @@ app.get('/post/:id', (req, res, next) => {
     <h1>BBS</h1>
     <div>
       ${req.signedCookies.loginUser ?
-        `
+          `
             <a href="/post">post</a>
             <a href="/logout">logout</a>  
           ` : `
@@ -157,9 +171,33 @@ app.get('/post/:id', (req, res, next) => {
     </div>
       <h2>${post.title}</h2>
       <fieldset>${post.content}</fieldset>
+      ${
+      req.isLogin ?
+        `
+          <form action="/post/${postId}/comment" method="POST">
+            <h4>Comment</h4>
+            <div><textarea name="comment"></textarea></div>
+            <button>discuss</button>
+          </form>
+        ` : `<p>If you want to discuss, please <a href='/login'>login</a>!</p>`
+      }
     `)
   } else {
     res.end('404 post not found');
+  }
+})
+
+// 向帖子发表评论，id为帖子编号
+app.post('/post/:id/comment', (req, res, next) => {
+  if (req.isLogin) {
+    var comment = req.body;
+    comment.timestamp = new Date().toISOString();
+    comment.postId = req.params.id;
+    comment.commentBy = req.signedCookies.loginUser;
+    comments.push(comment);
+    res.redirect(req.headers.referer || '/');
+  } else {
+    res.end('Not login');
   }
 })
 
