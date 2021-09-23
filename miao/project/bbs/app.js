@@ -52,7 +52,19 @@ app.use((req, res, next) => {
 
 app.get('/', (req, res, next) => {
   res.setHeader('Content-Type', 'text/html; charset=UTF-8');
-  console.log('sdfsdf',req.signedCookies.loginUser);
+  console.log('当前登陆用户', req.signedCookies.loginUser);
+  var page = Number(req.query.page || 1);
+  if (!page) page = 1;
+  var pageSize = 10;
+  var startIdx = (page - 1) * pageSize;
+  var endIdx = startIdx + pageSize;
+  var pagePosts = posts.slice(startIdx, endIdx);
+
+  if (startIdx >= posts.length) {
+    res.end('No this page');
+    return;
+  }
+
   res.end(`
     <h1>BBS</h1>
     <div>
@@ -69,7 +81,7 @@ app.get('/', (req, res, next) => {
     </div>
     <ul>
       ${
-    posts.map(post => {
+        pagePosts.map(post => {
           return `<li><a href="/post/${escape(post.id)}">${escape(post.title)}</a> by <span>${post.postedBy}</span></li>`
         }).join('\n')
       }
