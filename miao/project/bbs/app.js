@@ -59,8 +59,8 @@ app.get('/', (req, res, next) => {
       ${
         req.isLogin ?
           `
-            <a href="/post">post</a>
-            <a href="/logout">logout</a>  
+          <a href="/logout">logout</a>  
+          <a href="/post">post</a>
           ` : `
             <a href="/login">login</a>
             <a href="/register">register</a>
@@ -155,14 +155,16 @@ app.get('/post/:id', (req, res, next) => {
   var postId = req.params.id;
   var post = posts.find(it => it.id == postId);
   if (post) {
+    var postComments = comments.filter(it => it.postId = postId);
     res.setHeader('Content-Type', 'text/html; charset=UTF-8')
     res.end(`
     <h1>BBS</h1>
     <div>
-      ${req.signedCookies.loginUser ?
+      ${
+        req.signedCookies.loginUser ?
           `
+            <a href="/logout">logout</a>
             <a href="/post">post</a>
-            <a href="/logout">logout</a>  
           ` : `
             <a href="/login">login</a>
             <a href="/register">register</a>
@@ -171,16 +173,28 @@ app.get('/post/:id', (req, res, next) => {
     </div>
       <h2>${post.title}</h2>
       <fieldset>${post.content}</fieldset>
+      <hr>
+      ${
+        postComments.map(it => {
+          return `
+            <fieldset>
+              <legend>${it.commentBy}</legend>
+              <p>${it.comment}</p>
+            </fieldset>
+          `
+        }).join('\n')
+      }
+
       ${
       req.isLogin ?
         `
-          <form action="/post/${postId}/comment" method="POST">
+          <form action="/comment/post/${postId}" method="POST">
             <h4>Comment</h4>
             <div><textarea name="comment"></textarea></div>
             <button>discuss</button>
           </form>
         ` : `<p>If you want to discuss, please <a href='/login'>login</a>!</p>`
-      }
+      }   
     `)
   } else {
     res.end('404 post not found');
@@ -188,7 +202,7 @@ app.get('/post/:id', (req, res, next) => {
 })
 
 // 向帖子发表评论，id为帖子编号
-app.post('/post/:id/comment', (req, res, next) => {
+app.post('/comment/post/:id', (req, res, next) => {
   if (req.isLogin) {
     var comment = req.body;
     comment.timestamp = new Date().toISOString();
