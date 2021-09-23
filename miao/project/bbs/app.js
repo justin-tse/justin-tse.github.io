@@ -86,6 +86,10 @@ app.get('/', (req, res, next) => {
         }).join('\n')
       }
     </ul>
+    <p>
+      <a href="/?page=${page - 1}"">上一页</a>
+      <a href="/?page=${page + 1}"">下一页</a>
+    </p>
   `);
 })
 
@@ -176,8 +180,8 @@ app.get('/post/:id', (req, res, next) => {
   var postId = req.params.id;
   var post = posts.find(it => it.id == postId);
   if (post) {
-    var postComments = comments.filter(it => it.postId = postId);
-    res.setHeader('Content-Type', 'text/html; charset=UTF-8')
+    var postComments = comments.filter(it => it.postId == postId);
+    res.setHeader('Content-Type', 'text/html; charset=UTF-8');
     res.end(`
     <h1>BBS</h1>
     <div>
@@ -207,14 +211,14 @@ app.get('/post/:id', (req, res, next) => {
       }
 
       ${
-      req.isLogin ?
-        `
-          <form action="/comment/post/${postId}" method="POST">
-            <h4>Comment</h4>
-            <div><textarea name="comment"></textarea></div>
-            <button>discuss</button>
-          </form>
-        ` : `<p>If you want to discuss, please <a href='/login'>login</a>!</p>`
+        req.isLogin ?
+          `
+            <form action="/comment/post/${postId}" method="POST">
+              <h4>Comment</h4>
+              <div><textarea name="comment"></textarea></div>
+              <button>discuss</button>
+            </form>
+          ` : `<p>If you want to discuss, please <a href='/login'>login</a>!</p>`
       }   
     `)
   } else {
