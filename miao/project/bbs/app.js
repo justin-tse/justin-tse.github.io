@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const cookieParser = require('cookie-parser');
-const e = require('express');
+const escape = require('lodash/escape');
 
 const port = 8008;
 const app = express();
@@ -70,7 +70,7 @@ app.get('/', (req, res, next) => {
     <ul>
       ${
     posts.map(post => {
-          return `<li><a href="/post/${post.id}">${post.title}</a> by <span>${post.postedBy}</span></li>`
+          return `<li><a href="/post/${escape(post.id)}">${escape(post.title)}</a> by <span>${post.postedBy}</span></li>`
         }).join('\n')
       }
     </ul>
@@ -81,10 +81,19 @@ app.route('/register')
 .get((req, res, next) => {
   res.sendFile(__dirname + '/static/register.html');
 })
-  .post((req, res, next) => {
+.post((req, res, next) => {
   var regInfo = req.body;
-  if (users.some(it => it.name == regInfo.name || users.some(it => it.email == regInfo.email))) {
-    res.status(400).end('username or email already exists...');
+  var USERNAME_RE = /^\w+$/i;
+  if (!USERNAME_RE.test(regInfo.name)) {
+    res.status(400).end('Username invalid, please use only contain digit and letter or underscore');
+  } else if (users.some(it => it.name == regInfo.name) && users.some(it => it.email == regInfo.email)) {
+    res.status(400).end('username and email already exists...');
+  } else if (users.some(it => it.name == regInfo.name)) {
+    res.status(400).end('username already exists...');
+  } else if (users.some(it => it.email == regInfo.email)) {
+    res.status(400).end('email already exists...');
+  } else if (!regInfo.password) {
+    res.status(400).end('password must not be empty')
   } else {
     regInfo.id = users.length;
     users.push(req.body);
@@ -147,7 +156,7 @@ app.route('/post')
       posts.push(postInfo);
       res.redirect('/post/' + postInfo.id);
     } else {
-      res.end('401 not login')
+      res.end('401 not login');
     }
   })
 
@@ -171,15 +180,15 @@ app.get('/post/:id', (req, res, next) => {
           `
       }
     </div>
-      <h2>${post.title}</h2>
-      <fieldset>${post.content}</fieldset>
+      <h2>${escape(post.title)}</h2>
+      <fieldset>${escape(post.content)}</fieldset>
       <hr>
       ${
         postComments.map(it => {
           return `
             <fieldset>
-              <legend>${it.commentBy}</legend>
-              <p>${it.comment}</p>
+              <legend>${escape(it.commentBy)}</legend>
+              <p>${escape(it.comment)}</p>
             </fieldset>
           `
         }).join('\n')
