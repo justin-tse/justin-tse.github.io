@@ -38,12 +38,28 @@ app.use(express.urlencoded());
 
 app.get('/', (req, res, next) => {
   res.setHeader('Content-Type', 'text/html; charset=UTF-8');
+  console.log('sdfsdf',req.signedCookies.loginUser);
   res.end(`
     <h1>BBS</h1>
     <div>
-      <a href="/login">login</a>
-      <a href="/register">register</a>
+      ${
+        req.signedCookies.loginUser ?
+          `
+            <a href="/post">post</a>
+            <a href="/logout">logout</a>  
+          ` : `
+            <a href="/login">login</a>
+            <a href="/register">register</a>
+          `
+      }
     </div>
+    <ul>
+      ${
+    posts.map(post => {
+          return `<li><a href="/post/${post.id}">${post.title}</a> by <span>${post.postedBy}</span></li>`
+        }).join('\n')
+      }
+    </ul>
   `);
 })
 
@@ -63,24 +79,42 @@ app.route('/register')
 })
 
 app.route('/login')
-.get((req, res, next) => {
-  res.sendFile(__dirname + '/static/login.html');
+  .get((req, res, next) => {
+    console.log('从哪里进到login页面的: ', req.headers.referer);
+    res.setHeader('Content-Type', 'text/html; charset=UTF-8');
+    res.end(` 
+      <h1>login</h1>
+      <form action="/login" method="POST">
+        <div>Username: </div>
+        <input type="text" name="name">
+        <div>Password: </div>
+        <input type="text" name="password">
+        <input hidden name="return_to" value="${req.headers.referer || '/'}">
+        <div><button>login</button></div>
+      </form> 
+    `
+  );
 })
 .post((req, res, next) => {
   var loginInfo = req.body;
   var  user = users.find(it => it.name == loginInfo.name && it.password == loginInfo.password);
   if (user) {
     //  res.clearCookie('loginUser')// when logout, we should clear Cookie
-    res.cookie('loginUserName', user.name, {
+    res.cookie('loginUser', user.name, {
       signed: true
       // maxAge: 8640000,
       // expires: new Date(),
       // httpOnly: true
     });
-    res.end('login success!');
+    res.redirect(loginInfo.return_to);
   } else {
     res.end('username or password incorrect...');
   }
+})
+
+app.get('/logout', (req, res, next) => {
+  res.clearCookie('loginUser');
+  res.redirect(req.headers.referer || '/');
 })
 
 app.route('/post')
@@ -89,14 +123,18 @@ app.route('/post')
   })
   .post((req, res, next) => {
     var postInfo = req.body;
-    var userName = req.signedCookies.loginUserName;
-
-    postInfo.timeStamp = new Date().toISOString();
-    postInfo.id = posts.length;
-    postInfo.postedBy = userName;
-      
-    posts.push(postInfo);
-    res.end('post success, post id is ' + postInfo.id);
+    var userName = req.signedCookies.loginUser;
+    
+    if (userName) {
+      postInfo.timeStamp = new Date().toISOString();
+      postInfo.id = posts.length;
+      postInfo.postedBy = userName;
+        
+      posts.push(postInfo);
+      res.redirect('/post/' + postInfo.id);
+    } else {
+      res.end('401 not login')
+    }
   })
 
 app.get('/post/:id', (req, res, next) => {
@@ -105,7 +143,19 @@ app.get('/post/:id', (req, res, next) => {
   if (post) {
     res.setHeader('Content-Type', 'text/html; charset=UTF-8')
     res.end(`
-      <h1>${post.title}</h1>
+    <h1>BBS</h1>
+    <div>
+      ${req.signedCookies.loginUser ?
+        `
+            <a href="/post">post</a>
+            <a href="/logout">logout</a>  
+          ` : `
+            <a href="/login">login</a>
+            <a href="/register">register</a>
+          `
+      }
+    </div>
+      <h2>${post.title}</h2>
       <fieldset>${post.content}</fieldset>
     `)
   } else {
