@@ -16,7 +16,8 @@ block content
     span= page
     |
     |
-    a(href=`/?page=${page + 1}`) Next
+    if page < totalPage
+      a(href=`/?page=${page + 1}`) Next
 
 //- res.end(`
 //-   <h1>BBS</h1>

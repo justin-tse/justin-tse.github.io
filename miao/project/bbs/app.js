@@ -60,6 +60,7 @@ app.get('/', (req, res, next) => {
   console.log('当前登陆用户', req.signedCookies.loginUser);
   var page = Number(req.query.page || 1);
   var pageSize = 10;
+  var totalPage = Math.ceil(posts.length / pageSize);
   var startIdx = (page - 1) * pageSize;
   var endIdx = startIdx + pageSize;
   var pagePosts = posts.slice(startIdx, endIdx);
@@ -72,7 +73,8 @@ app.get('/', (req, res, next) => {
   res.render('home.pug', {
     isLogin: req.isLogin,
     posts: pagePosts,
-    page: page
+    page: page,
+    totalPage: totalPage
   });
 })
 
