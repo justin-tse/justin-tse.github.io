@@ -4,9 +4,9 @@ block content
   ul
     each post of posts 
       li
-        a(href="/post" + post.id)=post.title
+        a(href="/post" + post.id)= post.title
         | #{" by "}
-        span=post.postedBy
+        span= post.postedBy
   //   <ul>
   //     ${
   //       pagePosts.map(post => {

@@ -27,8 +27,17 @@ html
     footer
       p &copy; 2021
 
+  // res.end(`
+  //   <h1>BBS</h1>
+  //   <div>
+  //     ${
+  //       req.isLogin ?
+  //         `
   //         <a href="/logout">logout</a>  
   //         <a href="/post">post</a>
   //         ` : `
   //           <a href="/login">login</a>
   //           <a href="/register">register</a>
+  //         `
+  //     }
+  //   </div>

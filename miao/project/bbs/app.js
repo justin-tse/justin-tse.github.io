@@ -59,14 +59,13 @@ app.get('/', (req, res, next) => {
   res.setHeader('Content-Type', 'text/html; charset=UTF-8');
   console.log('当前登陆用户', req.signedCookies.loginUser);
   var page = Number(req.query.page || 1);
-  if (!page) page = 1;
   var pageSize = 10;
   var startIdx = (page - 1) * pageSize;
   var endIdx = startIdx + pageSize;
   var pagePosts = posts.slice(startIdx, endIdx);
 
   if (!pagePosts.length) {
-    res.end('No this page');
+    res.render('404.pug');
     return;
   }
 
@@ -192,48 +191,13 @@ app.get('/post/:id', (req, res, next) => {
   var post = posts.find(it => it.id == postId);
   if (post) {
     var postComments = comments.filter(it => it.postId == postId);
-    res.setHeader('Content-Type', 'text/html; charset=UTF-8');
-    res.end(`
-    <h1>BBS</h1>
-    <div>
-      ${
-        req.signedCookies.loginUser ?
-          `
-            <a href="/logout">logout</a>
-            <a href="/post">post</a>
-          ` : `
-            <a href="/login">login</a>
-            <a href="/register">register</a>
-          `
-      }
-    </div>
-      <h2>${escape(post.title)}</h2>
-      <fieldset>${escape(post.content)}</fieldset>
-      <hr>
-      ${
-        postComments.map(it => {
-          return `
-            <fieldset>
-              <legend>${escape(it.commentBy)}</legend>
-              <p>${escape(it.comment)}</p>
-            </fieldset>
-          `
-        }).join('\n')
-      }
-
-      ${
-        req.isLogin ?
-          `
-            <form action="/comment/post/${postId}" method="POST">
-              <h4>Comment</h4>
-              <div><textarea name="comment"></textarea></div>
-              <button>discuss</button>
-            </form>
-          ` : `<p>If you want to discuss, please <a href='/login'>login</a>!</p>`
-      }   
-    `)
+    res.render('post.pug', {
+      isLogin: reg.isLogin,
+      post: post,
+      comments: postComments
+    })
   } else {
-    res.end('404 post not found');
+    res.render('404.pug');
   }
 })
 
