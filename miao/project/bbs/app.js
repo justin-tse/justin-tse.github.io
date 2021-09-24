@@ -84,7 +84,6 @@ app.route('/register')
 })
 .post((req, res, next) => {
   var regInfo = req.body;
-  console.log(regInfo)
   var USERNAME_RE = /^\w+$/i;
   if (!USERNAME_RE.test(regInfo.name)) {
     res.status(400).end('Username invalid, please use only contain digit and letter or underscore');
@@ -107,7 +106,8 @@ app.route('/login')
   .get((req, res, next) => {
     console.log('从哪里进到login页面的: ', req.headers.referer);
     res.render('login.pug');
-})
+    
+  })
 .post((req, res, next) => {
   var loginInfo = req.body;
   var  user = users.find(it => it.name == loginInfo.name && it.password == loginInfo.password);

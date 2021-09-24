@@ -3,13 +3,21 @@ extends simply-layout.pug
 block content
   h1 login
   form(action='/login' method='POST')
-    div Username: 
-    input(type='text' name='name')
-    div Password: 
-    input(type='text' name='password')
-    input(hidden='' name='return_to' value=referer || '/')
-    div
-      button login
+    .mb-3
+      label.form-label(for='exampleInputEmail1') Username
+      input.form-control(type='text' name='name')
+    .mb-3
+      label.form-label(for='exampleInputPassword1') Password
+      input#exampleInputPassword1.form-control(type='password' name="password")
+      input(hidden='' name='return_to' value=referer || '/')
+    button.btn.btn-primary(type='submit') login
+    //- div Username: 
+    //- input(type='text' name='name')
+    //- div Password: 
+    //- input(type='text' name='password')
+    //- input(hidden='' name='return_to' value=referer || '/')
+    //- div
+    //-   button login
 
 //-  res.end(` 
 //-     <h1>login</h1>
