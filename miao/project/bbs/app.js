@@ -2,12 +2,17 @@ const express = require('express');
 const fs = require('fs');
 const cookieParser = require('cookie-parser');
 const escape = require('lodash/escape');
+const { traceDeprecation } = require('process');
 
 const port = 8008;
 const app = express();
 
-app.set('view engine', 'pug');
+
+app.set('view engine', 'pug'); // 模版默认扩展名， render时可以不写
 app.set('views', __dirname + '/templates');
+app.locals.pretty = true; // 让pug输出格式化过的html（https://stackoverflow.com/questions/5276892/how-can-i-get-express-to-output-nicely-formatted-html）
+
+// res.render('fooo.pug');
 
 const users = loadfile('./users.json');
 const posts = loadfile('./posts.json');
@@ -60,37 +65,43 @@ app.get('/', (req, res, next) => {
   var endIdx = startIdx + pageSize;
   var pagePosts = posts.slice(startIdx, endIdx);
 
-  if (startIdx >= posts.length) {
+  if (!pagePosts.length) {
     res.end('No this page');
     return;
   }
 
-  res.end(`
-    <h1>BBS</h1>
-    <div>
-      ${
-        req.isLogin ?
-          `
-          <a href="/logout">logout</a>  
-          <a href="/post">post</a>
-          ` : `
-            <a href="/login">login</a>
-            <a href="/register">register</a>
-          `
-      }
-    </div>
-    <ul>
-      ${
-        pagePosts.map(post => {
-          return `<li><a href="/post/${escape(post.id)}">${escape(post.title)}</a> by <span>${post.postedBy}</span></li>`
-        }).join('\n')
-      }
-    </ul>
-    <p>
-      <a href="/?page=${page - 1}"">上一页</a>
-      <a href="/?page=${page + 1}"">下一页</a>
-    </p>
-  `);
+  res.render('home.pug', {
+    isLogin: req.isLogin,
+    posts: pagePosts,
+    page: page
+  });
+
+  // res.end(`
+  //   <h1>BBS</h1>
+  //   <div>
+  //     ${
+  //       req.isLogin ?
+  //         `
+  //         <a href="/logout">logout</a>  
+  //         <a href="/post">post</a>
+  //         ` : `
+  //           <a href="/login">login</a>
+  //           <a href="/register">register</a>
+  //         `
+  //     }
+  //   </div>
+  //   <ul>
+  //     ${
+  //       pagePosts.map(post => {
+  //         return `<li><a href="/post/${escape(post.id)}">${escape(post.title)}</a> by <span>${post.postedBy}</span></li>`
+  //       }).join('\n')
+  //     }
+  //   </ul>
+  //   <p>
+  //     <a href="/?page=${page - 1}"">上一页</a>
+  //     <a href="/?page=${page + 1}"">下一页</a>
+  //   </p>
+  // `);
 })
 
 app.route('/register')
