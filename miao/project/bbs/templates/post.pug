@@ -12,9 +12,14 @@ block content
   
   if isLogin
     form(action=`/comment/post/${post.id}` method="POST")
-      h4 Comment
-      div: textarea(name="comment")
-      button discuss
+      .mb-3
+        label.form-label(for='exampleFormControlTextarea1') Comment
+        textarea.form-control(name='comment' rows='3' placeholder='comment')
+      .mb-3
+        button.btn.btn-primary.mb-3(type='submit') Summit   
+      //- h4 Comment
+      //- div: textarea(name="comment")
+      //- button discuss
   else 
     p 
       | If you want to discuss, please 
