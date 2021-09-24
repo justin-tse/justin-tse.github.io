@@ -4,12 +4,31 @@ html
   head
     meta(charset='UTF-8')
     title BBS
+    style a{ text-decoration:none } 
+    //- 上面这行是去掉a标签的英文下划线
   body
 
     header
       h1 BBS
+      p
+        if isLogin
+          a(href="/logout") logout
+          |
+          |
+          a(href="/post") post
+        else
+          a(href="/login") login
+          |
+          |
+          a(href="/register") register
 
     block content
     
     footer
       p &copy; 2021
+
+  //         <a href="/logout">logout</a>  
+  //         <a href="/post">post</a>
+  //         ` : `
+  //           <a href="/login">login</a>
+  //           <a href="/register">register</a>
