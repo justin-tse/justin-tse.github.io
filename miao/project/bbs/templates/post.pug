@@ -2,15 +2,16 @@ extends layout.pug
 
 block content 
   h2= post.title
+  span= post.timeStamp
   fieldset= post.content
 
   each comment in comments
     fieldset
-      legend= comment.commentBy
+      legend= comment.commentBy + '   (' + comment.timestamp + ')'
       p=  comment.comment
   
   if isLogin
-    form(action=`/comment/post/${postId}` method="POST")
+    form(action=`/comment/post/${post.id}` method="POST")
       h4 Comment
       div: textarea(name="comment")
       button discuss

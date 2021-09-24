@@ -1,0 +1,25 @@
+extends layout.pug
+
+block content
+  h1 login
+  form(action='/login' method='POST')
+    div Username: 
+    input(type='text' name='name')
+    div Password: 
+    input(type='text' name='password')
+    input(hidden='' name='return_to' value=referer || '/')
+    div
+      button login
+
+//-  res.end(` 
+//-     <h1>login</h1>
+//-     <form action="/login" method="POST">
+//-       <div>Username: </div>
+//-       <input type="text" name="name">
+//-       <div>Password: </div>
+//-       <input type="text" name="password">
+//-       <input hidden name="return_to" value="${req.headers.referer || '/'}">
+//-       <div><button>login</button></div>
+//-     </form> 
+//-   `
+//- );

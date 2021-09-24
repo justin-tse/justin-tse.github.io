@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const escape = require('lodash/escape');
 const { traceDeprecation } = require('process');
 
-const port = 8008;
+const port = 8888;
 const app = express();
 
 
@@ -78,7 +78,7 @@ app.get('/', (req, res, next) => {
 
 app.route('/register')
 .get((req, res, next) => {
-  res.sendFile(__dirname + '/static/register.html');
+  res.render('register.pug');
 })
 .post((req, res, next) => {
   var regInfo = req.body;
@@ -96,26 +96,14 @@ app.route('/register')
   } else {
     regInfo.id = users.length;
     users.push(req.body);
-    res.end('register success...');
+    res.render('register-success.pug');
   }
 })
 
 app.route('/login')
   .get((req, res, next) => {
     console.log('从哪里进到login页面的: ', req.headers.referer);
-    res.setHeader('Content-Type', 'text/html; charset=UTF-8');
-    res.end(` 
-      <h1>login</h1>
-      <form action="/login" method="POST">
-        <div>Username: </div>
-        <input type="text" name="name">
-        <div>Password: </div>
-        <input type="text" name="password">
-        <input hidden name="return_to" value="${req.headers.referer || '/'}">
-        <div><button>login</button></div>
-      </form> 
-    `
-  );
+    res.render('login.pug');
 })
 .post((req, res, next) => {
   var loginInfo = req.body;
@@ -155,7 +143,7 @@ app.route('/post')
       posts.push(postInfo);
       res.redirect('/post/' + postInfo.id);
     } else {
-      res.end('401 not login');
+      res.render('not-login.pug');
     }
   })
 
@@ -167,7 +155,7 @@ app.get('/post/:id', (req, res, next) => {
     res.render('post.pug', {
       isLogin: req.isLogin,
       post: post,
-      comments: postComments
+      comments: postComments,
     })
   } else {
     res.render('404.pug');
@@ -178,13 +166,13 @@ app.get('/post/:id', (req, res, next) => {
 app.post('/comment/post/:id', (req, res, next) => {
   if (req.isLogin) {
     var comment = req.body;
-    comment.timestamp = new Date().toISOString();
+    comment.timeStamp = new Date().toISOString();
     comment.postId = req.params.id;
     comment.commentBy = req.signedCookies.loginUser;
     comments.push(comment);
     res.redirect(req.headers.referer || '/');
   } else {
-    res.end('Not login');
+    res.render('not-login.pug');
   }
 })
 

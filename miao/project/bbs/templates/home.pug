@@ -4,12 +4,16 @@ block content
   ul
     each post of posts 
       li
-        a(href="/post" + post.id)= post.title
+        a(href="/post/" + post.id)= post.title
         | #{" by "}
         span= post.postedBy
 
   p 
-    a(href=`/?page=${page - 1}`) Previous
+    if page > 1
+       a(href=`/?page=${page - 1}`) Previous
+    |
+    |
+    span= page
     |
     |
     a(href=`/?page=${page + 1}`) Next
