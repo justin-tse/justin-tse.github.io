@@ -7,13 +7,6 @@ block content
         a(href="/post" + post.id)= post.title
         | #{" by "}
         span= post.postedBy
-  //   <ul>
-  //     ${
-  //       pagePosts.map(post => {
-  //         return `<li><a href="/post/${escape(post.id)}">${escape(post.title)}</a> by <span>${post.postedBy}</span></li>`
-  //       }).join('\n')
-  //     }
-  //   </ul>
 
   p 
     a(href=`/?page=${page - 1}`) Previous
@@ -21,10 +14,30 @@ block content
     |
     a(href=`/?page=${page + 1}`) Next
 
-  //   <p>
-  //     <a href="/?page=${page - 1}"">Previous</a>
-  //     <a href="/?page=${page + 1}"">Next</a>
-  //   </p>
-  // 
-
+//- res.end(`
+//-   <h1>BBS</h1>
+//-   <div>
+//-     ${
+//-       req.isLogin ?
+//-         `
+//-         <a href="/logout">logout</a>  
+//-         <a href="/post">post</a>
+//-         ` : `
+//-           <a href="/login">login</a>
+//-           <a href="/register">register</a>
+//-         `
+//-     }
+//-   </div>
+//-   <ul>
+//-     ${
+//-       pagePosts.map(post => {
+//-         return `<li><a href="/post/${escape(post.id)}">${escape(post.title)}</a> by <span>${post.postedBy}</span></li>`
+//-       }).join('\n')
+//-     }
+//-   </ul>
+//-   <p>
+//-     <a href="/?page=${page - 1}"">上一页</a>
+//-     <a href="/?page=${page + 1}"">下一页</a>
+//-   </p>
+//- `);
 

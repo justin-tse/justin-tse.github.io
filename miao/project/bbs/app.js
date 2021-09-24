@@ -74,33 +74,6 @@ app.get('/', (req, res, next) => {
     posts: pagePosts,
     page: page
   });
-
-  // res.end(`
-  //   <h1>BBS</h1>
-  //   <div>
-  //     ${
-  //       req.isLogin ?
-  //         `
-  //         <a href="/logout">logout</a>  
-  //         <a href="/post">post</a>
-  //         ` : `
-  //           <a href="/login">login</a>
-  //           <a href="/register">register</a>
-  //         `
-  //     }
-  //   </div>
-  //   <ul>
-  //     ${
-  //       pagePosts.map(post => {
-  //         return `<li><a href="/post/${escape(post.id)}">${escape(post.title)}</a> by <span>${post.postedBy}</span></li>`
-  //       }).join('\n')
-  //     }
-  //   </ul>
-  //   <p>
-  //     <a href="/?page=${page - 1}"">上一页</a>
-  //     <a href="/?page=${page + 1}"">下一页</a>
-  //   </p>
-  // `);
 })
 
 app.route('/register')
