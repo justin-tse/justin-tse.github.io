@@ -165,7 +165,7 @@ app.get('/post/:id', (req, res, next) => {
   if (post) {
     var postComments = comments.filter(it => it.postId == postId);
     res.render('post.pug', {
-      isLogin: reg.isLogin,
+      isLogin: req.isLogin,
       post: post,
       comments: postComments
     })
