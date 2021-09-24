@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const cookieParser = require('cookie-parser');
-const escape = require('lodash/escape');
+// const escape = require('lodash/escape');
 const { traceDeprecation } = require('process');
 
 const port = 8888;
@@ -129,7 +129,9 @@ app.get('/logout', (req, res, next) => {
 
 app.route('/post')
   .get((req, res, next) => {
-  res.sendFile(__dirname + '/static/post.html');
+    res.render('issue-post.pug', {
+      isLogin: req.isLogin
+    });
   })
   .post((req, res, next) => {
     var postInfo = req.body;

@@ -1,0 +1,15 @@
+extends simply-layout.pug
+
+block content
+  if isLogin
+    h1 post
+    form(action='/post' method='POST')
+      div Title: 
+      input(type='text' name='title')
+      div content: 
+      textarea(type='text' name='content' rows='20' cols='40')
+      div
+        button summit
+  else
+    h1 BBS
+    p Please #[a(href="/login") login] then you could post.

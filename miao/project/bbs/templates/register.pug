@@ -1,31 +1,18 @@
-doctype html 
+extends simply-layout.pug
 
-html 
-  head
-    meta(charset='UTF-8')
-    title BBS
-    style a{ text-decoration:none } 
-    //- 上面这行是去掉a标签的英文下划线
-  body
-
-    header
-      h1 BBS
-
-    block content
-      h1 Register
-      form(action='/register' method='POST')
-        div
-          | Username: 
-          br
-          input(type='text' name='name')
-        div
-          | Email: 
-          br
-          input(type='text' name='email')
-        div
-          | Password: 
-          br
-          input(type='text' name='password')
-        button register
-        footer
-          p &copy; 2021    
+block content
+  h1 Register
+  form(action='/register' method='POST')
+    div
+      | Username: 
+      br
+      input(type='text' name='name')
+    div
+      | Email: 
+      br
+      input(type='text' name='email')
+    div
+      | Password: 
+      br
+      input(type='text' name='password')
+    button register
