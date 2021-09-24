@@ -7,7 +7,7 @@ block content
 
   each comment in comments
     fieldset
-      legend= comment.commentBy + '   (' + comment.timestamp + ')'
+      legend= comment.commentBy + '   (' + comment.timeStamp + ')'
       p=  comment.comment
   
   if isLogin

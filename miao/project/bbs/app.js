@@ -84,6 +84,7 @@ app.route('/register')
 })
 .post((req, res, next) => {
   var regInfo = req.body;
+  console.log(regInfo)
   var USERNAME_RE = /^\w+$/i;
   if (!USERNAME_RE.test(regInfo.name)) {
     res.status(400).end('Username invalid, please use only contain digit and letter or underscore');

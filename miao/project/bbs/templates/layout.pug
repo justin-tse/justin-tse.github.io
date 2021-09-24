@@ -4,28 +4,29 @@ html
   head
     meta(charset='UTF-8')
     title BBS
+    link(rel="stylesheet", href="/bootstrap.min.css")
     style a{ text-decoration:none } 
     //- 上面这行是去掉a标签的英文下划线
   body
+    div.container
+      header
+        h1 BBS
+        p
+          if isLogin
+            a(href="/logout") logout
+            |
+            |
+            a(href="/post") post
+          else
+            a(href="/login") login
+            |
+            |
+            a(href="/register") register
 
-    header
-      h1 BBS
-      p
-        if isLogin
-          a(href="/logout") logout
-          |
-          |
-          a(href="/post") post
-        else
-          a(href="/login") login
-          |
-          |
-          a(href="/register") register
-
-    block content
-    
-    footer
-      p &copy; 2021
+      block content
+      
+      footer
+        p &copy; 2021
 
   // res.end(`
   //   <h1>BBS</h1>
