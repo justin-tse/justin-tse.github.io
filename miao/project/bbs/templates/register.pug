@@ -8,7 +8,7 @@ block content
       input.form-control(type='text' name='name')
     .mb-3
       label.form-label(for='exampleInputEmail1') Email address
-      input#exampleInputEmail1.form-control(type='email' aria-describedby='emailHelp')
+      input#exampleInputEmail1.form-control(type='email' aria-describedby='emailHelp' name="email")
       #emailHelp.form-text We&apos;ll never share your email with anyone else.
     .mb-3
       label.form-label(for='exampleInputPassword1') Password
@@ -17,16 +17,3 @@ block content
       input#exampleCheck1.form-check-input(type='checkbox')
       label.form-check-label(for='exampleCheck1') Check me out
     button.btn.btn-primary(type='submit') Submit
-    div
-      | Username: 
-      br
-      input(type='text' name='name')
-    div
-      | Email: 
-      br
-      input(type='text' name='email')
-    div
-      | Password: 
-      br
-      input(type='text' name='password')
-    button register
