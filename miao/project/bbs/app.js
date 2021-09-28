@@ -17,25 +17,25 @@ app.locals.pretty = true; // 让pug输出格式化过的html（https://stackover
 
 // res.render('fooo.pug');
 
-const users = loadfile('./users.json');
-const posts = loadfile('./posts.json');
-const comments = loadfile('./comments.json');
+// const users = loadfile('./users.json');
+// const posts = loadfile('./posts.json');
+// const comments = loadfile('./comments.json');
 
-function loadfile(file) {
-  try {
-    var content = fs.readFileSync(file);
-    return JSON.parse(content);
-  } catch (e) {
-    return [];
-  }
-}
+// function loadfile(file) {
+//   try {
+//     var content = fs.readFileSync(file);
+//     return JSON.parse(content);
+//   } catch (e) {
+//     return [];
+//   }
+// }
 
-setInterval(() => {
-  fs.writeFileSync('./users.json', JSON.stringify(users, null, 2));
-  fs.writeFileSync('./posts.json', JSON.stringify(posts, null, 2));
-  fs.writeFileSync('./comments.json', JSON.stringify(comments, null, 2));
-  console.log('saved');
-}, 5000)
+// setInterval(() => {
+//   fs.writeFileSync('./users.json', JSON.stringify(users, null, 2));
+//   fs.writeFileSync('./posts.json', JSON.stringify(posts, null, 2));
+//   fs.writeFileSync('./comments.json', JSON.stringify(comments, null, 2));
+//   console.log('saved');
+// }, 5000)
 
 app.use((req, res, next) => {
   console.log(req.method, req.url);
@@ -60,14 +60,18 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res, next) => {
-  res.setHeader('Content-Type', 'text/html; charset=UTF-8');
-  console.log('当前登陆用户', req.signedCookies.loginUser);
+  // res.setHeader('Content-Type', 'text/html; charset=UTF-8');
+  // console.log('当前登陆用户', req.signedCookies.loginUser);
   var page = Number(req.query.page || 1);
-  var pageSize = 10;
-  var totalPage = Math.ceil(posts.length / pageSize);
+  var pageSize = 4;
+
+  var totalPost = db.prepare('SELECT count(*) AS total FROM posts').get().total
+  var totalPage = Math.ceil(totalPost / pageSize);
+  var offset = (page - 1) * pageSize
+
   var startIdx = (page - 1) * pageSize;
   var endIdx = startIdx + pageSize;
-  var pagePosts = posts.slice(startIdx, endIdx);
+  var pagePosts = db.prepare('SELECT * FROM posts JOIN users ON posts.userId = users.userId LIMIT ? OFFSET ?').all(pageSize, offset);
 
   if (!pagePosts.length) {
     res.render('404.pug');
