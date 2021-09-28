@@ -98,15 +98,10 @@ app.route('/register')
   } else if (!regInfo.password) {
     res.status(400).end('password must not be empty')
   } else {
-    try {
       var addUser = db.prepare('INSERT INTO users (name, password, email) VALUES (?, ?, ?)')
       var result = addUser.run(regInfo.name, regInfo.password, regInfo.email);
       console.log(result);
       res.render('register-success.pug');
-    } catch (e) {
-      console.log(e);
-      throw e;
-    }
   }
 })
 
@@ -118,8 +113,12 @@ app.route('/login')
   })
 .post((req, res, next) => {
   var loginInfo = req.body;
-  var userStmt = db.prepare('SELECT * FROM users WHERE name = @name AND password = @password');
-  var user = userStmt.get(loginInfo);
+  // var userStmt = db.prepare('SELECT * FROM users WHERE name = @name AND password = @password');
+  var userStmt = db.prepare(`SELECT * FROM users WHERE name = '${loginInfo.name}' AND password = '${loginInfo.password}'`)
+  console.log(loginInfo.name)
+  
+  // var userStmt = db.prepare(`SELECT * FROM users WHERE name = 'foo' OR 1 = 1 OR '2'='2' AND password = 'a'`);
+  var user = userStmt.get();
   if (user) { 
     //  res.clearCookie('loginUser')// when logout, we should clear Cookie
     res.cookie('loginUser', user.name, {
@@ -167,11 +166,11 @@ app.get('/post/:id', (req, res, next) => {
   var postId = req.params.id;
   var post = db.prepare('SELECT * FROM posts JOIN users ON posts.userId = users.userId WHERE postId = ?').get(postId);
   if (post) {
-    var postComments = db.prepare('SELECT * FROM comments JOIN users ON comments.userId = users.userId WHERE postId = ?').all(postId);
+    var comments = db.prepare('SELECT * FROM comments JOIN users ON comments.userId = users.userId WHERE postId = ?').all(postId);
     res.render('post.pug', {
       isLogin: req.isLogin,
       post: post,
-      comments: postComments,
+      comments: comments,
     })
   } else {
     res.render('404.pug');
