@@ -161,7 +161,7 @@ app.route('/post')
 
 app.get('/post/:id', (req, res, next) => {
   var postId = req.params.id;
-  var post = db.prepare('SELECT * FROM posts WHERE postId = ?').get(postId);
+  var post = db.prepare('SELECT * FROM posts JOIN users ON posts.userId = users.userId WHERE postId = ?').get(postId);
   if (post) {
     var postComments = db.prepare('SELECT * FROM comments JOIN users ON comments.userId = users.userId WHERE postId = ?').all(postId);
     res.render('post.pug', {
