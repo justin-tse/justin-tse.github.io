@@ -7,14 +7,16 @@ block content
 
   each comment in comments
     fieldset
-      legend= comment.commentBy + '   (' + comment.timeStamp + ')'
-      p=  comment.comment
+      legend
+        a(href="/user/" + comment.userId)= comment.name
+        | (#{comment.timeStamp})
+      p=  comment.content
   
   if isLogin
-    form(action=`/comment/post/${post.id}` method="POST")
+    form(action=`/comment/post/${post.postId}` method="POST")
       .mb-3
         label.form-label(for='exampleFormControlTextarea1') Comment
-        textarea.form-control(name='comment' rows='3' placeholder='comment')
+        textarea.form-control(name='content' rows='3' placeholder='comment')
       .mb-3
         button.btn.btn-primary.mb-3(type='submit') Summit   
       //- h4 Comment

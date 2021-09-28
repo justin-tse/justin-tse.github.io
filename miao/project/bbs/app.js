@@ -49,11 +49,12 @@ app.use(express.urlencoded());
 
 app.use((req, res, next) => {
   if (req.signedCookies.loginUser) {
+    var name = req.signedCookies.loginUser;
     req.isLogin = true;
-    // req.loginUser = users.find(it => it.name == req.signedCookies.loginUser)
+    req.loginUser = db.prepare('SELECT * FROM users WHERE name = ?').get(name);
   } else {
     req.isLogin = false;
-    // req.loginUser = null;
+    req.loginUser = null;
   }
   next();
 })
@@ -113,8 +114,8 @@ app.route('/login')
   })
 .post((req, res, next) => {
   var loginInfo = req.body;
-  var userStmt = db.prepare('SELECT * FROM users WHERE name = ? AND password = ?');
-  var user = userStmt.get(loginInfo.name, loginInfo.password);
+  var userStmt = db.prepare('SELECT * FROM users WHERE name = @name AND password = @password');
+  var user = userStmt.get(loginInfo);
   if (user) { 
     //  res.clearCookie('loginUser')// when logout, we should clear Cookie
     res.cookie('loginUser', user.name, {
@@ -145,12 +146,14 @@ app.route('/post')
     var userName = req.signedCookies.loginUser;
     
     if (userName) {
+      var user = db.prepare('SELECT * FROM users WHERE name = ?').get(userName);
       postInfo.timeStamp = new Date().toISOString();
-      postInfo.id = posts.length;
-      postInfo.postedBy = userName;
-        
-      posts.push(postInfo);
-      res.redirect('/post/' + postInfo.id);
+      postInfo.userId = user.userId;
+
+      var result = db.prepare('INSERT INTO posts (title, content, userId, timeStamp) VALUES (?, ?, ?, ?)')
+        .run(postInfo.title, postInfo.content, postInfo.userId, postInfo.timeStamp);
+      
+      res.redirect('/post/' + result.lastInsertRowid);
     } else {
       res.render('not-login.pug');
     }
@@ -158,9 +161,9 @@ app.route('/post')
 
 app.get('/post/:id', (req, res, next) => {
   var postId = req.params.id;
-  var post = posts.find(it => it.id == postId);
+  var post = db.prepare('SELECT * FROM posts WHERE postId = ?').get(postId);
   if (post) {
-    var postComments = comments.filter(it => it.postId == postId);
+    var postComments = db.prepare('SELECT * FROM comments JOIN users ON comments.userId = users.userId WHERE postId = ?').all(postId);
     res.render('post.pug', {
       isLogin: req.isLogin,
       post: post,
@@ -174,12 +177,14 @@ app.get('/post/:id', (req, res, next) => {
 // 向帖子发表评论，id为帖子编号
 app.post('/comment/post/:id', (req, res, next) => {
   if (req.isLogin) {
-
     var comment = req.body;
+    var user = req.loginUser; //已登陆的用户
     comment.timeStamp = new Date().toISOString();
     comment.postId = req.params.id;
-    comment.commentBy = req.signedCookies.loginUser;
-    comments.push(comment);
+    comment.userId = user.userId;
+
+    var result = db.prepare('INSERT INTO comments (content, postId, userId, timeStamp) VALUES (@content, @postId, @userId, @timeStamp)')
+    .run(comment)
     res.redirect(req.headers.referer || '/');
   } else {
     res.render('not-login.pug');
