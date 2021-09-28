@@ -3,6 +3,9 @@ const fs = require('fs');
 const cookieParser = require('cookie-parser');
 // const escape = require('lodash/escape');
 const { traceDeprecation } = require('process');
+const Database  = require('better-sqlite3');
+
+const db = new Database(__dirname + '/bbs.sqlite3');
 
 const port = 8888;
 const app = express();
@@ -87,18 +90,18 @@ app.route('/register')
   var USERNAME_RE = /^\w+$/i;
   if (!USERNAME_RE.test(regInfo.name)) {
     res.status(400).end('Username invalid, please use only contain digit and letter or underscore');
-  } else if (users.some(it => it.name == regInfo.name) && users.some(it => it.email == regInfo.email)) {
-    res.status(400).end('username and email already exists...');
-  } else if (users.some(it => it.name == regInfo.name)) {
-    res.status(400).end('username already exists...');
-  } else if (users.some(it => it.email == regInfo.email)) {
-    res.status(400).end('email already exists...');
   } else if (!regInfo.password) {
     res.status(400).end('password must not be empty')
   } else {
-    regInfo.id = users.length;
-    users.push(req.body);
-    res.render('register-success.pug');
+    try {
+      var addUser = db.prepare('INSERT INTO users (name, password, email) VALUES (?, ?, ?)')
+      var result = addUser.run(regInfo.name, regInfo.password, regInfo.email);
+      console.log(result);
+      res.render('register-success.pug');
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
   }
 })
 
@@ -110,8 +113,9 @@ app.route('/login')
   })
 .post((req, res, next) => {
   var loginInfo = req.body;
-  var  user = users.find(it => it.name == loginInfo.name && it.password == loginInfo.password);
-  if (user) {
+  var userStmt = db.prepare('SELECT * FROM users WHERE name = ? AND password = ?');
+  var user = userStmt.get(loginInfo.name, loginInfo.password);
+  if (user) { 
     //  res.clearCookie('loginUser')// when logout, we should clear Cookie
     res.cookie('loginUser', user.name, {
       signed: true
@@ -170,6 +174,7 @@ app.get('/post/:id', (req, res, next) => {
 // 向帖子发表评论，id为帖子编号
 app.post('/comment/post/:id', (req, res, next) => {
   if (req.isLogin) {
+
     var comment = req.body;
     comment.timeStamp = new Date().toISOString();
     comment.postId = req.params.id;
